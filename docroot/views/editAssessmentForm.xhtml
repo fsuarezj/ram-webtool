@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+	<aui:fieldset>
+		<aui:field id="assessmentNameField" label="#{i18n['name']}">
+			<h:message for="assessmentName" />
+			<h:inputText id="assessmentName" required="true" value="#{ramSession.selectedAssessment.name}">
+				<f:ajax render="assessmentNameField" />
+			</h:inputText>
+		</aui:field>
+	</aui:fieldset>
+	<h:commandButton action="#{ramSession.saveAssessment}" value="#{i18n['create-ram']}">
+		<f:ajax execute="@form" render="@all" />
+	</h:commandButton>
+
+</f:view>
