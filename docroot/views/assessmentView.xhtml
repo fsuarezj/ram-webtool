@@ -17,6 +17,7 @@
 	    		<ui:include src="/views/editAssessmentForm.xhtml" />
 	    	</c:when>
 	    	<c:otherwise>
+	    		<span class="assessment-name"><h:outputText value="#{i18n['ram-name']}: #{ramSession.selectedAssessment.name}" /></span>
 	    		<c:choose>
 	    			<c:when test="#{assessmentBacking.getStep() == 1}">
 	    				<ui:include src="/views/ramSteps/ramStep1.xhtml" />
