@@ -1,4 +1,4 @@
-var last = "";
+var last = "#app_map_page";
 $(document).ready(function () {
 //	$('body').layout({ applyDefaultStyles: true, minSize:140 });
 	$(".thumb")
@@ -20,5 +20,5 @@ $(document).ready(function () {
 		})
 		.css('cursor', 'pointer');
 	$(".Page").hide();
-	$("#step_1_page").show(null);
+	$(last).show();
 });
