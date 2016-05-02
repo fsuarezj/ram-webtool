@@ -1,4 +1,4 @@
-package com.ferda.utils.flowcharts.exceptions;
+package com.lrc.liferay.ram.utils.flowcharts.exceptions;
 
 public class ModifiedFlowException extends Throwable {
 

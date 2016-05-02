@@ -1,11 +1,10 @@
-package com.ferda.utils.flowcharts;
+package com.lrc.liferay.ram.utils.flowcharts;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.ferda.utils.flowcharts.exceptions.ModifiedFlowException;
-import com.ferda.utils.flowcharts.exceptions.TransitionException;
+import com.lrc.liferay.ram.utils.flowcharts.exceptions.ModifiedFlowException;
 
 public class Flow<T,C extends Comparable<C>> {
 	private BasicFlowChart<T,C> flowChart;
@@ -22,14 +21,19 @@ public class Flow<T,C extends Comparable<C>> {
 		}
 		try {
 			flow.add(this.flowChart.getNextState(startDate, 0, condition));
-			return flowChart.getNode(flow.get(flow.size() - 1)).getContent();
-		} catch (TransitionException e) {
-			System.out.println("Transition does not exist");
-			return null;
+			return flowChart.getNodeContent(flow.get(flow.size() - 1));
 		} catch (ModifiedFlowException e) {
 			System.out.println("Modified Flowchart, restarting flow");
 			this.flow.clear();
 			return null;
+		}
+	}
+	
+	public T getCurrentStep() {
+		if (flow.isEmpty()) {
+			return flowChart.getNodeContent(0);
+		} else {
+			return flowChart.getNodeContent(flow.size() - 1);
 		}
 	}
 }
