@@ -1,20 +1,20 @@
 package com.lrc.liferay.ram.utils.flowcharts.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
 import org.junit.Test;
 
 import com.lrc.liferay.ram.utils.flowcharts.BasicFlowChart;
-import com.lrc.liferay.ram.utils.flowcharts.exceptions.ExistingNodeException;
-import com.lrc.liferay.ram.utils.flowcharts.exceptions.ModifiedFlowException;
-import com.lrc.liferay.ram.utils.flowcharts.exceptions.NonExistingNodeException;
-import com.lrc.liferay.ram.utils.flowcharts.exceptions.NullNodeContentException;
+import com.lrc.liferay.ram.utils.flowcharts.exceptions.FlowException;
+import com.lrc.liferay.ram.utils.flowcharts.exceptions.NodeContentException;
+import com.lrc.liferay.ram.utils.flowcharts.exceptions.NodeException;
 
 public class BasicFlowChartTests {
 	
-	private BasicFlowChart<Integer,Boolean> buildDecisionTree() throws NullNodeContentException, ExistingNodeException, NonExistingNodeException {
+	private BasicFlowChart<Integer,Boolean> buildDecisionTree() throws NodeContentException, NodeException {
 		BasicFlowChart<Integer,Boolean> flowChart = new BasicFlowChart<Integer,Boolean>(0);
 		flowChart.addNode(1);
 		flowChart.addEdge(0, true, 1);
@@ -25,37 +25,48 @@ public class BasicFlowChartTests {
 		return flowChart;
 	}
 
-	private BasicFlowChart<Integer,Boolean> buildErrorTree() throws NullNodeContentException, ExistingNodeException, NonExistingNodeException {
+	private BasicFlowChart<String,Boolean> buildStringDecisionTree() throws NodeContentException, NodeException {
+		BasicFlowChart<String,Boolean> flowChart = new BasicFlowChart<String,Boolean>("Zero");
+		flowChart.addNode("One");
+		flowChart.addEdge("Zero", true, "One");
+		flowChart.addNode("Two");
+		flowChart.addEdge("Zero", false, "Two");
+		flowChart.addNode("Three");
+		flowChart.addEdge("One", true, "Three");
+		return flowChart;
+	}
+
+	private BasicFlowChart<Integer,Boolean> buildErrorTree() throws NodeContentException, NodeException {
 		BasicFlowChart<Integer,Boolean> flowChart = new BasicFlowChart(0);
 		flowChart.addNode(1);
 		flowChart.addNode(2);
 		return flowChart;
 	}
 
-	@Test (expected = NullNodeContentException.class)
-	public void throwNullNodeContent() throws NullNodeContentException {
-		BasicFlowChart flowChart = new BasicFlowChart(null);
-	}
-	
 	@Test
-	public void oneNodeTests() throws NullNodeContentException {
+	public void oneNodeTests() throws NodeContentException {
 		BasicFlowChart flowChart1 = new BasicFlowChart("Begin");
 		BasicFlowChart<Boolean,Boolean> flowChart2 = new BasicFlowChart(true);
 		
-		assertTrue("Get Boolean Node", flowChart2.getNodeContent(0));
 		assertEquals("Get String Node", "Begin", flowChart1.getNodeContent(0));
+		assertTrue("Get Boolean Node", flowChart2.getNodeContent(0));
 		assertEquals("Size", 1, flowChart2.size());
 	}
 
-	@Test (expected = ExistingNodeException.class)
-	public void addNodeExistingNode() throws NullNodeContentException, ExistingNodeException, NonExistingNodeException {
+	@Test
+	public void addNodeTests() throws NodeContentException, NodeException {
 		BasicFlowChart flowChart = this.buildDecisionTree();
-		flowChart.addNode(2);
+		flowChart.addNode(4);
+		flowChart.addNode("Five");
+
+		assertEquals("addFirstNode", 4, flowChart.getNodeContent(4));
+		assertEquals("addFirstNode", 0, flowChart.getNodeContent(0));
+		assertEquals("addNode mismatch", "Five", flowChart.getNodeContent(5));
 	}
 
 	@Test
 	public void addFirstNodeTests()
-			throws NullNodeContentException, ExistingNodeException, NonExistingNodeException, ModifiedFlowException {
+			throws NodeContentException, NodeException, FlowException {
 		BasicFlowChart flowChart = this.buildDecisionTree();
 		flowChart.addFirstNode(4);
 		flowChart.addEdge(4, true, 0);
@@ -65,29 +76,59 @@ public class BasicFlowChartTests {
 		assertEquals("Remove edges when change?", (Integer) 4, flowChart.getNextState(new Date(), 0, true));
 	}
 
-	@Test (expected = ExistingNodeException.class)
-	public void addFirstNodeExistingNode() throws NullNodeContentException, ExistingNodeException, NonExistingNodeException {
-		BasicFlowChart flowChart = this.buildDecisionTree();
-		flowChart.addFirstNode(2);
-	}
-
 	@Test
-	public void setFirstNodeTests()
-			throws NullNodeContentException, ExistingNodeException, NonExistingNodeException, ModifiedFlowException {
-		BasicFlowChart flowChart = this.buildDecisionTree();
-		flowChart.setFirstNode(1);
-		flowChart.addEdge(1, false, 0);
+	public void setFirstNodeTests()	throws NodeContentException, NodeException, FlowException {
+		BasicFlowChart flowChart = this.buildStringDecisionTree();
+		assertEquals("From 1 to 3", (Integer) 3, flowChart.getNextState(new Date(), 1, true));
+		flowChart.setFirstNode("One");
+		assertEquals("From 1 to 3", (Integer) 3, flowChart.getNextState(new Date(), 0, true));
+		flowChart.addEdge("One", false, "Zero");
 
-		assertEquals("Node 0 is 1", 1, flowChart.getNodeContent(0));
-		assertEquals("Node 1 is 0", 0, flowChart.getNodeContent(1));
+		assertEquals("Node 0 is 1", "One", flowChart.getNodeContent(0));
+		assertEquals("Node 1 is 0", "Zero", flowChart.getNodeContent(1));
 		assertEquals("From 1 to 0", (Integer) 1, flowChart.getNextState(new Date(), 0, false));
 		assertEquals("From 0 to 1", (Integer) 0, flowChart.getNextState(new Date(), 1, true));
 		assertEquals("From 1 to 3", (Integer) 3, flowChart.getNextState(new Date(), 0, true));
 	}
 
-	@Test (expected = NonExistingNodeException.class)
-	public void setFirstNodeNonExistingNode() throws NullNodeContentException, ExistingNodeException, NonExistingNodeException {
+	@Test (expected = NodeContentException.class)
+	public void throwNullNodeContent() throws NodeContentException {
+		BasicFlowChart flowChart = new BasicFlowChart(null);
+	}
+	
+	@Test (expected = NodeException.class)
+	public void addNodeExistingNode() throws NodeContentException, NodeException {
 		BasicFlowChart flowChart = this.buildDecisionTree();
-		flowChart.setFirstNode(4);
+		flowChart.addNode(2);
+	}
+
+	@Test (expected = NodeException.class)
+	public void addFirstNodeExistingNode() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		flowChart.addFirstNode(2);
+	}
+
+	@Test (expected = NodeException.class)
+	public void setFirstNodeNonExistingNode() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		flowChart.setFirstNode("Four");
+	}
+
+	@Test (expected = NodeContentException.class)
+	public void addNodeNullNodeContent() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildStringDecisionTree();
+		flowChart.addNode(null);
+	}
+
+	@Test (expected = NodeContentException.class)
+	public void addNodeBadType() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildStringDecisionTree();
+		flowChart.addNode(5);
+	}
+	
+	@Test (expected = NodeContentException.class)
+	public void addNodeBadType2() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		flowChart.addNode("Hola");
 	}
 }

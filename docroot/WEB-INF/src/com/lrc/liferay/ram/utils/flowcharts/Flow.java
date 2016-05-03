@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.lrc.liferay.ram.utils.flowcharts.exceptions.ModifiedFlowException;
+import com.lrc.liferay.ram.utils.flowcharts.exceptions.FlowException;
 
 public class Flow<T,C extends Comparable<C>> {
 	private BasicFlowChart<T,C> flowChart;
@@ -22,7 +22,7 @@ public class Flow<T,C extends Comparable<C>> {
 		try {
 			flow.add(this.flowChart.getNextState(startDate, 0, condition));
 			return flowChart.getNodeContent(flow.get(flow.size() - 1));
-		} catch (ModifiedFlowException e) {
+		} catch (FlowException e) {
 			System.out.println("Modified Flowchart, restarting flow");
 			this.flow.clear();
 			return null;

@@ -5,21 +5,21 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import com.lrc.liferay.ram.utils.flowcharts.exceptions.NullNodeContentException;
+import com.lrc.liferay.ram.utils.flowcharts.exceptions.NodeContentException;
 
 public class BasicNode<T,C extends Comparable<C>> {
 	private T content;
 	private TreeMap<C,Integer> edges = null;
 	
-	public BasicNode(T content) throws NullNodeContentException {
+	public BasicNode(T content) throws NodeContentException {
 		if (content == null)
-			throw new NullNodeContentException();
+			throw new NodeContentException("BasicNode: null node content");
 		this.content = content;
 	}
 
-	public BasicNode(T content, TreeMap<C,Integer> edges) throws NullNodeContentException {
+	public BasicNode(T content, TreeMap<C,Integer> edges) throws NodeContentException {
 		if (content == null)
-			throw new NullNodeContentException();
+			throw new NodeContentException("BasicNode: null node content");
 		this.content = content;
 		this.edges = edges;
 	}

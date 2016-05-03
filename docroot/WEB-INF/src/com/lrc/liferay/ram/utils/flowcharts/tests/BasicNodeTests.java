@@ -1,24 +1,25 @@
 package com.lrc.liferay.ram.utils.flowcharts.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.TreeMap;
 
 import org.junit.Test;
 
 import com.lrc.liferay.ram.utils.flowcharts.BasicNode;
-import com.lrc.liferay.ram.utils.flowcharts.exceptions.NullNodeContentException;
+import com.lrc.liferay.ram.utils.flowcharts.exceptions.NodeContentException;
 
 public class BasicNodeTests {
 	
-	@Test (expected = NullNodeContentException.class)
-	public void throwNullNodeContent() throws NullNodeContentException {
+	@Test (expected = NodeContentException.class)
+	public void throwNullNodeContent() throws NodeContentException {
 		BasicNode nodeNull = new BasicNode(null);
 		assertEquals("Content = null","This does not execute",nodeNull.nextNode(1));
 	}
 
 	@Test
-	public void nextNodeTest() throws NullNodeContentException {
+	public void nextNodeTest() throws NodeContentException {
 		TreeMap nullEdges = null;
 		TreeMap emptyEdges = new TreeMap();
 		TreeMap edges = new TreeMap();
@@ -38,7 +39,7 @@ public class BasicNodeTests {
 	}
 
 	@Test
-	public void addEdgeTest() throws NullNodeContentException {
+	public void addEdgeTest() throws NodeContentException {
 		BasicNode node = new BasicNode("Node 0");
 		
 		node.addEdge(true, 3);
@@ -50,7 +51,7 @@ public class BasicNodeTests {
 	}
 	
 	@Test
-	public void edgesOpsTest() throws NullNodeContentException {
+	public void edgesOpsTest() throws NodeContentException {
 		BasicNode node = new BasicNode("Node 0");
 		BasicNode node2 = new BasicNode("Node 0");
 		
