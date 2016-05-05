@@ -1,8 +1,11 @@
 package com.lrc.liferay.ram.utils.flowcharts;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.lrc.liferay.ram.utils.flowcharts.exceptions.FlowException;
 import com.lrc.liferay.ram.utils.flowcharts.exceptions.NodeContentException;
@@ -43,6 +46,20 @@ public class BasicFlowChart<T,C extends Comparable<C>> {
 		return this.nodes.indexOf(auxNode);
 	}
 	
+	private boolean isConnected(int index, List<Boolean> flags) {
+		flags.set(index,true);
+		for (Integer nodeIndex: this.nodes.get(index).connectsWith()) {
+			if (!flags.get(nodeIndex)) {
+				this.isConnected(nodeIndex,flags);
+			}
+		}
+		Boolean result = new Boolean(true);
+		for(Boolean flag: flags) {
+			result = result && flag;
+		}
+		return result;
+	}
+	
 //	private BasicNode<T,C> getNode(T content) {
 //		for(BasicNode<T,C> node: this.nodes) {
 //			if (content.equals(node.getContent()))
@@ -66,11 +83,6 @@ public class BasicFlowChart<T,C extends Comparable<C>> {
 		}
 	}
 	
-	/**
-	 * @param content
-	 * @throws NodeException
-	 * @throws NodeContentException 
-	 */
 	public void setFirstNode(T content) throws NodeException, NodeContentException {
 		BasicNode<T,C> auxNode = new BasicNode(content);
 		int oldIndex = this.nodes.indexOf(auxNode);
@@ -88,7 +100,6 @@ public class BasicFlowChart<T,C extends Comparable<C>> {
 				throw new NodeContentException("BasicFlowChart.addNode: Bad content type");
 			this.nodes.add(new BasicNode<T,C>(content));
 			this.lastEdit = new Date();
-			Class hola = Date.class;
 		} else {
 			throw new NodeException("BasicFlowChart.addNode: Existing node");
 		}
@@ -101,11 +112,22 @@ public class BasicFlowChart<T,C extends Comparable<C>> {
 			throw new NodeException("BasicFlowChart.addEdge: Non existing node");
 		}
 		if (destIndex < 0) {
+			if (!(destination.getClass() == this.getNodeContent(0).getClass()))
+				throw new NodeContentException("BasicFlowChart.addEdge: Bad content type");
 			this.nodes.add(new BasicNode<T,C>(destination));
 			destIndex = this.indexContaining(destination);
 		}
 		this.nodes.get(originIndex).addEdge(condition, destIndex);
 		this.lastEdit = new Date();
+	}
+	
+	public boolean isConnected() {
+		// Makes and populates a List to store flags
+		List<Boolean> flags = new ArrayList<Boolean>();
+		for (int i = 0; i < this.nodes.size(); i++) {
+			flags.add(false);
+		}
+		return this.isConnected(0, flags);
 	}
 	// TODO: public void removeNode(T content);
 
@@ -119,12 +141,34 @@ public class BasicFlowChart<T,C extends Comparable<C>> {
 	}
 	
 	public Integer getNextState(Date startDate, Integer old, C condition) throws FlowException {
-		if (startDate.before(lastEdit))
-			throw new FlowException("BasicFlowChart.getNextState: FlowChart has been modified after Flow startDate");
-		Integer result = this.nodes.get(old).nextNode(condition);
-		if (result == null)
-			return old;
-		else
-			return result;
+		if (this.lastEdit.after(startDate))
+			throw new FlowException("BasicFlowChart.getNextState: FlowChart has been modified at " + this.lastEdit.getTime() + " after Flow startDate (at " + startDate.getTime() + ")", FlowException.MODIFIED_FLOWCHART);
+		try {
+			Integer result = this.nodes.get(old).nextNode(condition);
+			if (result == null)
+				return old;
+			else
+				return result;
+		} catch (ClassCastException e) {
+			throw new ClassCastException("BasicFlowChart.getNextState: Bad condition type -> " + e.getMessage());
+		}
+	}
+	
+	public Integer getNextState(Date startDate, Integer old, C condition, boolean permissive) throws FlowException {
+		if (this.lastEdit.after(startDate))
+			throw new FlowException("BasicFlowChart.getNextState: FlowChart has been modified at " + this.lastEdit.getTime() + " after Flow startDate (at " + startDate.getTime() + ")", FlowException.MODIFIED_FLOWCHART);
+		try {
+			Integer result = this.nodes.get(old).nextNode(condition, permissive);
+			if (result == null)
+				return old;
+			else
+				return result;
+		} catch (ClassCastException e) {
+			throw new ClassCastException("BasicFlowChart.getNextState: Bad condition type -> " + e.getMessage());
+		}
+	}
+	
+	public Boolean isFinalNode(Integer nodeIndex) {
+		return this.nodes.get(nodeIndex).isFinal();
 	}
 }

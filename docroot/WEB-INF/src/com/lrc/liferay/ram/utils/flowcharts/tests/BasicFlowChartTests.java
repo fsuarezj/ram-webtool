@@ -2,6 +2,7 @@ package com.lrc.liferay.ram.utils.flowcharts.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import java.util.Date;
 
@@ -44,24 +45,17 @@ public class BasicFlowChartTests {
 	}
 
 	@Test
-	public void oneNodeTests() throws NodeContentException {
+	public void oneNodeTests() throws NodeContentException, NodeException {
 		BasicFlowChart flowChart1 = new BasicFlowChart("Begin");
 		BasicFlowChart<Boolean,Boolean> flowChart2 = new BasicFlowChart(true);
 		
 		assertEquals("Get String Node", "Begin", flowChart1.getNodeContent(0));
 		assertTrue("Get Boolean Node", flowChart2.getNodeContent(0));
 		assertEquals("Size", 1, flowChart2.size());
-	}
-
-	@Test
-	public void addNodeTests() throws NodeContentException, NodeException {
-		BasicFlowChart flowChart = this.buildDecisionTree();
-		flowChart.addNode(4);
-		flowChart.addNode("Five");
-
-		assertEquals("addFirstNode", 4, flowChart.getNodeContent(4));
-		assertEquals("addFirstNode", 0, flowChart.getNodeContent(0));
-		assertEquals("addNode mismatch", "Five", flowChart.getNodeContent(5));
+		assertTrue("Connected", flowChart1.isConnected());
+		assertTrue("Connected", flowChart2.isConnected());
+		flowChart1.addEdge("Begin", true, "Begin");
+		assertTrue("Connected", flowChart1.isConnected());
 	}
 
 	@Test
@@ -91,11 +85,63 @@ public class BasicFlowChartTests {
 		assertEquals("From 1 to 3", (Integer) 3, flowChart.getNextState(new Date(), 0, true));
 	}
 
+	@Test
+	public void addNodeTests() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		flowChart.addNode(4);
+
+		assertEquals("addFirstNode", 4, flowChart.getNodeContent(4));
+		assertEquals("addFirstNode", 0, flowChart.getNodeContent(0));
+	}
+
+	@Test
+	public void addEdgeTests() throws NodeContentException, NodeException, FlowException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		flowChart.addEdge(2, true, 3);
+
+		assertEquals("addEdgeTest", (Integer) 3, flowChart.getNextState(new Date(),2,true));
+		assertEquals("addEdgeTest", (Integer) 2, flowChart.getNextState(new Date(),2,false, true));
+		assertEquals("addEdgeTest", (Integer) 3, flowChart.getNextState(new Date(),1,true));
+		flowChart.addEdge(1, true, 0);
+		assertEquals("addEdgeTest", (Integer) 0, flowChart.getNextState(new Date(),1,true));
+		flowChart.addEdge(2, false, 4);
+		assertEquals("addEdgeTest", (Integer) 4, flowChart.getNextState(new Date(),2,false));
+	}
+	
+	@Test
+	public void isConnectedTests() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		
+		assertTrue("isConnected ", flowChart.isConnected());
+		flowChart.addEdge(2, true, 4);
+		assertTrue("isConnected ", flowChart.isConnected());
+		flowChart.addEdge(2, false, 2);
+		assertTrue("isConnected ", flowChart.isConnected());
+		flowChart.addNode(5);
+		assertFalse("isConnected ", flowChart.isConnected());
+	}
+
+	@Test
+	public void getNodeContentTests() throws NodeContentException, FlowException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		
+		assertEquals("getNodeContent", (Integer) 3, flowChart.getNodeContent(3));
+	}
+
+	@Test
+	public void getNextStateTests() throws NodeContentException, FlowException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		
+		assertEquals("getNextState", (Integer) 3, flowChart.getNextState(new Date(),3,true, true));
+		assertEquals("getNextState", (Integer) 3, flowChart.getNextState(new Date(),1,true));
+		assertEquals("getNextState", (Integer) 2, flowChart.getNextState(new Date(),0,false));
+	}
+
 	@Test (expected = NodeContentException.class)
 	public void throwNullNodeContent() throws NodeContentException {
 		BasicFlowChart flowChart = new BasicFlowChart(null);
 	}
-	
+		
 	@Test (expected = NodeException.class)
 	public void addNodeExistingNode() throws NodeContentException, NodeException {
 		BasicFlowChart flowChart = this.buildDecisionTree();
@@ -130,5 +176,50 @@ public class BasicFlowChartTests {
 	public void addNodeBadType2() throws NodeContentException, NodeException {
 		BasicFlowChart flowChart = this.buildDecisionTree();
 		flowChart.addNode("Hola");
+	}
+
+	@Test (expected = NodeException.class)
+	public void addEdgeNodeException() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		flowChart.addEdge(4, true, 3);
+	}
+
+	@Test (expected = NodeException.class)
+	public void addEdgeNodeException2() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		flowChart.addEdge("Jeje", true, 3);
+	}
+
+	@Test (expected = NodeContentException.class)
+	public void addEdgeNodeException3() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		flowChart.addEdge(2, true, "Juju");
+	}
+
+	@Test (expected = IndexOutOfBoundsException.class)
+	public void getNodeContentOutOfBoundsException() throws NodeContentException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		assertEquals("addFirstNode", (Integer) 5, flowChart.getNodeContent(5));
+	}
+
+	@Test (expected = FlowException.class)
+	public void getNextStateFlowException() throws NodeContentException, FlowException, NodeException, InterruptedException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		assertEquals("getNextState", (Integer) 3, flowChart.getNextState(new Date(),3,false));
+		flowChart.addEdge(3, false, 2);
+		Thread.sleep(1);
+		assertEquals("getNextState", (Integer) 2, flowChart.getNextState(new Date(),3,false));
+	}
+
+	@Test (expected = IndexOutOfBoundsException.class)
+	public void getNextStateOutOfBoundsException() throws NodeContentException, FlowException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		assertEquals("getNextState", (Integer) 3, flowChart.getNextState(new Date(),4,false));
+	}
+
+	@Test (expected = ClassCastException.class)
+	public void getNextStateBadConditionException() throws NodeContentException, FlowException, NodeException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		assertEquals("getNextState", (Integer) 3, flowChart.getNextState(new Date(),0,3));
 	}
 }
