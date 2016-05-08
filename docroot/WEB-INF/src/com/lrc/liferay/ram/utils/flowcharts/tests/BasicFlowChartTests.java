@@ -1,14 +1,17 @@
 package com.lrc.liferay.ram.utils.flowcharts.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 
 import com.lrc.liferay.ram.utils.flowcharts.BasicFlowChart;
+import com.lrc.liferay.ram.utils.flowcharts.Edge;
 import com.lrc.liferay.ram.utils.flowcharts.exceptions.FlowException;
 import com.lrc.liferay.ram.utils.flowcharts.exceptions.NodeContentException;
 import com.lrc.liferay.ram.utils.flowcharts.exceptions.NodeException;
@@ -27,14 +30,13 @@ public class BasicFlowChartTests {
 	}
 
 	private BasicFlowChart<String,Boolean> buildStringDecisionTree() throws NodeContentException, NodeException {
-		BasicFlowChart<String,Boolean> flowChart = new BasicFlowChart<String,Boolean>("Zero");
-		flowChart.addNode("One");
-		flowChart.addEdge("Zero", true, "One");
-		flowChart.addNode("Two");
-		flowChart.addEdge("Zero", false, "Two");
-		flowChart.addNode("Three");
-		flowChart.addEdge("One", true, "Three");
-		return flowChart;
+		List<String> nodes = Arrays.asList("Zero", "One", "Two", "Three");
+		List<Edge> edges = Arrays.asList(
+				new Edge("Zero", true, "One"),
+				new Edge("Zero", false, "True"),
+				new Edge("One", true, "Three"));
+		BasicFlowChart<String,Boolean> flowChart = new BasicFlowChart(nodes);
+		return new BasicFlowChart(nodes, edges);
 	}
 
 	private BasicFlowChart<Integer,Boolean> buildErrorTree() throws NodeContentException, NodeException {
@@ -83,6 +85,17 @@ public class BasicFlowChartTests {
 		assertEquals("From 1 to 0", (Integer) 1, flowChart.getNextState(new Date(), 0, false));
 		assertEquals("From 0 to 1", (Integer) 0, flowChart.getNextState(new Date(), 1, true));
 		assertEquals("From 1 to 3", (Integer) 3, flowChart.getNextState(new Date(), 0, true));
+	}
+
+	@Test
+	public void bulkConstructorTests() throws NodeContentException, NodeException {
+		List<String> nodes = Arrays.asList("Zero", "One", "Two", "Three");
+		List<Edge> edges = Arrays.asList(
+				new Edge("Zero", true, "One"),
+				new Edge("Zero", false, "True"),
+				new Edge("One", true, "Three"));
+		BasicFlowChart<String,Boolean> flowChart = new BasicFlowChart(nodes);
+		flowChart = new BasicFlowChart(nodes, edges);
 	}
 
 	@Test
@@ -138,7 +151,25 @@ public class BasicFlowChartTests {
 	}
 
 	@Test (expected = NodeContentException.class)
-	public void throwNullNodeContent() throws NodeContentException {
+	public void addEdgeNullContentTests() throws NodeContentException, NodeException, FlowException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		flowChart.addEdge(2, true, null);
+
+		assertEquals("addEdgeTest", (Integer) 3, flowChart.getNextState(new Date(),2,true, true));
+		assertEquals("addEdgeTest", (Integer) null, flowChart.getNextState(new Date(),2,true));
+	}
+
+	@Test (expected = NullPointerException.class)
+	public void addEdgeNullEdgeTests() throws NodeContentException, NodeException, FlowException {
+		BasicFlowChart flowChart = this.buildDecisionTree();
+		flowChart.addEdge(2, null, 3);
+
+		assertEquals("addEdgeTest", (Integer) 3, flowChart.getNextState(new Date(),2,true, true));
+		assertEquals("addEdgeTest", (Integer) null, flowChart.getNextState(new Date(),2,true));
+	}
+
+	@Test (expected = NullPointerException.class)
+	public void throwNullNodeContent() throws NodeContentException, NodeException {
 		BasicFlowChart flowChart = new BasicFlowChart(null);
 	}
 		

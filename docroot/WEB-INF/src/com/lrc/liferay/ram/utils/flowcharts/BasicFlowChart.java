@@ -1,25 +1,40 @@
 package com.lrc.liferay.ram.utils.flowcharts;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.lrc.liferay.ram.utils.flowcharts.exceptions.FlowException;
 import com.lrc.liferay.ram.utils.flowcharts.exceptions.NodeContentException;
 import com.lrc.liferay.ram.utils.flowcharts.exceptions.NodeException;
 
 public class BasicFlowChart<T,C extends Comparable<C>> {
-	private List<BasicNode<T,C>> nodes = null;
+	private List<BasicNode<T,C>> nodes = new ArrayList<BasicNode<T,C>>();
 	private Date lastEdit;
 	
-	////// CONSTRUCTOR //////
+	////// CONSTRUCTORS //////
+	public BasicFlowChart(List<T> nodes) throws NodeContentException, NodeException {
+		if (nodes.isEmpty())
+			throw new NodeContentException("BasicFlowChart: null node content");
+		for (T node: nodes) {
+			this.addNode(node);
+		}
+	}
+	
 	public BasicFlowChart(T content) throws NodeContentException {
-		this.nodes = new ArrayList<BasicNode<T,C>>();
 		this.nodes.add(0, new BasicNode<T,C>(content));
 		this.lastEdit = new Date();
+	}
+	
+	public BasicFlowChart(List<T> nodes, List<Edge<T,C>> edges) throws NodeContentException, NodeException {
+		if (nodes.isEmpty())
+			throw new NodeContentException("BasicFlowChart: null node content");
+		for (T node: nodes) {
+			this.addNode(node);
+		}
+		for (Edge<T,C> edge: edges) {
+			this.addEdge(edge.getOrigin(), edge.getCondition(), edge.getDestination());
+		}
 	}
 	
 //	public BasicFlowChart(BasicNode<T,C> node) {
@@ -96,8 +111,10 @@ public class BasicFlowChart<T,C extends Comparable<C>> {
 	
 	public void addNode(T content) throws NodeContentException, NodeException {
 		if (this.indexContaining(content) < 0) {
-			if (!(content.getClass() == this.getNodeContent(0).getClass()))
-				throw new NodeContentException("BasicFlowChart.addNode: Bad content type");
+			if (!(this.nodes.isEmpty())) {
+				if (!(content.getClass() == this.getNodeContent(0).getClass()))
+					throw new NodeContentException("BasicFlowChart.addNode: Bad content type");
+			}
 			this.nodes.add(new BasicNode<T,C>(content));
 			this.lastEdit = new Date();
 		} else {

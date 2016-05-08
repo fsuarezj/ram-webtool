@@ -21,7 +21,6 @@ public class RamSession extends AbstractBaseBean implements Serializable{
 	private static final String assessmentView = "assessmentView.xhtml";
 	
 	Assessment selectedAssessment;
-//	List<Assessment> assessments;
 	List<Assessment> assessments;
 	private boolean workingOnAssessment;
 
