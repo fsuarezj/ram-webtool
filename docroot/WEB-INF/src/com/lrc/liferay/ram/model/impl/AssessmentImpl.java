@@ -32,11 +32,6 @@ public class AssessmentImpl extends AssessmentBaseImpl {
 	public AssessmentImpl() {
 	}
 	
-	public AssessmentImpl(long assessmentId, long groupId) {
-		super.setGroupId(groupId);
-		super.setAssessmentId(assessmentId);
-	}
-	
 	public int stepForward() {
 		// TODO: Create outOfRangeException
 		if (super.getStep() < 5)
