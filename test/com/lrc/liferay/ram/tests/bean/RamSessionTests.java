@@ -67,9 +67,9 @@ public class RamSessionTests {
 
 		for (int i = 0; i < 4; i++) {
 			assessmentMocks.add(PowerMockito.mock(Assessment.class));
-			assessmentMocks.get(i).setAssessmentId(i);
-			assessmentMocks.get(i).setName("Assessment" + ((Integer) i).toString());
-			assessmentMocks.get(i).setStep(i);
+//			assessmentMocks.get(i).setAssessmentId(i);
+//			assessmentMocks.get(i).setName("Assessment" + ((Integer) i).toString());
+//			assessmentMocks.get(i).setStep(i);
 		}
 
 		return Arrays.asList(new Object [][] {
