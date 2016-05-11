@@ -24,12 +24,9 @@ public class RamSession extends AbstractBaseBean implements Serializable{
 	List<Assessment> assessments;
 	private boolean workingOnAssessment;
 
-	private String auxText;
-	
 	@PostConstruct
 	public void postConstruct() {
 		this.workingOnAssessment = false;
-		this.auxText = "Beginning";
 	}
 	
 	public void saveAssessment() {
@@ -65,6 +62,8 @@ public class RamSession extends AbstractBaseBean implements Serializable{
 		try {
 			AssessmentLocalServiceUtil.deleteAssessment(this.selectedAssessment);
 			this.assessments.remove(this.selectedAssessment);
+			this.selectedAssessment = null;
+			this.workingOnAssessment = false;
 		} catch (Exception e) {
 			this.addGlobalUnexpectedErrorMessage();
 			logger.error(e);
@@ -73,7 +72,6 @@ public class RamSession extends AbstractBaseBean implements Serializable{
 	}
 	
 	public String selectAssessment(Assessment assessment) {
-		this.auxText = "Assessment selected";
 		this.workingOnAssessment = true;
 		this.selectedAssessment = assessment;
 		return RamSession.assessmentView;
@@ -83,10 +81,6 @@ public class RamSession extends AbstractBaseBean implements Serializable{
 		return this.workingOnAssessment;
 	}
 
-	public String getAuxText() {
-		return this.auxText;
-	}
-	
 	public Assessment getSelectedAssessment() {
 		return this.selectedAssessment;
 	}
