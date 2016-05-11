@@ -27,5 +27,6 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/ferda/informatica/development/lib/powermock-mockito-junit-1.6.5/powermock-api-mockito-common-1.6.5.jar"/>
 	<classpathentry kind="output" path="docroot/WEB-INF/classes"/>
 </classpath>

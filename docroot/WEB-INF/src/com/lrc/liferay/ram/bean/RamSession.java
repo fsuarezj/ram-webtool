@@ -65,6 +65,8 @@ public class RamSession extends AbstractBaseBean implements Serializable{
 		try {
 			AssessmentLocalServiceUtil.deleteAssessment(this.selectedAssessment);
 			this.assessments.remove(this.selectedAssessment);
+			this.selectedAssessment = null;
+			this.workingOnAssessment = false;
 		} catch (Exception e) {
 			this.addGlobalUnexpectedErrorMessage();
 			logger.error(e);
