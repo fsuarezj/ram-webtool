@@ -1,4 +1,4 @@
-package com.lrc.liferay.ram.tests.unit.utils;
+package unit.com.lrc.liferay.ram.utils.flowcharts;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

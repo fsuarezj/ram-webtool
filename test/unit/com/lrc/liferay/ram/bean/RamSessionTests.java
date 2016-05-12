@@ -1,4 +1,4 @@
-package com.lrc.liferay.ram.tests.bean;
+package unit.com.lrc.liferay.ram.bean;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

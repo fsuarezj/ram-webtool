@@ -22,6 +22,7 @@
 		<dependency conf="test->default" name="arquillian-junit-container" org="org.jboss.arquillian.junit" rev="1.1.8.Final" />
 		<dependency conf="test->default" name="arquillian-tomcat-remote-7" org="org.jboss.arquillian.container" rev="1.0.0.CR7" />
 		<dependency conf="test->default" name="com.liferay.ant.arquillian" org="com.liferay" rev="1.0.2" />
+		<dependency conf="test->default" name="junit" org="junit" rev="4.12" />
 		<dependency conf="test->default" name="javassist" org="org.javassist" rev="3.17.1-GA" />
 	</dependencies>
 </ivy-module>
