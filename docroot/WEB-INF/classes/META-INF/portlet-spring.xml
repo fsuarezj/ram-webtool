@@ -4,4 +4,7 @@
 	<bean id="com.lrc.liferay.ram.service.AssessmentLocalService" class="com.lrc.liferay.ram.service.impl.AssessmentLocalServiceImpl" />
 	<bean id="com.lrc.liferay.ram.service.AssessmentService" class="com.lrc.liferay.ram.service.impl.AssessmentServiceImpl" />
 	<bean id="com.lrc.liferay.ram.service.persistence.AssessmentPersistence" class="com.lrc.liferay.ram.service.persistence.AssessmentPersistenceImpl" parent="basePersistence" />
+	<bean id="com.lrc.liferay.toolbuilder.service.AssessmentLocalService" class="com.lrc.liferay.toolbuilder.service.impl.AssessmentLocalServiceImpl" />
+	<bean id="com.lrc.liferay.toolbuilder.service.AssessmentService" class="com.lrc.liferay.toolbuilder.service.impl.AssessmentServiceImpl" />
+	<bean id="com.lrc.liferay.toolbuilder.service.persistence.AssessmentPersistence" class="com.lrc.liferay.toolbuilder.service.persistence.AssessmentPersistenceImpl" parent="basePersistence" />
 </beans>

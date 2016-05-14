@@ -3,10 +3,11 @@ package com.lrc.liferay.ram.utils.flowcharts;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 import com.lrc.liferay.ram.utils.flowcharts.exceptions.FlowException;
 import com.lrc.liferay.ram.utils.flowcharts.exceptions.NodeContentException;
+
+import java.util.TreeMap;
 
 public class BasicNode<T,C extends Comparable<C>> {
 	private T content;

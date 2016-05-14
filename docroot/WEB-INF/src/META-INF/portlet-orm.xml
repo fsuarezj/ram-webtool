@@ -28,7 +28,32 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.lrc.liferay.toolbuilder.model.impl.AssessmentModelImpl">
+		<attributes>
+			<id name="assessmentId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="step" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.lrc.liferay.ram.model.impl.AssessmentImpl" name="Assessment">
+		<table name="lrc_ram_Assessment" />
+		<attributes />
+	</entity>
+	<entity class="com.lrc.liferay.toolbuilder.model.impl.AssessmentImpl" name="Assessment">
 		<table name="lrc_ram_Assessment" />
 		<attributes />
 	</entity>
