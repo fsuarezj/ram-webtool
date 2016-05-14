@@ -28,5 +28,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/home/ferda/informatica/development/lib/powermock-mockito-junit-1.6.5/powermock-api-mockito-common-1.6.5.jar"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=tool-builder-portlet&amp;ivyXmlPath=ivy.xml&amp;confs=*&amp;ivySettingsPath=%24%7Bliferay_sdk_dir%3Atool-builder-portlet%7D%2Fivy-settings.xml&amp;loadSettingsOnDemand=false&amp;ivyUserDir=%24%7Bliferay_sdk_dir%3Atool-builder-portlet%7D%2F.ivy&amp;propertyFiles=">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="docroot/WEB-INF/classes"/>
 </classpath>

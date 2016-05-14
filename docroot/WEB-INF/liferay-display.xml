@@ -3,6 +3,6 @@
 
 <display>
 	<category name="category.sample">
-		<portlet id="ram-webtool" />
+		<portlet id="tool-builder" />
 	</category>
 </display>

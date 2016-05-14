@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:aui="http://liferay.com/faces/aui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <h:head />
+    <h:body>
+	    <h:message globalOnly="true" layout="table" />
+	    <h:form>
+	    <c:choose>
+	    	<c:when test="#{instanceBacking.getStep() == 0}">
+	    		<h3><h:outputText value="#{i18n['new-ram']}" /></h3>
+	    		<ui:include src="/views/editInstanceForm.xhtml" />
+	    	</c:when>
+	    	<c:otherwise>
+	    		<span class="instance-name"><h:outputText value="#{i18n['ram-name']}: #{ramSession.selectedInstance.name}" /></span>
+	    		<c:choose>
+	    			<c:when test="#{instanceBacking.getStep() == 1}">
+	    				<ui:include src="/views/ramSteps/ramStep1.xhtml" />
+	    			</c:when>
+	    			<c:when test="#{instanceBacking.getStep() == 2}">
+	    				<ui:include src="/views/ramSteps/ramStep2.xhtml" />
+	    			</c:when>
+	    			<c:when test="#{instanceBacking.getStep() == 3}">
+	    				<ui:include src="/views/ramSteps/ramStep3.xhtml" />
+	    			</c:when>
+	    			<c:when test="#{instanceBacking.getStep() == 4}">
+	    				<ui:include src="/views/ramSteps/ramStep4.xhtml" />
+	    			</c:when>
+	    			<c:when test="#{instanceBacking.getStep() == 5}">
+	    				<ui:include src="/views/ramSteps/ramStep5.xhtml" />
+	    			</c:when>
+	    		</c:choose>
+		    	<h:commandButton action="#{instanceBacking.stepForward}" value="#{i18n['step-forward']}">
+		    		<f:ajax render="@all" />
+		    	</h:commandButton>
+	    	</c:otherwise>
+	    </c:choose>
+	    	<h:commandButton action="#{ramSession.cancelInstance}" value="#{i18n['exit-ram']}">
+	    		<f:ajax render="@all" />
+	    	</h:commandButton>
+	    	<h:commandButton action="#{ramSession.deleteInstance}" value="#{i18n['delete-ram']}">
+	    		<f:ajax render="@all" />
+	    	</h:commandButton>
+	    </h:form>
+	</h:body>
+</f:view>

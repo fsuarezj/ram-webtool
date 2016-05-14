@@ -1,10 +1,7 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="com.lrc.liferay.ram.service.AssessmentLocalService" class="com.lrc.liferay.ram.service.impl.AssessmentLocalServiceImpl" />
-	<bean id="com.lrc.liferay.ram.service.AssessmentService" class="com.lrc.liferay.ram.service.impl.AssessmentServiceImpl" />
-	<bean id="com.lrc.liferay.ram.service.persistence.AssessmentPersistence" class="com.lrc.liferay.ram.service.persistence.AssessmentPersistenceImpl" parent="basePersistence" />
-	<bean id="com.lrc.liferay.toolbuilder.service.AssessmentLocalService" class="com.lrc.liferay.toolbuilder.service.impl.AssessmentLocalServiceImpl" />
-	<bean id="com.lrc.liferay.toolbuilder.service.AssessmentService" class="com.lrc.liferay.toolbuilder.service.impl.AssessmentServiceImpl" />
-	<bean id="com.lrc.liferay.toolbuilder.service.persistence.AssessmentPersistence" class="com.lrc.liferay.toolbuilder.service.persistence.AssessmentPersistenceImpl" parent="basePersistence" />
+	<bean id="org.lrc.liferay.toolbuilder.service.InstanceLocalService" class="org.lrc.liferay.toolbuilder.service.impl.InstanceLocalServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.InstanceService" class="org.lrc.liferay.toolbuilder.service.impl.InstanceServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.persistence.InstancePersistence" class="org.lrc.liferay.toolbuilder.service.persistence.InstancePersistenceImpl" parent="basePersistence" />
 </beans>

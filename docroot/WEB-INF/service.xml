@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
-<service-builder package-path="com.lrc.liferay.ram">
-	<author>fsuarezj</author>
-	<namespace>lrc_ram</namespace>
-	<entity name="Assessment" local-service="true">
+<service-builder package-path="org.lrc.liferay.toolbuilder">
+	<author>Fernando Suárez</author>
+	<namespace>lrc_tb</namespace>
+
+	<entity name="Instance" local-service="true">
 
 		<!-- PK fields -->
 
-		<column name="assessmentId" type="long" primary="true"></column>
+		<column name="instanceId" type="long" primary="true"></column>
 
 		<!-- Group instance -->
 
@@ -48,6 +49,6 @@
         </finder>
 	</entity>
     <exceptions>
-        <exception>AssessmentName</exception>
+        <exception>InstanceName</exception>
     </exceptions>
 </service-builder>

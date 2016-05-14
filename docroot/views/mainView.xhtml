@@ -12,8 +12,8 @@
 	<h:body>
 		<h:outputText value="DEBUG: #{ramSession.auxText}" />
 		<h:form>
-			<ui:include src="/views/assessmentsList.xhtml" />
-			<h:commandButton action="#{assessmentBacking.add}" value="#{i18n['new-ram']}">
+			<ui:include src="/views/instancesList.xhtml" />
+			<h:commandButton action="#{instanceBacking.add}" value="#{i18n['new-ram']}">
 				<f:ajax render="@all" />
 			</h:commandButton>
 		</h:form>

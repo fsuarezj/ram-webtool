@@ -2,17 +2,13 @@ package integration;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.lrc.liferay.toolbuilder.service.InstanceLocalServiceUtil;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.lrc.liferay.ram.bean.RamSession;
-import com.lrc.liferay.ram.model.Assessment;
-import com.lrc.liferay.ram.service.AssessmentLocalServiceUtil;
 
 @RunWith(Arquillian.class)
 public class PruebaIntegTest {
@@ -29,8 +25,8 @@ public class PruebaIntegTest {
 	
 	@Test
 	public void pruebaTest() throws SystemException {
-//		List<Assessment> assessments = AssessmentLocalServiceUtil.getAssessments(10181);
-//		assertFalse("Non empty list", assessments.isEmpty());
+//		List<Instance> instances = InstanceLocalServiceUtil.getInstances(10181);
+//		assertFalse("Non empty list", instances.isEmpty());
 
 //		User user = UserLocalServiceUtil.createUser(CounterLocalServiceUtil.increment());
 //		if (Validator.isNotNull(user))
@@ -38,15 +34,15 @@ public class PruebaIntegTest {
 //		else
 //			assert(false);
 		
-		int count = AssessmentLocalServiceUtil.getAssessmentsCount();
+		int count = InstanceLocalServiceUtil.getInstancesCount();
 		
 		assertEquals(5, count);
 	}
 
 	@Test
 	public void pruebaTest2() throws SystemException {
-//		List<Assessment> assessments = AssessmentLocalServiceUtil.getAssessments(10181);
-//		assertFalse("Non empty list", assessments.isEmpty());
+//		List<Instance> instances = InstanceLocalServiceUtil.getInstances(10181);
+//		assertFalse("Non empty list", instances.isEmpty());
 
 //		User user = UserLocalServiceUtil.createUser(CounterLocalServiceUtil.increment());
 //		if (Validator.isNotNull(user))
@@ -62,9 +58,9 @@ public class PruebaIntegTest {
 		
 //		RamSession ramSession = new RamSession();
 //		
-//		List<Assessment> assessments = ramSession.getAssessments();
+//		List<Instance> instances = ramSession.getInstances();
 //		
-//		assertEquals(5, assessments.size());
+//		assertEquals(5, instances.size());
 	}
 
 }
