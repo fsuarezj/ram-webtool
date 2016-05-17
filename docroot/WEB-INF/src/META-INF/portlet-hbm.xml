@@ -3,22 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.lrc.liferay.ram.model.Assessment" />
-	<import class="com.lrc.liferay.toolbuilder.model.Assessment" />
 	<class name="com.lrc.liferay.ram.model.impl.AssessmentImpl" table="lrc_ram_Assessment">
-		<cache usage="read-write" />
-		<id name="assessmentId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="step" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-	</class>
-	<class name="com.lrc.liferay.toolbuilder.model.impl.AssessmentImpl" table="lrc_ram_Assessment">
 		<cache usage="read-write" />
 		<id name="assessmentId" type="long">
 			<generator class="assigned" />
