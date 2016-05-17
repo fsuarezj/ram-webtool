@@ -15,7 +15,7 @@ import com.liferay.faces.portal.context.LiferayFacesContext;
 
 @ManagedBean
 @SessionScoped
-public class RamSession extends AbstractBaseBean implements Serializable{
+public class ToolSession extends AbstractBaseBean implements Serializable{
 	
 	private static final long serialVersionUID = 4205262693196822283L;
 	private static final String mainView = "mainView.xhtml";
@@ -59,7 +59,7 @@ public class RamSession extends AbstractBaseBean implements Serializable{
 	public String cancelInstance() {
 		this.selectedInstance = null;
 		this.workingOnInstance = false;
-		return RamSession.mainView;
+		return ToolSession.mainView;
 	}
 	
 	public String deleteInstance() {
@@ -72,14 +72,14 @@ public class RamSession extends AbstractBaseBean implements Serializable{
 			this.addGlobalUnexpectedErrorMessage();
 			logger.error(e);
 		}
-		return RamSession.mainView;
+		return ToolSession.mainView;
 	}
 	
 	public String selectInstance(Instance instance) {
 		this.auxText = "Instance selected";
 		this.workingOnInstance = true;
 		this.selectedInstance = instance;
-		return RamSession.instanceView;
+		return ToolSession.instanceView;
 	}
 	
 	public boolean isWorkingOnInstance() {

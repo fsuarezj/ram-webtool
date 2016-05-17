@@ -10,7 +10,7 @@
 >
 	<h:head />
 	<h:body>
-		<h:outputText value="DEBUG: #{ramSession.auxText}" />
+		<h:outputText value="DEBUG: #{toolSession.auxText}" />
 		<h:form>
 			<ui:include src="/views/instancesList.xhtml" />
 			<h:commandButton action="#{instanceBacking.add}" value="#{i18n['new-ram']}">

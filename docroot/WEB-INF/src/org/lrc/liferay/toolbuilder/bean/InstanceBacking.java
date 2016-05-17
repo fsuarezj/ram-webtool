@@ -13,8 +13,8 @@ import com.liferay.faces.portal.context.LiferayFacesContext;
 @RequestScoped
 public class InstanceBacking extends AbstractBaseBean {
 
-	@ManagedProperty(name = "ramSession", value = "#{ramSession}")
-	protected RamSession ramSession;
+	@ManagedProperty(name = "toolSession", value = "#{toolSession}")
+	protected ToolSession toolSession;
 	
 	public String add() {
 		Instance instance = InstanceUtil.create(0L);
@@ -24,20 +24,20 @@ public class InstanceBacking extends AbstractBaseBean {
 		instance.setUserId(liferayFacesContext.getUserId());
 		instance.setStep(0);
 		
-		return ramSession.selectInstance(instance);
+		return toolSession.selectInstance(instance);
 	}
 	
 	public int getStep() {
-		return ramSession.getSelectedInstance().getStep();
+		return toolSession.getSelectedInstance().getStep();
 	}
 	
 	public void stepForward() {
-		ramSession.getSelectedInstance().stepForward();
-		ramSession.saveInstance();
+		toolSession.getSelectedInstance().stepForward();
+		toolSession.saveInstance();
 	}
 	
-	public void setRamSession(RamSession ramSession) {
-		this.ramSession = ramSession;
+	public void setToolSession(ToolSession toolSession) {
+		this.toolSession = toolSession;
 	}
 
 }

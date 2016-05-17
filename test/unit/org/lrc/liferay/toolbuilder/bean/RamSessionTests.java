@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.lrc.liferay.toolbuilder.bean.RamSession;
+import org.lrc.liferay.toolbuilder.bean.ToolSession;
 import org.lrc.liferay.toolbuilder.model.Instance;
 import org.lrc.liferay.toolbuilder.service.InstanceLocalServiceUtil;
 import org.powermock.api.mockito.PowerMockito;
@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 @PowerMockRunnerDelegate(Parameterized.class)
 @PrepareForTest({InstanceLocalServiceUtil.class, LiferayFacesContext.class})
 public class RamSessionTests {
-	private RamSession ramSession;
+	private ToolSession ramSession;
 	private List<Instance> instances;
 	private int size;
 	private long groupId;
@@ -55,7 +55,7 @@ public class RamSessionTests {
 //	}
 	
 	public RamSessionTests(List<Instance> instances, int size, int groupId) {
-		this.ramSession = new RamSession();
+		this.ramSession = new ToolSession();
 		this.instances = instances;
 		this.size = size;
 		this.groupId = groupId;

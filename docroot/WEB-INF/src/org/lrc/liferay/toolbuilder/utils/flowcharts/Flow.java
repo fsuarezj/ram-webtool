@@ -63,4 +63,10 @@ public class Flow<T,C extends Comparable<C>> {
 		}
 		return result;
 	}
+	
+	public T stepBackward() {
+		if (flow.size() > 0)
+			flow.remove(flow.size()-1);
+		return this.getCurrentStep();
+	}
 }

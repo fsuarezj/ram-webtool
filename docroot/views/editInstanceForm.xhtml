@@ -10,12 +10,12 @@
 	<aui:fieldset>
 		<aui:field id="instanceNameField" label="#{i18n['name']}">
 			<h:message for="instanceName" />
-			<h:inputText id="instanceName" required="true" value="#{ramSession.selectedInstance.name}">
+			<h:inputText id="instanceName" required="true" value="#{toolSession.selectedInstance.name}">
 				<f:ajax render="instanceNameField" />
 			</h:inputText>
 		</aui:field>
 	</aui:fieldset>
-	<h:commandButton action="#{ramSession.saveInstance}" value="#{i18n['create-ram']}">
+	<h:commandButton action="#{toolSession.saveInstance}" value="#{i18n['create-ram']}">
 		<f:ajax execute="@form" render="@all" />
 	</h:commandButton>
 

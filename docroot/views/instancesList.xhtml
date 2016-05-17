@@ -8,17 +8,17 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
     
     <c:choose>
-    	<c:when test="#{empty ramSession.instances}">
+    	<c:when test="#{empty toolSession.instances}">
 			<h:outputText value="#{i18n['no-existing-instances']}" />
 			<br />
     	</c:when>
     	<c:otherwise>
 			<h3><h:outputText value="#{i18n['instances-list']}" /></h3>
 			<br />
-			<h:dataTable styleClass="table table-bordered table-hover table-striped" rowClasses="table-cell" value="#{ramSession.instances}" var="instance">
+			<h:dataTable styleClass="table table-bordered table-hover table-striped" rowClasses="table-cell" value="#{toolSession.instances}" var="instance">
 				<h:column>
 					<f:facet name="header"><h:outputText value="#{i18n['ram-name']}" /></f:facet>
-					<h:commandLink action="#{ramSession.selectInstance(instance)}" value="#{instance.name}">
+					<h:commandLink action="#{toolSession.selectInstance(instance)}" value="#{instance.name}">
 						<f:ajax render="@all" />
 					</h:commandLink>
 				</h:column>
