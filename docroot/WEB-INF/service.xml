@@ -4,11 +4,9 @@
 	<author>Fernando Suárez</author>
 	<namespace>lrc_tb</namespace>
 
-	<entity name="Instance" local-service="true">
+	<entity name="ToolInstance" local-service="true">
 
 		<!-- PK fields -->
-
-		<column name="instanceId" type="long" primary="true"></column>
 
 		<!-- Group instance -->
 
@@ -36,7 +34,8 @@
 		<!-- Group instance -->
 
 		<!-- Audit fields -->
-        <column name="step" type="int"></column>
+        <column name="toolInstanceId" type="long" primary="true"></column>
+        <column name="wrapperStepId" type="long" primary="false"></column>
         <finder name="GroupId" return-type="Collection">
             <finder-column name="groupId"></finder-column>
         </finder>
@@ -48,7 +47,27 @@
             <finder-column name="userId"></finder-column>
         </finder>
 	</entity>
-    <exceptions>
+	<entity name="WrapperStep" local-service="true">
+
+		<!-- PK fields -->
+
+		<column name="wrapperStepId" type="long" primary="true"></column>
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long"></column>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+        <column name="currentStep" type="int"></column>
+        <column name="sequential" type="boolean"></column>
+	</entity>
+	<exceptions>
         <exception>InstanceName</exception>
     </exceptions>
 </service-builder>

@@ -8,107 +8,103 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.lrc.liferay.toolbuilder.model.Instance;
-import org.lrc.liferay.toolbuilder.service.InstanceLocalServiceUtil;
+import org.lrc.liferay.toolbuilder.ToolInstance;
+import org.lrc.liferay.toolbuilder.model.WrapperStep;
+import org.lrc.liferay.toolbuilder.service.ToolInstanceLocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.WrapperStepLocalServiceUtil;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.portal.kernel.exception.SystemException;
 
 @ManagedBean
 @SessionScoped
 public class ToolSession extends AbstractBaseBean implements Serializable{
 	
-	private static final long serialVersionUID = 4205262693196822283L;
+	private static final long serialVersionUID = 8736093122352111506L;
 	private static final String mainView = "mainView.xhtml";
 	private static final String instanceView = "instanceView.xhtml";
 	
-	Instance selectedInstance;
-	List<Instance> instances;
-	private boolean workingOnInstance;
+	ToolInstance selectedToolInstance;
+	List<ToolInstance> toolInstances;
+	private boolean workingOnToolInstance;
+	private boolean configuringInstance;
 
-	private String auxText;
-	
 	@PostConstruct
 	public void postConstruct() {
-		this.workingOnInstance = false;
-		this.auxText = "Beginning";
+		this.workingOnToolInstance = false;
+		this.configuringInstance = false;
+	}
+
+	public void saveToolInstance() throws SystemException {
+		this.configuringInstance = false;
+		this.selectedToolInstance.save();
+		if (!this.toolInstances.contains(this.selectedToolInstance))
+			this.toolInstances.add(this.selectedToolInstance);
 	}
 	
-	public void saveInstance() {
-
-		try {
-			// If the instance is being created goes to Step 1
-			if (this.selectedInstance.getStep() == 0)
-				this.selectedInstance.stepForward();
-
-			// Persistence connection
-			if (this.selectedInstance.getInstanceId() == 0) {
-				this.selectedInstance = InstanceLocalServiceUtil.addInstance(this.selectedInstance);
-				// Include instance on list
-				this.instances.add(this.selectedInstance);
-			}
-			else
-				this.selectedInstance = InstanceLocalServiceUtil.updateInstance(this.selectedInstance);
-			
-
-		} catch (Exception e) {
-			this.addGlobalUnexpectedErrorMessage();
-			logger.error(e);
-		}
-	}
-	
-	public String cancelInstance() {
-		this.selectedInstance = null;
-		this.workingOnInstance = false;
+	public String cancelToolInstance() {
+		this.selectedToolInstance = null;
+		this.workingOnToolInstance = false;
+		this.configuringInstance = false;
 		return ToolSession.mainView;
 	}
 	
-	public String deleteInstance() {
+	public String deleteToolInstance() {
 		try {
-			InstanceLocalServiceUtil.deleteInstance(this.selectedInstance);
-			this.instances.remove(this.selectedInstance);
-			this.selectedInstance = null;
-			this.workingOnInstance = false;
+			this.selectedToolInstance.delete();
+			this.toolInstances.remove(this.selectedToolInstance);
+			this.selectedToolInstance = null;
+			this.workingOnToolInstance = false;
+			this.configuringInstance = false;
 		} catch (Exception e) {
 			this.addGlobalUnexpectedErrorMessage();
 			logger.error(e);
 		}
 		return ToolSession.mainView;
 	}
-	
-	public String selectInstance(Instance instance) {
-		this.auxText = "Instance selected";
-		this.workingOnInstance = true;
-		this.selectedInstance = instance;
+
+	public String selectToolInstance(ToolInstance toolInstance) {
+		this.workingOnToolInstance = true;
+		this.selectedToolInstance = toolInstance;
 		return ToolSession.instanceView;
 	}
-	
-	public boolean isWorkingOnInstance() {
-		return this.workingOnInstance;
+
+	public boolean isWorkingOnToolInstance() {
+		return this.workingOnToolInstance;
 	}
 
-	public String getAuxText() {
-		return this.auxText;
+	public ToolInstance getSelectedToolInstance() {
+		return this.selectedToolInstance;
 	}
 	
-	public Instance getSelectedInstance() {
-		return this.selectedInstance;
-	}
-	
-	public List<Instance> getInstances() {
+	public List<ToolInstance> getToolInstances() {
 		// TODO: Mensajes entre SessionBeans cuando haya modificación del listado disponible para un usuario
 		// TODO: Criterios de búsqueda (nombre del RAM, permisos, etc)
-		if (this.instances == null) {
-			this.instances = new ArrayList<Instance>();
+		WrapperStep wrapperStep;
+		System.out.println("Entrando");
+		if (this.toolInstances == null) {
+			System.out.println("Lista = null");
+			this.toolInstances = new ArrayList<ToolInstance>();
 			long groupId = LiferayFacesContext.getInstance().getScopeGroupId();
-			
 			try {
-				List<Instance> list = InstanceLocalServiceUtil.getInstances(groupId);
-				for (Instance instance : list)
-					this.instances.add(instance);
+				List<org.lrc.liferay.toolbuilder.model.ToolInstance> list = ToolInstanceLocalServiceUtil.getToolInstances(groupId);
+				System.out.println("Tamaño de la lista: " + list.size());
+				for (org.lrc.liferay.toolbuilder.model.ToolInstance toolInstance : list) {
+					wrapperStep = WrapperStepLocalServiceUtil.getWrapperStep(toolInstance.getWrapperStepId());
+					this.toolInstances.add(new ToolInstance(wrapperStep, toolInstance));
+				}
 			} catch (Exception e) {
 				logger.error(e);
 			}
 		}
-		return this.instances;
+		return this.toolInstances;
+	}
+
+	public void setConfiguringInstance() {
+		this.configuringInstance = true;
+	}
+	
+	public boolean getConfiguringInstance() {
+		return this.configuringInstance;
 	}
 }

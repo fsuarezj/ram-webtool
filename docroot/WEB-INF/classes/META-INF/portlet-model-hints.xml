@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 
 <model-hints>
-	<model name="org.lrc.liferay.toolbuilder.model.Instance">
-		<field name="instanceId" type="long" />
+	<model name="org.lrc.liferay.toolbuilder.model.ToolInstance">
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -10,6 +9,18 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="name" type="String" />
-		<field name="step" type="int" />
+		<field name="toolInstanceId" type="long" />
+		<field name="wrapperStepId" type="long" />
+	</model>
+	<model name="org.lrc.liferay.toolbuilder.model.WrapperStep">
+		<field name="wrapperStepId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="currentStep" type="int" />
+		<field name="sequential" type="boolean" />
 	</model>
 </model-hints>

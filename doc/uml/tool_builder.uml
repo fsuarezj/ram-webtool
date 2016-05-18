@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_EdigcBnqEeaHdNAhBjaKYg" name="StepFactory">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_EdigcBnqEeaHdNAhBjaKYg" name="WrapperStep">
   <packageImport xmi:id="_VU3GEBnuEeaHdNAhBjaKYg">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#_0"/>
   </packageImport>
@@ -8,31 +8,13 @@
       <ownedParameter xmi:id="_yyl2wBnrEeaHdNAhBjaKYg" name="stepType">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
-      <ownedParameter xmi:id="_2Vn4oBnrEeaHdNAhBjaKYg" type="__ohc0BnqEeaHdNAhBjaKYg" direction="return"/>
-    </ownedOperation>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Interface" xmi:id="__ohc0BnqEeaHdNAhBjaKYg" name="Step">
-    <ownedOperation xmi:id="_CqrmQBnrEeaHdNAhBjaKYg" name="draw" visibility="public">
-      <ownedParameter xmi:id="_H0jDEBnrEeaHdNAhBjaKYg" direction="return">
-        <name xsi:nil="true"/>
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedParameter>
+      <ownedParameter xmi:id="_2Vn4oBnrEeaHdNAhBjaKYg" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_FKZUgBnsEeaHdNAhBjaKYg" name="infoStep"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_L7o-0BnsEeaHdNAhBjaKYg" name="decisionTreeStep"/>
-  <packagedElement xmi:type="uml:Dependency" xmi:id="_bc9XoBnsEeaHdNAhBjaKYg" client="_L7o-0BnsEeaHdNAhBjaKYg" supplier="__ohc0BnqEeaHdNAhBjaKYg"/>
-  <packagedElement xmi:type="uml:Dependency" xmi:id="_cQAlMBnsEeaHdNAhBjaKYg" name="implements" client="_FKZUgBnsEeaHdNAhBjaKYg" supplier="__ohc0BnqEeaHdNAhBjaKYg"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="_5bTIwBnuEeaHdNAhBjaKYg" memberEnd="_5bTIwRnuEeaHdNAhBjaKYg _5bTv0RnuEeaHdNAhBjaKYg" navigableOwnedEnd="_5bTIwRnuEeaHdNAhBjaKYg _5bTv0RnuEeaHdNAhBjaKYg">
-    <ownedEnd xmi:id="_5bTIwRnuEeaHdNAhBjaKYg" name="stepFactorys" type="_SCcP4BnqEeaHdNAhBjaKYg" association="_5bTIwBnuEeaHdNAhBjaKYg">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5bTIwhnuEeaHdNAhBjaKYg"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5bTv0BnuEeaHdNAhBjaKYg" value="*"/>
-    </ownedEnd>
-    <ownedEnd xmi:id="_5bTv0RnuEeaHdNAhBjaKYg" name="steps" type="__ohc0BnqEeaHdNAhBjaKYg" association="_5bTIwBnuEeaHdNAhBjaKYg">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5bUW4BnuEeaHdNAhBjaKYg"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5bUW4RnuEeaHdNAhBjaKYg" value="*"/>
-    </ownedEnd>
-  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_bc9XoBnsEeaHdNAhBjaKYg" client="_L7o-0BnsEeaHdNAhBjaKYg"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_cQAlMBnsEeaHdNAhBjaKYg" name="implements" client="_FKZUgBnsEeaHdNAhBjaKYg"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_CX3bIBnvEeaHdNAhBjaKYg" name="decisionTreeStep">
     <interfaceRealization xmi:id="_I9edMBnvEeaHdNAhBjaKYg" client="_CX3bIBnvEeaHdNAhBjaKYg" supplier="_CX7skBnvEeaHdNAhBjaKYg" contract="_CX7skBnvEeaHdNAhBjaKYg"/>
   </packagedElement>
@@ -56,4 +38,11 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Dependency" xmi:id="_ZBn2QBnvEeaHdNAhBjaKYg" client="_CX_W8RnvEeaHdNAhBjaKYg" supplier="_CX7skBnvEeaHdNAhBjaKYg"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ciPxQBxIEea6ApegACagyg" name="WrapperStep">
+    <ownedAttribute xmi:id="_h3-f0BxIEea6ApegACagyg" name="wrapperStepModel" visibility="private" type="_eatHsBxIEea6ApegACagyg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nSY6EBxIEea6ApegACagyg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oSTe8BxIEea6ApegACagyg" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_eatHsBxIEea6ApegACagyg" name="WrapperStepModel"/>
 </uml:Model>

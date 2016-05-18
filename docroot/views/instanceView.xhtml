@@ -12,12 +12,12 @@
 	    <h:message globalOnly="true" layout="table" />
 	    <h:form>
 	    <c:choose>
-	    	<c:when test="#{instanceBacking.getStep() == 0}">
+	    	<c:when test="#{toolSession.configuringInstance}">
 	    		<h3><h:outputText value="#{i18n['new-ram']}" /></h3>
 	    		<ui:include src="/views/editInstanceForm.xhtml" />
 	    	</c:when>
 	    	<c:otherwise>
-	    		<span class="instance-name"><h:outputText value="#{i18n['ram-name']}: #{toolSession.selectedInstance.name}" /></span>
+	    		<span class="instance-name"><h:outputText value="#{i18n['ram-name']}: #{toolSession.selectedToolInstance.name}" /></span>
 	    		<c:choose>
 	    			<c:when test="#{instanceBacking.getStep() == 1}">
 	    				<ui:include src="/views/ramSteps/ramStep1.xhtml" />
@@ -40,10 +40,10 @@
 		    	</h:commandButton>
 	    	</c:otherwise>
 	    </c:choose>
-	    	<h:commandButton action="#{toolSession.cancelInstance}" value="#{i18n['exit-ram']}">
+	    	<h:commandButton action="#{toolSession.cancelToolInstance}" value="#{i18n['exit-ram']}">
 	    		<f:ajax render="@all" />
 	    	</h:commandButton>
-	    	<h:commandButton action="#{toolSession.deleteInstance}" value="#{i18n['delete-ram']}">
+	    	<h:commandButton action="#{toolSession.deleteToolInstance}" value="#{i18n['delete-ram']}">
 	    		<f:ajax render="@all" />
 	    	</h:commandButton>
 	    </h:form>

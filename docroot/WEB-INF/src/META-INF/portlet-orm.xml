@@ -7,9 +7,9 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
-	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.InstanceModelImpl">
+	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.ToolInstanceModelImpl">
 		<attributes>
-			<id name="instanceId" />
+			<id name="toolInstanceId" />
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
@@ -21,15 +21,40 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="name" />
-			<basic name="step" />
+			<basic name="wrapperStepId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<entity class="org.lrc.liferay.toolbuilder.model.impl.InstanceImpl" name="Instance">
-		<table name="lrc_tb_Instance" />
+	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.WrapperStepModelImpl">
+		<attributes>
+			<id name="wrapperStepId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="currentStep" />
+			<basic name="sequential" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="org.lrc.liferay.toolbuilder.model.impl.ToolInstanceImpl" name="ToolInstance">
+		<table name="lrc_tb_ToolInstance" />
+		<attributes />
+	</entity>
+	<entity class="org.lrc.liferay.toolbuilder.model.impl.WrapperStepImpl" name="WrapperStep">
+		<table name="lrc_tb_WrapperStep" />
 		<attributes />
 	</entity>
 </entity-mappings>

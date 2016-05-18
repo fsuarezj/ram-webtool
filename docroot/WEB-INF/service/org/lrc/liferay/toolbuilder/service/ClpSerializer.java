@@ -25,7 +25,8 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 
-import org.lrc.liferay.toolbuilder.model.InstanceClp;
+import org.lrc.liferay.toolbuilder.model.ToolInstanceClp;
+import org.lrc.liferay.toolbuilder.model.WrapperStepClp;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -102,8 +103,12 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
-		if (oldModelClassName.equals(InstanceClp.class.getName())) {
-			return translateInputInstance(oldModel);
+		if (oldModelClassName.equals(ToolInstanceClp.class.getName())) {
+			return translateInputToolInstance(oldModel);
+		}
+
+		if (oldModelClassName.equals(WrapperStepClp.class.getName())) {
+			return translateInputWrapperStep(oldModel);
 		}
 
 		return oldModel;
@@ -121,10 +126,20 @@ public class ClpSerializer {
 		return newList;
 	}
 
-	public static Object translateInputInstance(BaseModel<?> oldModel) {
-		InstanceClp oldClpModel = (InstanceClp)oldModel;
+	public static Object translateInputToolInstance(BaseModel<?> oldModel) {
+		ToolInstanceClp oldClpModel = (ToolInstanceClp)oldModel;
 
-		BaseModel<?> newModel = oldClpModel.getInstanceRemoteModel();
+		BaseModel<?> newModel = oldClpModel.getToolInstanceRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputWrapperStep(BaseModel<?> oldModel) {
+		WrapperStepClp oldClpModel = (WrapperStepClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getWrapperStepRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -149,8 +164,45 @@ public class ClpSerializer {
 		String oldModelClassName = oldModelClass.getName();
 
 		if (oldModelClassName.equals(
-					"org.lrc.liferay.toolbuilder.model.impl.InstanceImpl")) {
-			return translateOutputInstance(oldModel);
+					"org.lrc.liferay.toolbuilder.model.impl.ToolInstanceImpl")) {
+			return translateOutputToolInstance(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"org.lrc.liferay.toolbuilder.model.impl.WrapperStepImpl")) {
+			return translateOutputWrapperStep(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -271,19 +323,34 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
-					"org.lrc.liferay.toolbuilder.NoSuchInstanceException")) {
-			return new org.lrc.liferay.toolbuilder.NoSuchInstanceException();
+					"org.lrc.liferay.toolbuilder.NoSuchToolInstanceException")) {
+			return new org.lrc.liferay.toolbuilder.NoSuchToolInstanceException();
+		}
+
+		if (className.equals(
+					"org.lrc.liferay.toolbuilder.NoSuchWrapperStepException")) {
+			return new org.lrc.liferay.toolbuilder.NoSuchWrapperStepException();
 		}
 
 		return throwable;
 	}
 
-	public static Object translateOutputInstance(BaseModel<?> oldModel) {
-		InstanceClp newModel = new InstanceClp();
+	public static Object translateOutputToolInstance(BaseModel<?> oldModel) {
+		ToolInstanceClp newModel = new ToolInstanceClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
-		newModel.setInstanceRemoteModel(oldModel);
+		newModel.setToolInstanceRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputWrapperStep(BaseModel<?> oldModel) {
+		WrapperStepClp newModel = new WrapperStepClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setWrapperStepRemoteModel(oldModel);
 
 		return newModel;
 	}

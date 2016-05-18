@@ -18,8 +18,10 @@ import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 
 import org.lrc.liferay.toolbuilder.service.ClpSerializer;
-import org.lrc.liferay.toolbuilder.service.InstanceLocalServiceUtil;
-import org.lrc.liferay.toolbuilder.service.InstanceServiceUtil;
+import org.lrc.liferay.toolbuilder.service.ToolInstanceLocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.ToolInstanceServiceUtil;
+import org.lrc.liferay.toolbuilder.service.WrapperStepLocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.WrapperStepServiceUtil;
 
 /**
  * @author Fernando Suárez
@@ -36,9 +38,12 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
-			InstanceLocalServiceUtil.clearService();
+			ToolInstanceLocalServiceUtil.clearService();
 
-			InstanceServiceUtil.clearService();
+			ToolInstanceServiceUtil.clearService();
+			WrapperStepLocalServiceUtil.clearService();
+
+			WrapperStepServiceUtil.clearService();
 		}
 	}
 }

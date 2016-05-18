@@ -4,10 +4,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import org.lrc.liferay.toolbuilder.model.Instance;
-import org.lrc.liferay.toolbuilder.service.persistence.InstanceUtil;
+import org.lrc.liferay.toolbuilder.ToolInstance;
+import org.lrc.liferay.toolbuilder.model.WrapperStep;
+import org.lrc.liferay.toolbuilder.service.persistence.ToolInstanceUtil;
+import org.lrc.liferay.toolbuilder.service.persistence.WrapperStepUtil;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.portal.kernel.exception.SystemException;
 
 @ManagedBean
 @RequestScoped
@@ -17,27 +20,38 @@ public class InstanceBacking extends AbstractBaseBean {
 	protected ToolSession toolSession;
 	
 	public String add() {
-		Instance instance = InstanceUtil.create(0L);
+		System.out.println("Hola hola");
+		org.lrc.liferay.toolbuilder.model.ToolInstance toolInstance = ToolInstanceUtil.create(0L);
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		instance.setGroupId(liferayFacesContext.getScopeGroupId());
-		instance.setCompanyId(liferayFacesContext.getCompanyId());
-		instance.setUserId(liferayFacesContext.getUserId());
-		instance.setStep(0);
+		toolInstance.setGroupId(liferayFacesContext.getScopeGroupId());
+		toolInstance.setCompanyId(liferayFacesContext.getCompanyId());
+		toolInstance.setUserId(liferayFacesContext.getUserId());
 		
-		return toolSession.selectInstance(instance);
+		WrapperStep wrapperStep = WrapperStepUtil.create(0L);
+		wrapperStep.setSequential(true);
+		wrapperStep.setGroupId(liferayFacesContext.getScopeGroupId());
+		wrapperStep.setCompanyId(liferayFacesContext.getCompanyId());
+		wrapperStep.setUserId(liferayFacesContext.getUserId());
+		wrapperStep.setCurrentStep(0);
+		
+		this.toolSession.setConfiguringInstance();
+		return this.toolSession.selectToolInstance(new ToolInstance(wrapperStep, toolInstance));
 	}
 	
 	public int getStep() {
-		return toolSession.getSelectedInstance().getStep();
+		return toolSession.getSelectedToolInstance().getCurrentStepNumber();
 	}
 	
-	public void stepForward() {
-		toolSession.getSelectedInstance().stepForward();
-		toolSession.saveInstance();
+	public void stepForward() throws SystemException {
+		toolSession.getSelectedToolInstance().stepForward();
+		toolSession.saveToolInstance();
+	}
+
+	public ToolSession getToolSession() {
+		return this.toolSession;
 	}
 	
 	public void setToolSession(ToolSession toolSession) {
 		this.toolSession = toolSession;
 	}
-
 }

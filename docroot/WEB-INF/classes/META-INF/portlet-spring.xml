@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="org.lrc.liferay.toolbuilder.service.InstanceLocalService" class="org.lrc.liferay.toolbuilder.service.impl.InstanceLocalServiceImpl" />
-	<bean id="org.lrc.liferay.toolbuilder.service.InstanceService" class="org.lrc.liferay.toolbuilder.service.impl.InstanceServiceImpl" />
-	<bean id="org.lrc.liferay.toolbuilder.service.persistence.InstancePersistence" class="org.lrc.liferay.toolbuilder.service.persistence.InstancePersistenceImpl" parent="basePersistence" />
+	<bean id="org.lrc.liferay.toolbuilder.service.ToolInstanceLocalService" class="org.lrc.liferay.toolbuilder.service.impl.ToolInstanceLocalServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.ToolInstanceService" class="org.lrc.liferay.toolbuilder.service.impl.ToolInstanceServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.persistence.ToolInstancePersistence" class="org.lrc.liferay.toolbuilder.service.persistence.ToolInstancePersistenceImpl" parent="basePersistence" />
+	<bean id="org.lrc.liferay.toolbuilder.service.WrapperStepLocalService" class="org.lrc.liferay.toolbuilder.service.impl.WrapperStepLocalServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.WrapperStepService" class="org.lrc.liferay.toolbuilder.service.impl.WrapperStepServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.persistence.WrapperStepPersistence" class="org.lrc.liferay.toolbuilder.service.persistence.WrapperStepPersistenceImpl" parent="basePersistence" />
 </beans>
