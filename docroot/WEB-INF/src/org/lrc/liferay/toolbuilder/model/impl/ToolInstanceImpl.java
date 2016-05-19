@@ -14,6 +14,13 @@
 
 package org.lrc.liferay.toolbuilder.model.impl;
 
+import org.lrc.liferay.toolbuilder.model.WrapperStep;
+import org.lrc.liferay.toolbuilder.service.ToolInstanceLocalServiceUtil;
+import org.lrc.liferay.toolbuilder.steps.Step;
+
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+
 /**
  * The extended model implementation for the ToolInstance service. Represents a row in the &quot;lrc_tb_ToolInstance&quot; database table, with each column mapped to a property of this class.
  *
@@ -23,12 +30,68 @@ package org.lrc.liferay.toolbuilder.model.impl;
  *
  * @author Fernando Suárez
  */
-public class ToolInstanceImpl extends ToolInstanceBaseImpl {
+public class ToolInstanceImpl extends ToolInstanceBaseImpl implements Step {
+
+	private static final long serialVersionUID = -4480073195704693014L;
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a tool instance model instance should use the {@link org.lrc.liferay.toolbuilder.model.ToolInstance} interface instead.
 	 */
+	final String view = "instanceView.xhtml";
+
+	private WrapperStep wrapperStep;
+
 	public ToolInstanceImpl() {
+	}
+	
+	@Override
+	public void save() throws SystemException {
+	
+		// Persistence connection
+		System.out.println("Saving wrapperStep with step " + this.wrapperStep.getCurrentStepNumber());
+		this.wrapperStep.save();
+		System.out.println("Saving ToolInstance");
+		this.setWrapperStepId(this.wrapperStep.getWrapperStepId());
+		if (this.getToolInstanceId() == 0) {
+			ToolInstanceLocalServiceUtil.addToolInstance(this);
+		}
+		else {
+			ToolInstanceLocalServiceUtil.updateToolInstance(this);
+		}
+	}
+	
+	@Override
+	public void delete() throws PortalException, SystemException {
+		ToolInstanceLocalServiceUtil.deleteToolInstance(this.getToolInstanceId());
+		this.wrapperStep.delete();
+	}
+	
+//	@Override
+//	public boolean equals(Object toolInstance) {
+//		return this.getToolInstanceId() == ((org.lrc.liferay.toolbuilder.ToolInstance) toolInstance).getToolInstanceId();
+//	}
+
+	@Override
+	public String getStepName() {
+		return "TOOL-INSTANCE";
+	}
+
+	@Override
+	public String draw() {
+		return view;
+	}
+	
+	public Integer stepForward() {
+		return this.wrapperStep.stepForward();
+	}
+	
+	public int getCurrentStepNumber() {
+		return this.wrapperStep.getCurrentStepNumber();
+	}
+	
+	public void setWrapperStep(WrapperStep wrapperStep) {
+		this.wrapperStep = wrapperStep;
 	}
 }

@@ -17,7 +17,7 @@ package org.lrc.liferay.toolbuilder;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * @author ferda
+ * @author Fernando Suárez
  */
 public class InstanceNameException extends PortalException {
 

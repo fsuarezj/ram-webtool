@@ -3,7 +3,7 @@ package org.lrc.liferay.toolbuilder.steps;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
-public interface Step {
+public interface Step extends StepDef {
 	
 	public String draw();
 	

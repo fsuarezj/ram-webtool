@@ -31,4 +31,21 @@ public interface ToolInstance extends ToolInstanceModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link org.lrc.liferay.toolbuilder.model.impl.ToolInstanceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public void save()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void delete()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.lang.String getStepName();
+
+	public java.lang.String draw();
+
+	public java.lang.Integer stepForward();
+
+	public int getCurrentStepNumber();
+
+	public void setWrapperStep(
+		org.lrc.liferay.toolbuilder.model.WrapperStep wrapperStep);
 }

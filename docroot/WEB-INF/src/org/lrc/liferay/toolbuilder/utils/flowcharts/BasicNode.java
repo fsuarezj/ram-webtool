@@ -74,7 +74,7 @@ public class BasicNode<T,C extends Comparable<C>> {
 	public void removeEdgeByNode(Integer index) {
 		if (this.edges != null) {
 			if (this.edges.containsValue(index)) {
-				List<C> temp = new ArrayList();
+				List<C> temp = new ArrayList<C>();
 				for(Entry<C,Integer> edge: this.edges.entrySet()) {
 					if (edge.getValue() == index) {
 						temp.add(edge.getKey());
@@ -95,7 +95,8 @@ public class BasicNode<T,C extends Comparable<C>> {
 		if (!(o instanceof BasicNode))
 			return false;
 		else {
-			BasicNode auxNode = (BasicNode) o;
+			@SuppressWarnings("unchecked")
+			BasicNode<T,C> auxNode = (BasicNode<T,C>) o;
 			return (this.content.equals(auxNode.getContent()));
 			
 		}

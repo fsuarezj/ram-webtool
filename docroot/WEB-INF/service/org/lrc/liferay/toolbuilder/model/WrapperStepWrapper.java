@@ -458,6 +458,56 @@ public class WrapperStepWrapper implements WrapperStep,
 	}
 
 	@Override
+	public void addStep(org.lrc.liferay.toolbuilder.steps.Step step) {
+		_wrapperStep.addStep(step);
+	}
+
+	/**
+	* @return the index of the next step. If it is the final step it returns the current step.
+	*/
+	@Override
+	public java.lang.Integer stepForward() {
+		return _wrapperStep.stepForward();
+	}
+
+	/**
+	* @param newStep the index of the new step
+	* @return the index of the new step. If sequential will throw exception if newStep is not the next one
+	*/
+	@Override
+	public java.lang.Integer setCurrentStep(java.lang.Integer newStep) {
+		return _wrapperStep.setCurrentStep(newStep);
+	}
+
+	@Override
+	public java.lang.Integer getCurrentStepNumber() {
+		return _wrapperStep.getCurrentStepNumber();
+	}
+
+	@Override
+	public void save()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_wrapperStep.save();
+	}
+
+	@Override
+	public void delete()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_wrapperStep.delete();
+	}
+
+	@Override
+	public java.lang.String draw() {
+		return _wrapperStep.draw();
+	}
+
+	@Override
+	public java.lang.String getStepName() {
+		return _wrapperStep.getStepName();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

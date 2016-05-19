@@ -23,4 +23,9 @@ public class InfoStep implements Step {
 		
 	}
 
+	@Override
+	public String getStepName() {
+		return "INFO";
+	}
+
 }

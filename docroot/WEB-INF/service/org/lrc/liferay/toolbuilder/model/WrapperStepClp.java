@@ -367,6 +367,151 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 		}
 	}
 
+	@Override
+	public java.lang.Integer setCurrentStep(java.lang.Integer newStep) {
+		try {
+			String methodName = "setCurrentStep";
+
+			Class<?>[] parameterTypes = new Class<?>[] { java.lang.Integer.class };
+
+			Object[] parameterValues = new Object[] { newStep };
+
+			java.lang.Integer returnObj = (java.lang.Integer)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.lang.Integer getCurrentStepNumber() {
+		try {
+			String methodName = "getCurrentStepNumber";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.Integer returnObj = (java.lang.Integer)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public void save() {
+		try {
+			String methodName = "save";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public void addStep(org.lrc.liferay.toolbuilder.steps.Step step) {
+		try {
+			String methodName = "addStep";
+
+			Class<?>[] parameterTypes = new Class<?>[] {
+					org.lrc.liferay.toolbuilder.steps.Step.class
+				};
+
+			Object[] parameterValues = new Object[] { step };
+
+			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.lang.String getStepName() {
+		try {
+			String methodName = "getStepName";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.lang.String draw() {
+		try {
+			String methodName = "draw";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public void delete() {
+		try {
+			String methodName = "delete";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public java.lang.Integer stepForward() {
+		try {
+			String methodName = "stepForward";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.Integer returnObj = (java.lang.Integer)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getWrapperStepRemoteModel() {
 		return _wrapperStepRemoteModel;
 	}

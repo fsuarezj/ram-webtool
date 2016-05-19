@@ -4,7 +4,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
-import org.lrc.liferay.toolbuilder.ToolInstance;
 import org.lrc.liferay.toolbuilder.model.WrapperStep;
 import org.lrc.liferay.toolbuilder.service.persistence.ToolInstanceUtil;
 import org.lrc.liferay.toolbuilder.service.persistence.WrapperStepUtil;
@@ -20,7 +19,7 @@ public class InstanceBacking extends AbstractBaseBean {
 	protected ToolSession toolSession;
 	
 	public String add() {
-		System.out.println("Hola hola");
+		System.out.println("Adding a new Tool Instance");
 		org.lrc.liferay.toolbuilder.model.ToolInstance toolInstance = ToolInstanceUtil.create(0L);
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		toolInstance.setGroupId(liferayFacesContext.getScopeGroupId());
@@ -34,8 +33,10 @@ public class InstanceBacking extends AbstractBaseBean {
 		wrapperStep.setUserId(liferayFacesContext.getUserId());
 		wrapperStep.setCurrentStep(0);
 		
+		toolInstance.setWrapperStep(wrapperStep);
+		
 		this.toolSession.setConfiguringInstance();
-		return this.toolSession.selectToolInstance(new ToolInstance(wrapperStep, toolInstance));
+		return this.toolSession.selectToolInstance(toolInstance);
 	}
 	
 	public int getStep() {
@@ -44,6 +45,7 @@ public class InstanceBacking extends AbstractBaseBean {
 	
 	public void stepForward() throws SystemException {
 		toolSession.getSelectedToolInstance().stepForward();
+		System.out.println("StepForward to " + toolSession.getSelectedToolInstance().getCurrentStepNumber());
 		toolSession.saveToolInstance();
 	}
 

@@ -6,9 +6,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
-import org.lrc.liferay.toolbuilder.ToolInstance;
+import org.lrc.liferay.toolbuilder.model.ToolInstance;
 import org.lrc.liferay.toolbuilder.model.WrapperStep;
 import org.lrc.liferay.toolbuilder.service.ToolInstanceLocalServiceUtil;
 import org.lrc.liferay.toolbuilder.service.WrapperStepLocalServiceUtil;
@@ -20,6 +21,13 @@ import com.liferay.portal.kernel.exception.SystemException;
 @SessionScoped
 public class ToolSession extends AbstractBaseBean implements Serializable{
 	
+	@ManagedProperty(name = "factoryBean", value = "#{factoryBean}")
+	private FactoryBean factoryBean;
+
+	public void setFactoryBean(FactoryBean factoryBean) {
+		this.factoryBean = factoryBean;
+	}
+
 	private static final long serialVersionUID = 8736093122352111506L;
 	private static final String mainView = "mainView.xhtml";
 	private static final String instanceView = "instanceView.xhtml";
@@ -81,17 +89,16 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 		// TODO: Mensajes entre SessionBeans cuando haya modificación del listado disponible para un usuario
 		// TODO: Criterios de búsqueda (nombre del RAM, permisos, etc)
 		WrapperStep wrapperStep;
-		System.out.println("Entrando");
+		System.out.println("Calling ToolSession.getToolInstances()");
 		if (this.toolInstances == null) {
-			System.out.println("Lista = null");
 			this.toolInstances = new ArrayList<ToolInstance>();
 			long groupId = LiferayFacesContext.getInstance().getScopeGroupId();
 			try {
-				List<org.lrc.liferay.toolbuilder.model.ToolInstance> list = ToolInstanceLocalServiceUtil.getToolInstances(groupId);
-				System.out.println("Tamaño de la lista: " + list.size());
-				for (org.lrc.liferay.toolbuilder.model.ToolInstance toolInstance : list) {
+				List<ToolInstance> list = ToolInstanceLocalServiceUtil.getToolInstances(groupId);
+				for (ToolInstance toolInstance : list) {
 					wrapperStep = WrapperStepLocalServiceUtil.getWrapperStep(toolInstance.getWrapperStepId());
-					this.toolInstances.add(new ToolInstance(wrapperStep, toolInstance));
+					toolInstance.setWrapperStep(wrapperStep);
+					this.toolInstances.add(toolInstance);
 				}
 			} catch (Exception e) {
 				logger.error(e);

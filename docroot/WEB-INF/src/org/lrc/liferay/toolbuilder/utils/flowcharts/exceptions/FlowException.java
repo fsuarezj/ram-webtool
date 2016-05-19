@@ -1,6 +1,8 @@
 package org.lrc.liferay.toolbuilder.utils.flowcharts.exceptions;
 
 public class FlowException extends Throwable {
+
+	private static final long serialVersionUID = 7123134697913647724L;
 	public static final int NO_EXISTING_EDGES = 1;
 	public static final int NO_EDGES_FOR_CONDITION = 2;
 	public static final int MODIFIED_FLOWCHART = 3;

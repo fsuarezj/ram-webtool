@@ -44,11 +44,11 @@ public class BasicFlowChart<T,C extends Comparable<C>> {
 //	}
 	
 	////// PRIVATE METHODS //////
-	private void changeEdgesIndex(Integer oldIndex, Integer newIndex) {
-		for(BasicNode<T,C> node: this.nodes) {
-			node.changeEdgesIndex(oldIndex, newIndex);
-		}
-	}
+//	private void changeEdgesIndex(Integer oldIndex, Integer newIndex) {
+//		for(BasicNode<T,C> node: this.nodes) {
+//			node.changeEdgesIndex(oldIndex, newIndex);
+//		}
+//	}
 	
 	private void exchangeEdgesIndex(Integer index1, Integer index2) {
 		for(BasicNode<T,C> node: this.nodes) {
@@ -57,7 +57,7 @@ public class BasicFlowChart<T,C extends Comparable<C>> {
 	}
 	
 	private int indexContaining(T content) throws NodeContentException {
-		BasicNode<T,C> auxNode = new BasicNode(content);
+		BasicNode<T,C> auxNode = new BasicNode<T,C>(content);
 		return this.nodes.indexOf(auxNode);
 	}
 	
@@ -85,7 +85,7 @@ public class BasicFlowChart<T,C extends Comparable<C>> {
 
 	////// CONSTRUCTION METHODS //////
 	public void addFirstNode(T content) throws NodeContentException, NodeException {
-		BasicNode<T,C> auxNode = new BasicNode(content);
+		BasicNode<T,C> auxNode = new BasicNode<T,C>(content);
 		if (!(this.nodes.get(0).equals(auxNode))) {
 			if(this.nodes.indexOf(auxNode) < 0) {
 				auxNode = this.nodes.set(0, auxNode);
@@ -99,7 +99,7 @@ public class BasicFlowChart<T,C extends Comparable<C>> {
 	}
 	
 	public void setFirstNode(T content) throws NodeException, NodeContentException {
-		BasicNode<T,C> auxNode = new BasicNode(content);
+		BasicNode<T,C> auxNode = new BasicNode<T,C>(content);
 		int oldIndex = this.nodes.indexOf(auxNode);
 		if (oldIndex < 0)
 			throw new NodeException("BasicFlowChart.setFirstNode: Non existing node");

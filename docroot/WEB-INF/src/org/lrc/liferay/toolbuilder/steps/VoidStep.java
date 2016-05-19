@@ -32,4 +32,9 @@ public class VoidStep implements Step {
 
 	}
 
+	@Override
+	public String getStepName() {
+		return "VOID";
+	}
+
 }

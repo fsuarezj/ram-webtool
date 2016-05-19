@@ -448,6 +448,45 @@ public class ToolInstanceWrapper implements ToolInstance,
 	}
 
 	@Override
+	public void save()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_toolInstance.save();
+	}
+
+	@Override
+	public void delete()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_toolInstance.delete();
+	}
+
+	@Override
+	public java.lang.String getStepName() {
+		return _toolInstance.getStepName();
+	}
+
+	@Override
+	public java.lang.String draw() {
+		return _toolInstance.draw();
+	}
+
+	@Override
+	public java.lang.Integer stepForward() {
+		return _toolInstance.stepForward();
+	}
+
+	@Override
+	public int getCurrentStepNumber() {
+		return _toolInstance.getCurrentStepNumber();
+	}
+
+	@Override
+	public void setWrapperStep(
+		org.lrc.liferay.toolbuilder.model.WrapperStep wrapperStep) {
+		_toolInstance.setWrapperStep(wrapperStep);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

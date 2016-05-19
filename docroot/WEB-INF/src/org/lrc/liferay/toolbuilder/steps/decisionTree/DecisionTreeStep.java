@@ -87,4 +87,9 @@ public class DecisionTreeStep implements Step {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String getStepName() {
+		return "DECISION_TREE";
+	}
 }

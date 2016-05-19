@@ -31,4 +31,29 @@ public interface WrapperStep extends WrapperStepModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link org.lrc.liferay.toolbuilder.model.impl.WrapperStepImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public void addStep(org.lrc.liferay.toolbuilder.steps.Step step);
+
+	/**
+	* @return the index of the next step. If it is the final step it returns the current step.
+	*/
+	public java.lang.Integer stepForward();
+
+	/**
+	* @param newStep the index of the new step
+	* @return the index of the new step. If sequential will throw exception if newStep is not the next one
+	*/
+	public java.lang.Integer setCurrentStep(java.lang.Integer newStep);
+
+	public java.lang.Integer getCurrentStepNumber();
+
+	public void save()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void delete()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.lang.String draw();
+
+	public java.lang.String getStepName();
 }
