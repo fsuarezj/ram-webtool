@@ -66,6 +66,7 @@
 		<column name="modifiedDate" type="Date"></column>
         <column name="currentStep" type="int"></column>
         <column name="sequential" type="boolean"></column>
+        <column name="stepsNumber" type="int"></column>
 	</entity>
 	<exceptions>
         <exception>InstanceName</exception>

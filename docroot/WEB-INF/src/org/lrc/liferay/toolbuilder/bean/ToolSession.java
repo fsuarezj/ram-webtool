@@ -89,7 +89,7 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 		// TODO: Mensajes entre SessionBeans cuando haya modificación del listado disponible para un usuario
 		// TODO: Criterios de búsqueda (nombre del RAM, permisos, etc)
 		WrapperStep wrapperStep;
-		System.out.println("Calling ToolSession.getToolInstances()");
+//		System.out.println("Calling ToolSession.getToolInstances()");
 		if (this.toolInstances == null) {
 			this.toolInstances = new ArrayList<ToolInstance>();
 			long groupId = LiferayFacesContext.getInstance().getScopeGroupId();
@@ -97,6 +97,8 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 				List<ToolInstance> list = ToolInstanceLocalServiceUtil.getToolInstances(groupId);
 				for (ToolInstance toolInstance : list) {
 					wrapperStep = WrapperStepLocalServiceUtil.getWrapperStep(toolInstance.getWrapperStepId());
+					wrapperStep.createSteps();
+					wrapperStep.setStepsNumber(5);
 					toolInstance.setWrapperStep(wrapperStep);
 					this.toolInstances.add(toolInstance);
 				}

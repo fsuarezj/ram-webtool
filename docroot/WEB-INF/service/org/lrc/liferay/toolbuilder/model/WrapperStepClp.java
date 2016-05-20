@@ -84,6 +84,7 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("currentStep", getCurrentStep());
 		attributes.put("sequential", getSequential());
+		attributes.put("stepsNumber", getStepsNumber());
 
 		return attributes;
 	}
@@ -142,6 +143,12 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 
 		if (sequential != null) {
 			setSequential(sequential);
+		}
+
+		Integer stepsNumber = (Integer)attributes.get("stepsNumber");
+
+		if (stepsNumber != null) {
+			setStepsNumber(stepsNumber);
 		}
 	}
 
@@ -368,21 +375,25 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 	}
 
 	@Override
-	public java.lang.Integer setCurrentStep(java.lang.Integer newStep) {
-		try {
-			String methodName = "setCurrentStep";
+	public int getStepsNumber() {
+		return _stepsNumber;
+	}
 
-			Class<?>[] parameterTypes = new Class<?>[] { java.lang.Integer.class };
+	@Override
+	public void setStepsNumber(int stepsNumber) {
+		_stepsNumber = stepsNumber;
 
-			Object[] parameterValues = new Object[] { newStep };
+		if (_wrapperStepRemoteModel != null) {
+			try {
+				Class<?> clazz = _wrapperStepRemoteModel.getClass();
 
-			java.lang.Integer returnObj = (java.lang.Integer)invokeOnRemoteModel(methodName,
-					parameterTypes, parameterValues);
+				Method method = clazz.getMethod("setStepsNumber", int.class);
 
-			return returnObj;
-		}
-		catch (Exception e) {
-			throw new UnsupportedOperationException(e);
+				method.invoke(_wrapperStepRemoteModel, stepsNumber);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
 		}
 	}
 
@@ -399,6 +410,38 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 					parameterTypes, parameterValues);
 
 			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public void setCurrentStepAdvanced(java.lang.Integer newStep) {
+		try {
+			String methodName = "setCurrentStepAdvanced";
+
+			Class<?>[] parameterTypes = new Class<?>[] { java.lang.Integer.class };
+
+			Object[] parameterValues = new Object[] { newStep };
+
+			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public void createSteps() {
+		try {
+			String methodName = "createSteps";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
 		}
 		catch (Exception e) {
 			throw new UnsupportedOperationException(e);
@@ -590,6 +633,7 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 		clone.setModifiedDate(getModifiedDate());
 		clone.setCurrentStep(getCurrentStep());
 		clone.setSequential(getSequential());
+		clone.setStepsNumber(getStepsNumber());
 
 		return clone;
 	}
@@ -642,7 +686,7 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{wrapperStepId=");
 		sb.append(getWrapperStepId());
@@ -662,6 +706,8 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 		sb.append(getCurrentStep());
 		sb.append(", sequential=");
 		sb.append(getSequential());
+		sb.append(", stepsNumber=");
+		sb.append(getStepsNumber());
 		sb.append("}");
 
 		return sb.toString();
@@ -669,7 +715,7 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("org.lrc.liferay.toolbuilder.model.WrapperStep");
@@ -711,6 +757,10 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 			"<column><column-name>sequential</column-name><column-value><![CDATA[");
 		sb.append(getSequential());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>stepsNumber</column-name><column-value><![CDATA[");
+		sb.append(getStepsNumber());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -727,6 +777,7 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 	private Date _modifiedDate;
 	private int _currentStep;
 	private boolean _sequential;
+	private int _stepsNumber;
 	private BaseModel<?> _wrapperStepRemoteModel;
 	private Class<?> _clpSerializerClass = org.lrc.liferay.toolbuilder.service.ClpSerializer.class;
 }

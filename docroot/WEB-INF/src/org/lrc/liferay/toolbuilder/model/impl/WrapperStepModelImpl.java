@@ -74,9 +74,10 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "currentStep", Types.INTEGER },
-			{ "sequential", Types.BOOLEAN }
+			{ "sequential", Types.BOOLEAN },
+			{ "stepsNumber", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table lrc_tb_WrapperStep (wrapperStepId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,currentStep INTEGER,sequential BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table lrc_tb_WrapperStep (wrapperStepId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,currentStep INTEGER,sequential BOOLEAN,stepsNumber INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table lrc_tb_WrapperStep";
 	public static final String ORDER_BY_JPQL = " ORDER BY wrapperStep.wrapperStepId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY lrc_tb_WrapperStep.wrapperStepId ASC";
@@ -113,6 +114,7 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setCurrentStep(soapModel.getCurrentStep());
 		model.setSequential(soapModel.getSequential());
+		model.setStepsNumber(soapModel.getStepsNumber());
 
 		return model;
 	}
@@ -186,6 +188,7 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("currentStep", getCurrentStep());
 		attributes.put("sequential", getSequential());
+		attributes.put("stepsNumber", getStepsNumber());
 
 		return attributes;
 	}
@@ -244,6 +247,12 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 
 		if (sequential != null) {
 			setSequential(sequential);
+		}
+
+		Integer stepsNumber = (Integer)attributes.get("stepsNumber");
+
+		if (stepsNumber != null) {
+			setStepsNumber(stepsNumber);
 		}
 	}
 
@@ -366,6 +375,17 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 		_sequential = sequential;
 	}
 
+	@JSON
+	@Override
+	public int getStepsNumber() {
+		return _stepsNumber;
+	}
+
+	@Override
+	public void setStepsNumber(int stepsNumber) {
+		_stepsNumber = stepsNumber;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -402,6 +422,7 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 		wrapperStepImpl.setModifiedDate(getModifiedDate());
 		wrapperStepImpl.setCurrentStep(getCurrentStep());
 		wrapperStepImpl.setSequential(getSequential());
+		wrapperStepImpl.setStepsNumber(getStepsNumber());
 
 		wrapperStepImpl.resetOriginalValues();
 
@@ -496,12 +517,14 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 
 		wrapperStepCacheModel.sequential = getSequential();
 
+		wrapperStepCacheModel.stepsNumber = getStepsNumber();
+
 		return wrapperStepCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{wrapperStepId=");
 		sb.append(getWrapperStepId());
@@ -521,6 +544,8 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 		sb.append(getCurrentStep());
 		sb.append(", sequential=");
 		sb.append(getSequential());
+		sb.append(", stepsNumber=");
+		sb.append(getStepsNumber());
 		sb.append("}");
 
 		return sb.toString();
@@ -528,7 +553,7 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("org.lrc.liferay.toolbuilder.model.WrapperStep");
@@ -570,6 +595,10 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 			"<column><column-name>sequential</column-name><column-value><![CDATA[");
 		sb.append(getSequential());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>stepsNumber</column-name><column-value><![CDATA[");
+		sb.append(getStepsNumber());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -590,5 +619,6 @@ public class WrapperStepModelImpl extends BaseModelImpl<WrapperStep>
 	private Date _modifiedDate;
 	private int _currentStep;
 	private boolean _sequential;
+	private int _stepsNumber;
 	private WrapperStep _escapedModel;
 }

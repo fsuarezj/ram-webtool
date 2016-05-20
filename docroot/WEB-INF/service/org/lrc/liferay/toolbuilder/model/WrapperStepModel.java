@@ -224,6 +224,20 @@ public interface WrapperStepModel extends BaseModel<WrapperStep>, GroupedModel {
 	 */
 	public void setSequential(boolean sequential);
 
+	/**
+	 * Returns the steps number of this wrapper step.
+	 *
+	 * @return the steps number of this wrapper step
+	 */
+	public int getStepsNumber();
+
+	/**
+	 * Sets the steps number of this wrapper step.
+	 *
+	 * @param stepsNumber the steps number of this wrapper step
+	 */
+	public void setStepsNumber(int stepsNumber);
+
 	@Override
 	public boolean isNew();
 

@@ -14,12 +14,13 @@
 
 package org.lrc.liferay.toolbuilder.model.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lrc.liferay.toolbuilder.StepFactory;
 import org.lrc.liferay.toolbuilder.service.WrapperStepLocalServiceUtil;
 import org.lrc.liferay.toolbuilder.steps.Step;
-import org.lrc.liferay.toolbuilder.steps.VoidStep;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -51,16 +52,18 @@ public class WrapperStepImpl extends WrapperStepBaseImpl implements Step {
 	
 	public WrapperStepImpl() {
 		this.steps = new ArrayList<Step>();
-		//TODO: Get steps from persistent layer
-		this.setCurrentStep(0);
-		for (int i = 0; i < 5; i++)
-			this.addStep(new VoidStep());
 	}
 	
 	public WrapperStepImpl(int depth) {
 		this.steps = new ArrayList<Step>();
 		//this.setDepth(depth);
 		//TODO: Get steps from persistent layer
+	}
+	
+	public void createSteps() throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		//TODO: Get steps from persistent layer
+		for (int i = 0; i < 5; i++)
+			this.addStep(StepFactory.getStep("VOID"));
 	}
 	
 	public void addStep(Step step) {
@@ -73,11 +76,7 @@ public class WrapperStepImpl extends WrapperStepBaseImpl implements Step {
 	 * @return the index of the next step. If it is the final step it returns the current step.
 	 */
 	public Integer stepForward() {
-		System.out.println("CurrentStep before is " + this.getCurrentStep());
-		System.out.println("Steps size is " + this.steps.size());
-		if (this.getCurrentStep() + 1 < this.steps.size())
-			this.setCurrentStep(this.getCurrentStep() + 1);
-		System.out.println("CurrentStep after is " + this.getCurrentStep());
+		this.setCurrentStepAdvanced(this.getCurrentStep() + 1);
 		return this.getCurrentStep();
 	}
 	
@@ -85,20 +84,13 @@ public class WrapperStepImpl extends WrapperStepBaseImpl implements Step {
 	 * @param newStep the index of the new step
 	 * @return the index of the new step. If sequential will throw exception if newStep is not the next one
 	 */
-	public Integer setCurrentStep(Integer newStep) {
-		if (this.isSequential())
-			if (this.getCurrentStep() + 1 == newStep)
-				return this.stepForward();
-			else
-				// TODO: Throw SequentialWrapperException
-				return this.getCurrentStep();
-		else {
-			if (newStep < this.steps.size()) {
-				this.setCurrentStep((int)newStep);
-				return newStep;
+	public void setCurrentStepAdvanced(Integer newStep) {
+		if (newStep < this.getStepsNumber()) {
+			if (this.isSequential()) {
+				if (this.getCurrentStep() + 1 == newStep)
+					this.setCurrentStep((int)newStep);
 			} else {
-				// TODO: Throw OutOfRangeException
-				return this.getCurrentStep();
+				this.setCurrentStep((int)newStep);
 			}
 		}
 	}
@@ -114,14 +106,13 @@ public class WrapperStepImpl extends WrapperStepBaseImpl implements Step {
 		if (this.isSequential()) {
 			if (this.getWrapperStepId() == 0) {
 				WrapperStepLocalServiceUtil.addWrapperStep(this);
-				System.out.println("New WrapperStepId after saving is " + this.getWrapperStepId());
 			}
-			else
+			else {
 				WrapperStepLocalServiceUtil.updateWrapperStep(this);
+			}
 		} else {
 			if (this.getWrapperStepId() == 0) {
 				WrapperStepLocalServiceUtil.addWrapperStep(this);
-				System.out.println("New WrapperStepId after saving is " + this.getWrapperStepId());
 			}
 		}
 //		try {

@@ -40,6 +40,7 @@ public class WrapperStepSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCurrentStep(model.getCurrentStep());
 		soapModel.setSequential(model.getSequential());
+		soapModel.setStepsNumber(model.getStepsNumber());
 
 		return soapModel;
 	}
@@ -168,6 +169,14 @@ public class WrapperStepSoap implements Serializable {
 		_sequential = sequential;
 	}
 
+	public int getStepsNumber() {
+		return _stepsNumber;
+	}
+
+	public void setStepsNumber(int stepsNumber) {
+		_stepsNumber = stepsNumber;
+	}
+
 	private long _wrapperStepId;
 	private long _groupId;
 	private long _companyId;
@@ -177,4 +186,5 @@ public class WrapperStepSoap implements Serializable {
 	private Date _modifiedDate;
 	private int _currentStep;
 	private boolean _sequential;
+	private int _stepsNumber;
 }

@@ -1,5 +1,7 @@
 package org.lrc.liferay.toolbuilder.bean;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -18,7 +20,7 @@ public class InstanceBacking extends AbstractBaseBean {
 	@ManagedProperty(name = "toolSession", value = "#{toolSession}")
 	protected ToolSession toolSession;
 	
-	public String add() {
+	public String add() throws ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InstantiationException, NoSuchMethodException, SecurityException, InvocationTargetException {
 		System.out.println("Adding a new Tool Instance");
 		org.lrc.liferay.toolbuilder.model.ToolInstance toolInstance = ToolInstanceUtil.create(0L);
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
@@ -31,6 +33,8 @@ public class InstanceBacking extends AbstractBaseBean {
 		wrapperStep.setGroupId(liferayFacesContext.getScopeGroupId());
 		wrapperStep.setCompanyId(liferayFacesContext.getCompanyId());
 		wrapperStep.setUserId(liferayFacesContext.getUserId());
+		wrapperStep.createSteps();
+		wrapperStep.setStepsNumber(5);
 		wrapperStep.setCurrentStep(0);
 		
 		toolInstance.setWrapperStep(wrapperStep);

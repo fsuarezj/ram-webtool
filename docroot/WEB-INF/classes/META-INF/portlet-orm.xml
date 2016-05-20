@@ -43,6 +43,7 @@
 			</basic>
 			<basic name="currentStep" />
 			<basic name="sequential" />
+			<basic name="stepsNumber" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

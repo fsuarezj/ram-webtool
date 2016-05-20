@@ -31,5 +31,6 @@ create table lrc_tb_WrapperStep (
 	createDate DATE null,
 	modifiedDate DATE null,
 	currentStep INTEGER,
-	sequential BOOLEAN
+	sequential BOOLEAN,
+	stepsNumber INTEGER
 );

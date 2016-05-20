@@ -22,5 +22,6 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="currentStep" type="int" />
 		<field name="sequential" type="boolean" />
+		<field name="stepsNumber" type="int" />
 	</model>
 </model-hints>

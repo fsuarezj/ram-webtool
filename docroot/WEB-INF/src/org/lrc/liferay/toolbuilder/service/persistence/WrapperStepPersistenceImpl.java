@@ -328,6 +328,7 @@ public class WrapperStepPersistenceImpl extends BasePersistenceImpl<WrapperStep>
 		wrapperStepImpl.setModifiedDate(wrapperStep.getModifiedDate());
 		wrapperStepImpl.setCurrentStep(wrapperStep.getCurrentStep());
 		wrapperStepImpl.setSequential(wrapperStep.isSequential());
+		wrapperStepImpl.setStepsNumber(wrapperStep.getStepsNumber());
 
 		return wrapperStepImpl;
 	}

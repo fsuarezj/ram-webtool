@@ -59,6 +59,7 @@ public class WrapperStepWrapper implements WrapperStep,
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("currentStep", getCurrentStep());
 		attributes.put("sequential", getSequential());
+		attributes.put("stepsNumber", getStepsNumber());
 
 		return attributes;
 	}
@@ -117,6 +118,12 @@ public class WrapperStepWrapper implements WrapperStep,
 
 		if (sequential != null) {
 			setSequential(sequential);
+		}
+
+		Integer stepsNumber = (Integer)attributes.get("stepsNumber");
+
+		if (stepsNumber != null) {
+			setStepsNumber(stepsNumber);
 		}
 	}
 
@@ -352,6 +359,26 @@ public class WrapperStepWrapper implements WrapperStep,
 		_wrapperStep.setSequential(sequential);
 	}
 
+	/**
+	* Returns the steps number of this wrapper step.
+	*
+	* @return the steps number of this wrapper step
+	*/
+	@Override
+	public int getStepsNumber() {
+		return _wrapperStep.getStepsNumber();
+	}
+
+	/**
+	* Sets the steps number of this wrapper step.
+	*
+	* @param stepsNumber the steps number of this wrapper step
+	*/
+	@Override
+	public void setStepsNumber(int stepsNumber) {
+		_wrapperStep.setStepsNumber(stepsNumber);
+	}
+
 	@Override
 	public boolean isNew() {
 		return _wrapperStep.isNew();
@@ -458,6 +485,16 @@ public class WrapperStepWrapper implements WrapperStep,
 	}
 
 	@Override
+	public void createSteps()
+		throws java.lang.ClassNotFoundException,
+			java.lang.IllegalAccessException, java.lang.IllegalArgumentException,
+			java.lang.InstantiationException, java.lang.NoSuchMethodException,
+			java.lang.SecurityException,
+			java.lang.reflect.InvocationTargetException {
+		_wrapperStep.createSteps();
+	}
+
+	@Override
 	public void addStep(org.lrc.liferay.toolbuilder.steps.Step step) {
 		_wrapperStep.addStep(step);
 	}
@@ -475,8 +512,8 @@ public class WrapperStepWrapper implements WrapperStep,
 	* @return the index of the new step. If sequential will throw exception if newStep is not the next one
 	*/
 	@Override
-	public java.lang.Integer setCurrentStep(java.lang.Integer newStep) {
-		return _wrapperStep.setCurrentStep(newStep);
+	public void setCurrentStepAdvanced(java.lang.Integer newStep) {
+		_wrapperStep.setCurrentStepAdvanced(newStep);
 	}
 
 	@Override

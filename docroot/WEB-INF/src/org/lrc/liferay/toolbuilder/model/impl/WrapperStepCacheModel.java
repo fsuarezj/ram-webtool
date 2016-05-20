@@ -38,7 +38,7 @@ public class WrapperStepCacheModel implements CacheModel<WrapperStep>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{wrapperStepId=");
 		sb.append(wrapperStepId);
@@ -58,6 +58,8 @@ public class WrapperStepCacheModel implements CacheModel<WrapperStep>,
 		sb.append(currentStep);
 		sb.append(", sequential=");
 		sb.append(sequential);
+		sb.append(", stepsNumber=");
+		sb.append(stepsNumber);
 		sb.append("}");
 
 		return sb.toString();
@@ -95,6 +97,7 @@ public class WrapperStepCacheModel implements CacheModel<WrapperStep>,
 
 		wrapperStepImpl.setCurrentStep(currentStep);
 		wrapperStepImpl.setSequential(sequential);
+		wrapperStepImpl.setStepsNumber(stepsNumber);
 
 		wrapperStepImpl.resetOriginalValues();
 
@@ -112,6 +115,7 @@ public class WrapperStepCacheModel implements CacheModel<WrapperStep>,
 		modifiedDate = objectInput.readLong();
 		currentStep = objectInput.readInt();
 		sequential = objectInput.readBoolean();
+		stepsNumber = objectInput.readInt();
 	}
 
 	@Override
@@ -133,6 +137,7 @@ public class WrapperStepCacheModel implements CacheModel<WrapperStep>,
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeInt(currentStep);
 		objectOutput.writeBoolean(sequential);
+		objectOutput.writeInt(stepsNumber);
 	}
 
 	public long wrapperStepId;
@@ -144,4 +149,5 @@ public class WrapperStepCacheModel implements CacheModel<WrapperStep>,
 	public long modifiedDate;
 	public int currentStep;
 	public boolean sequential;
+	public int stepsNumber;
 }
