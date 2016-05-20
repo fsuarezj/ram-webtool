@@ -512,8 +512,8 @@ public class WrapperStepWrapper implements WrapperStep,
 	* @return the index of the new step. If sequential will throw exception if newStep is not the next one
 	*/
 	@Override
-	public void setCurrentStepAdvanced(java.lang.Integer newStep) {
-		_wrapperStep.setCurrentStepAdvanced(newStep);
+	public void goToStep(java.lang.Integer newStep) {
+		_wrapperStep.goToStep(newStep);
 	}
 
 	@Override

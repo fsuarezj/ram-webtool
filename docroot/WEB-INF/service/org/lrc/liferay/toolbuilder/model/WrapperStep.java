@@ -49,7 +49,7 @@ public interface WrapperStep extends WrapperStepModel, PersistedModel {
 	* @param newStep the index of the new step
 	* @return the index of the new step. If sequential will throw exception if newStep is not the next one
 	*/
-	public void setCurrentStepAdvanced(java.lang.Integer newStep);
+	public void goToStep(java.lang.Integer newStep);
 
 	public java.lang.Integer getCurrentStepNumber();
 

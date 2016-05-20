@@ -76,7 +76,7 @@ public class WrapperStepImpl extends WrapperStepBaseImpl implements Step {
 	 * @return the index of the next step. If it is the final step it returns the current step.
 	 */
 	public Integer stepForward() {
-		this.setCurrentStepAdvanced(this.getCurrentStep() + 1);
+		this.goToStep(this.getCurrentStep() + 1);
 		return this.getCurrentStep();
 	}
 	
@@ -84,7 +84,7 @@ public class WrapperStepImpl extends WrapperStepBaseImpl implements Step {
 	 * @param newStep the index of the new step
 	 * @return the index of the new step. If sequential will throw exception if newStep is not the next one
 	 */
-	public void setCurrentStepAdvanced(Integer newStep) {
+	public void goToStep(Integer newStep) {
 		if (newStep < this.getStepsNumber()) {
 			if (this.isSequential()) {
 				if (this.getCurrentStep() + 1 == newStep)

@@ -417,22 +417,6 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 	}
 
 	@Override
-	public void setCurrentStepAdvanced(java.lang.Integer newStep) {
-		try {
-			String methodName = "setCurrentStepAdvanced";
-
-			Class<?>[] parameterTypes = new Class<?>[] { java.lang.Integer.class };
-
-			Object[] parameterValues = new Object[] { newStep };
-
-			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
-		}
-		catch (Exception e) {
-			throw new UnsupportedOperationException(e);
-		}
-	}
-
-	@Override
 	public void createSteps() {
 		try {
 			String methodName = "createSteps";
@@ -456,6 +440,22 @@ public class WrapperStepClp extends BaseModelImpl<WrapperStep>
 			Class<?>[] parameterTypes = new Class<?>[] {  };
 
 			Object[] parameterValues = new Object[] {  };
+
+			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public void goToStep(java.lang.Integer newStep) {
+		try {
+			String methodName = "goToStep";
+
+			Class<?>[] parameterTypes = new Class<?>[] { java.lang.Integer.class };
+
+			Object[] parameterValues = new Object[] { newStep };
 
 			invokeOnRemoteModel(methodName, parameterTypes, parameterValues);
 		}
