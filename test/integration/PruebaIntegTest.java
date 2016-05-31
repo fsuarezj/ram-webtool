@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.lrc.liferay.toolbuilder.service.InstanceLocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.ToolInstanceLocalServiceUtil;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -34,7 +34,7 @@ public class PruebaIntegTest {
 //		else
 //			assert(false);
 		
-		int count = InstanceLocalServiceUtil.getInstancesCount();
+		int count = ToolInstanceLocalServiceUtil.getToolInstancesCount();
 		
 		assertEquals(5, count);
 	}

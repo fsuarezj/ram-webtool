@@ -7,15 +7,15 @@
     xmlns:h="http://java.sun.com/jsf/html" 
     xmlns:ui="http://java.sun.com/jsf/facelets">
     
-	<aui:fieldset>
-		<aui:field id="instanceNameField" label="#{i18n['name']}">
-			<h:message for="instanceName" />
-			<h:inputText id="instanceName" required="true" value="#{toolSession.selectedToolInstance.name}">
-				<f:ajax render="instanceNameField" />
+	<aui:fieldset id="toolInstanceNameFieldSet">
+		<aui:field id="toolInstanceNameField" label="#{i18n['name']}">
+			<h:message for="toolInstanceName" />
+			<h:inputText id="toolInstanceName" required="true" value="#{toolSession.selectedToolInstance.name}">
+				<f:ajax render="toolInstanceNameField" />
 			</h:inputText>
 		</aui:field>
 	</aui:fieldset>
-	<h:commandButton action="#{toolSession.saveToolInstance}" value="#{i18n['create-ram']}">
+	<h:commandButton id="createToolInstanceButton" action="#{toolSession.saveToolInstance}" value="#{i18n['create-ram']}">
 		<f:ajax execute="@form" render="@all" />
 	</h:commandButton>
 

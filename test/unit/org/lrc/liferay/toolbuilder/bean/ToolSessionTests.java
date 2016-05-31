@@ -14,8 +14,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-import org.lrc.liferay.toolbuilder.ToolInstance;
 import org.lrc.liferay.toolbuilder.bean.ToolSession;
+import org.lrc.liferay.toolbuilder.model.ToolInstance;
 import org.lrc.liferay.toolbuilder.service.ToolInstanceLocalServiceUtil;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -103,15 +103,15 @@ public class ToolSessionTests {
 		assertTrue("It is working on instance", toolSession.isWorkingOnToolInstance());
 
 		// If it has instanceMocks[1] remove it
-		PowerMockito.when(ToolInstanceLocalServiceUtil.deleteToolInstance(this.toolSession.getSelectedToolInstance().getToolInstanceId())).thenReturn(this.toolSession.getSelectedToolInstance().getToolInstance());
+		PowerMockito.when(ToolInstanceLocalServiceUtil.deleteToolInstance(this.toolSession.getSelectedToolInstance().getToolInstanceId())).thenReturn(this.toolSession.getSelectedToolInstance());
 		assertEquals("deleteToolInstance correct", "mainView.xhtml", this.toolSession.deleteToolInstance());
 		aux = this.toolSession.getToolInstances();
 		assertEquals("Test ToolInstances size after deleting", this.size == 0? this.size: this.size - 1, aux.size());
 
 		// Add instanceMocks[0]
 		this.toolSession.selectToolInstance(instanceMocks.get(0));
-		PowerMockito.when(ToolInstanceLocalServiceUtil.addToolInstance(this.toolSession.getSelectedToolInstance().getToolInstance())).
-			thenReturn(this.toolSession.getSelectedToolInstance().getToolInstance());
+		PowerMockito.when(ToolInstanceLocalServiceUtil.addToolInstance(this.toolSession.getSelectedToolInstance())).
+			thenReturn(this.toolSession.getSelectedToolInstance());
 		this.toolSession.saveToolInstance();
 		assertEquals("Test ToolInstances size", this.size == 0? 1: this.size, aux.size());
 		

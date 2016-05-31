@@ -10,40 +10,42 @@
     <h:head />
     <h:body>
 	    <h:message globalOnly="true" layout="table" />
-	    <h:form>
+	    <h:form id="toolInstanceForm">
 	    <c:choose>
 	    	<c:when test="#{toolSession.configuringInstance}">
 	    		<h3><h:outputText value="#{i18n['new-ram']}" /></h3>
 	    		<ui:include src="/views/editInstanceForm.xhtml" />
 	    	</c:when>
 	    	<c:otherwise>
-	    		<span class="instance-name"><h:outputText value="#{i18n['ram-name']}: #{toolSession.selectedToolInstance.name}" /></span>
-	    		<c:choose>
-	    			<c:when test="#{instanceBacking.getStep() == 1}">
-	    				<ui:include src="/views/ramSteps/ramStep1.xhtml" />
-	    			</c:when>
-	    			<c:when test="#{instanceBacking.getStep() == 2}">
-	    				<ui:include src="/views/ramSteps/ramStep2.xhtml" />
-	    			</c:when>
-	    			<c:when test="#{instanceBacking.getStep() == 3}">
-	    				<ui:include src="/views/ramSteps/ramStep3.xhtml" />
-	    			</c:when>
-	    			<c:when test="#{instanceBacking.getStep() == 4}">
-	    				<ui:include src="/views/ramSteps/ramStep4.xhtml" />
-	    			</c:when>
-	    			<c:when test="#{instanceBacking.getStep() == 5}">
-	    				<ui:include src="/views/ramSteps/ramStep5.xhtml" />
-	    			</c:when>
-	    		</c:choose>
-		    	<h:commandButton action="#{instanceBacking.stepForward}" value="#{i18n['step-forward']}">
-		    		<f:ajax render="@all" />
-		    	</h:commandButton>
+    			<h:outputLabel class="instance-name"><h:outputText value="#{i18n['ram-name']}: #{toolSession.selectedToolInstance.name}" /></h:outputLabel>
+	    		<h:outputLabel id="toolInstanceContent">
+	    			<c:choose>
+	    				<c:when test="#{instanceBacking.getStep() == 1}">
+	    					<ui:include src="/views/ramSteps/ramStep1.xhtml" />
+	    				</c:when>
+	    				<c:when test="#{instanceBacking.getStep() == 2}">
+	    					<ui:include src="/views/ramSteps/ramStep2.xhtml" />
+	    				</c:when>
+	    				<c:when test="#{instanceBacking.getStep() == 3}">
+	    					<ui:include src="/views/ramSteps/ramStep3.xhtml" />
+	    				</c:when>
+	    				<c:when test="#{instanceBacking.getStep() == 4}">
+	    					<ui:include src="/views/ramSteps/ramStep4.xhtml" />
+	    				</c:when>
+	    				<c:when test="#{instanceBacking.getStep() == 5}">
+	    					<ui:include src="/views/ramSteps/ramStep5.xhtml" />
+	    				</c:when>
+	    			</c:choose>
+				</h:outputLabel>
+	    		<h:commandButton id="stepForwardButton" action="#{instanceBacking.stepForward}" value="#{i18n['step-forward']}">
+	    			<f:ajax render="toolInstanceContent" />
+	    		</h:commandButton>
 	    	</c:otherwise>
 	    </c:choose>
-	    	<h:commandButton action="#{toolSession.cancelToolInstance}" value="#{i18n['exit-ram']}">
+	    	<h:commandButton id="cancelToolInstanceButton" action="#{toolSession.cancelToolInstance}" value="#{i18n['exit-ram']}">
 	    		<f:ajax render="@all" />
 	    	</h:commandButton>
-	    	<h:commandButton action="#{toolSession.deleteToolInstance}" value="#{i18n['delete-ram']}">
+	    	<h:commandButton id="deleteToolInstanceButton" action="#{toolSession.deleteToolInstance}" value="#{i18n['delete-ram']}">
 	    		<f:ajax render="@all" />
 	    	</h:commandButton>
 	    </h:form>
