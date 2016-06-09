@@ -1,10 +1,24 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="org.lrc.liferay.toolbuilder.service.ToolInstanceLocalService" class="org.lrc.liferay.toolbuilder.service.impl.ToolInstanceLocalServiceImpl" />
-	<bean id="org.lrc.liferay.toolbuilder.service.ToolInstanceService" class="org.lrc.liferay.toolbuilder.service.impl.ToolInstanceServiceImpl" />
-	<bean id="org.lrc.liferay.toolbuilder.service.persistence.ToolInstancePersistence" class="org.lrc.liferay.toolbuilder.service.persistence.ToolInstancePersistenceImpl" parent="basePersistence" />
-	<bean id="org.lrc.liferay.toolbuilder.service.WrapperStepLocalService" class="org.lrc.liferay.toolbuilder.service.impl.WrapperStepLocalServiceImpl" />
-	<bean id="org.lrc.liferay.toolbuilder.service.WrapperStepService" class="org.lrc.liferay.toolbuilder.service.impl.WrapperStepServiceImpl" />
-	<bean id="org.lrc.liferay.toolbuilder.service.persistence.WrapperStepPersistence" class="org.lrc.liferay.toolbuilder.service.persistence.WrapperStepPersistenceImpl" parent="basePersistence" />
+	<bean id="org.lrc.liferay.toolbuilder.service.InstalledStepLocalService" class="org.lrc.liferay.toolbuilder.service.impl.InstalledStepLocalServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.InstalledStepService" class="org.lrc.liferay.toolbuilder.service.impl.InstalledStepServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.persistence.InstalledStepPersistence" class="org.lrc.liferay.toolbuilder.service.persistence.InstalledStepPersistenceImpl" parent="basePersistence" />
+	<bean id="org.lrc.liferay.toolbuilder.service.StepDBELocalService" class="org.lrc.liferay.toolbuilder.service.impl.StepDBELocalServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.StepDBEService" class="org.lrc.liferay.toolbuilder.service.impl.StepDBEServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.persistence.StepDBEPersistence" class="org.lrc.liferay.toolbuilder.service.persistence.StepDBEPersistenceImpl" parent="basePersistence" />
+	<bean id="org.lrc.liferay.toolbuilder.service.StepDefDBELocalService" class="org.lrc.liferay.toolbuilder.service.impl.StepDefDBELocalServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.StepDefDBEService" class="org.lrc.liferay.toolbuilder.service.impl.StepDefDBEServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.persistence.StepDefDBEPersistence" class="org.lrc.liferay.toolbuilder.service.persistence.StepDefDBEPersistenceImpl" parent="basePersistence" />
+	<bean id="org.lrc.liferay.toolbuilder.service.ToolDefDBEService" class="org.lrc.liferay.toolbuilder.service.impl.ToolDefDBEServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.persistence.ToolDefDBEPersistence" class="org.lrc.liferay.toolbuilder.service.persistence.ToolDefDBEPersistenceImpl" parent="basePersistence" />
+	<bean id="org.lrc.liferay.toolbuilder.service.ToolInstanceDBELocalService" class="org.lrc.liferay.toolbuilder.service.impl.ToolInstanceDBELocalServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.ToolInstanceDBEService" class="org.lrc.liferay.toolbuilder.service.impl.ToolInstanceDBEServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.persistence.ToolInstanceDBEPersistence" class="org.lrc.liferay.toolbuilder.service.persistence.ToolInstanceDBEPersistenceImpl" parent="basePersistence" />
+	<bean id="org.lrc.liferay.toolbuilder.service.WrapperStepDBELocalService" class="org.lrc.liferay.toolbuilder.service.impl.WrapperStepDBELocalServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.WrapperStepDBEService" class="org.lrc.liferay.toolbuilder.service.impl.WrapperStepDBEServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.persistence.WrapperStepDBEPersistence" class="org.lrc.liferay.toolbuilder.service.persistence.WrapperStepDBEPersistenceImpl" parent="basePersistence" />
+	<bean id="org.lrc.liferay.toolbuilder.service.WrapperStepDefDBELocalService" class="org.lrc.liferay.toolbuilder.service.impl.WrapperStepDefDBELocalServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.WrapperStepDefDBEService" class="org.lrc.liferay.toolbuilder.service.impl.WrapperStepDefDBEServiceImpl" />
+	<bean id="org.lrc.liferay.toolbuilder.service.persistence.WrapperStepDefDBEPersistence" class="org.lrc.liferay.toolbuilder.service.persistence.WrapperStepDefDBEPersistenceImpl" parent="basePersistence" />
 </beans>

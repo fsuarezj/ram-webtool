@@ -3,10 +3,11 @@
 <service-builder package-path="org.lrc.liferay.toolbuilder">
 	<author>Fernando Suárez</author>
 	<namespace>lrc_tb</namespace>
-
-	<entity name="ToolInstance" local-service="true">
+	<entity name="InstalledStep" local-service="true">
 
 		<!-- PK fields -->
+
+		<column name="stepType" type="String" primary="true"></column>
 
 		<!-- Group instance -->
 
@@ -19,39 +20,58 @@
 		<column name="userName" type="String"></column>
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>
-		<column name="name" type="String"></column>
-
-
-		<!-- PK fields -->
-
-		<!-- Group instance -->
-
-		<!-- Audit fields -->
-
-
-		<!-- PK fields -->
-
-		<!-- Group instance -->
-
-		<!-- Audit fields -->
-        <column name="toolInstanceId" type="long" primary="true"></column>
-        <column name="wrapperStepId" type="long" primary="false"></column>
-        <finder name="GroupId" return-type="Collection">
-            <finder-column name="groupId"></finder-column>
-        </finder>
-        <finder name="G_N" return-type="Collection">
-            <finder-column name="groupId"></finder-column>
-            <finder-column name="name"></finder-column>
-        </finder>
-        <finder name="UserId" return-type="Collection">
-            <finder-column name="userId"></finder-column>
+        <column name="namespace" type="String"></column>
+        <column name="className" type="String"></column>
+        <finder name="StepType" return-type="InstalledStep" unique="true">
+            <finder-column name="stepType"></finder-column>
         </finder>
 	</entity>
-	<entity name="WrapperStep" local-service="true">
+	<entity name="ToolDefDBE">
 
 		<!-- PK fields -->
 
-		<column name="wrapperStepId" type="long" primary="true"></column>
+		<column name="toolDefDBEId" type="long" primary="true"></column>
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+        <column name="toolName" type="String"></column>
+        <finder name="ToolDefDBEId" return-type="Collection" unique="false">
+            <finder-column name="toolDefDBEId"></finder-column>
+        </finder>
+        <finder name="ToolName" return-type="Collection">
+            <finder-column name="toolName"></finder-column>
+        </finder>
+	</entity>
+
+	<entity name="ToolInstanceDBE" local-service="true">
+	
+		<!-- PK fields -->
+
+		<column name="toolInstanceDBEId" type="long" primary="true"></column>
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+        <column name="toolDefDBEId" type="long"></column>
+        <finder name="ToolInstanceDBEId" return-type="Collection">
+            <finder-column name="toolInstanceDBEId"></finder-column>
+        </finder>
+	</entity>
+	<entity human-name="Step Definition" local-service="true"
+		name="StepDefDBE">
+
+
+		<!-- PK fields -->
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+
+
+		<!-- PK fields -->
+
+		<column name="stepDefDBEId" type="long" primary="true" id-type="increment"></column>
 
 		<!-- Group instance -->
 
@@ -64,11 +84,68 @@
 		<column name="userName" type="String"></column>
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>
-        <column name="currentStep" type="int"></column>
-        <column name="sequential" type="boolean"></column>
+		<column name="stepType" type="String"></column>
+        <finder name="StepDefDBEId" return-type="Collection">
+            <finder-column name="stepDefDBEId"></finder-column>
+        </finder>
+	</entity>
+	<entity local-service="true" name="StepDBE">
+
+		<!-- PK fields -->
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+
+
+		<!-- PK fields -->
+
+		<column name="stepDBEId" type="long" primary="true" id-type="increment"></column>
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long"></column>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+        <column name="StepDefDBEId" type="long"></column>
+        <finder name="StepDBEId" return-type="Collection">
+            <finder-column name="stepDBEId"></finder-column>
+        </finder>
+	</entity>
+	<entity local-service="true" name="WrapperStepDefDBE">
+        <column name="wrapperStepDefDBEId" type="long" primary="true"></column>
         <column name="stepsNumber" type="int"></column>
+        <column name="sequential" type="boolean"></column>
+        <column name="depth" type="int"></column>
+        <column name="stepDefs" type="Collection" entity="StepDefDBE" mapping-table="WSDef_StepDef"></column>
+        <finder name="WrapperStepDefDBEId" return-type="Collection">
+            <finder-column name="wrapperStepDefDBEId"></finder-column>
+        </finder>
+    </entity>
+	<entity name="WrapperStepDBE" local-service="true">
+
+		<!-- PK fields -->
+		
+        <column name="wrapperStepDBEId" type="long" primary="true"></column>
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+
+        <column name="currentStep" type="int"></column>
+        <column name="steps" type="Collection" entity="StepDBE" mapping-table="WS_Step"></column>
+        <finder name="WrapperStepDBEId" return-type="Collection">
+            <finder-column name="wrapperStepDBEId"></finder-column>
+        </finder>
 	</entity>
-	<exceptions>
+    <exceptions>
         <exception>InstanceName</exception>
     </exceptions>
+
 </service-builder>

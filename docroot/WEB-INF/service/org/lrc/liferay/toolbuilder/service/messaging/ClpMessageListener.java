@@ -18,10 +18,19 @@ import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 
 import org.lrc.liferay.toolbuilder.service.ClpSerializer;
-import org.lrc.liferay.toolbuilder.service.ToolInstanceLocalServiceUtil;
-import org.lrc.liferay.toolbuilder.service.ToolInstanceServiceUtil;
-import org.lrc.liferay.toolbuilder.service.WrapperStepLocalServiceUtil;
-import org.lrc.liferay.toolbuilder.service.WrapperStepServiceUtil;
+import org.lrc.liferay.toolbuilder.service.InstalledStepLocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.InstalledStepServiceUtil;
+import org.lrc.liferay.toolbuilder.service.StepDBELocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.StepDBEServiceUtil;
+import org.lrc.liferay.toolbuilder.service.StepDefDBELocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.StepDefDBEServiceUtil;
+import org.lrc.liferay.toolbuilder.service.ToolDefDBEServiceUtil;
+import org.lrc.liferay.toolbuilder.service.ToolInstanceDBELocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.ToolInstanceDBEServiceUtil;
+import org.lrc.liferay.toolbuilder.service.WrapperStepDBELocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.WrapperStepDBEServiceUtil;
+import org.lrc.liferay.toolbuilder.service.WrapperStepDefDBELocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.WrapperStepDefDBEServiceUtil;
 
 /**
  * @author Fernando Suárez
@@ -38,12 +47,26 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
-			ToolInstanceLocalServiceUtil.clearService();
+			InstalledStepLocalServiceUtil.clearService();
 
-			ToolInstanceServiceUtil.clearService();
-			WrapperStepLocalServiceUtil.clearService();
+			InstalledStepServiceUtil.clearService();
+			StepDBELocalServiceUtil.clearService();
 
-			WrapperStepServiceUtil.clearService();
+			StepDBEServiceUtil.clearService();
+			StepDefDBELocalServiceUtil.clearService();
+
+			StepDefDBEServiceUtil.clearService();
+
+			ToolDefDBEServiceUtil.clearService();
+			ToolInstanceDBELocalServiceUtil.clearService();
+
+			ToolInstanceDBEServiceUtil.clearService();
+			WrapperStepDBELocalServiceUtil.clearService();
+
+			WrapperStepDBEServiceUtil.clearService();
+			WrapperStepDefDBELocalServiceUtil.clearService();
+
+			WrapperStepDefDBEServiceUtil.clearService();
 		}
 	}
 }

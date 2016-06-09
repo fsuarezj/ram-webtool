@@ -7,9 +7,9 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
-	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.ToolInstanceModelImpl">
+	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.InstalledStepModelImpl">
 		<attributes>
-			<id name="toolInstanceId" />
+			<id name="stepType" />
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
@@ -20,17 +20,17 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="name" />
-			<basic name="wrapperStepId" />
+			<basic name="namespace" />
+			<basic name="className" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.WrapperStepModelImpl">
+	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.StepDBEModelImpl">
 		<attributes>
-			<id name="wrapperStepId" />
+			<id name="stepDBEId" />
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
@@ -41,21 +41,97 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="StepDefDBEId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.StepDefDBEModelImpl">
+		<attributes>
+			<id name="stepDefDBEId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="stepType" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.ToolDefDBEModelImpl">
+		<attributes>
+			<id name="toolDefDBEId" />
+			<basic name="toolName" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.ToolInstanceDBEModelImpl">
+		<attributes>
+			<id name="toolInstanceDBEId" />
+			<basic name="toolDefDBEId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.WrapperStepDBEModelImpl">
+		<attributes>
+			<id name="wrapperStepDBEId" />
 			<basic name="currentStep" />
-			<basic name="sequential" />
-			<basic name="stepsNumber" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
-			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<entity class="org.lrc.liferay.toolbuilder.model.impl.ToolInstanceImpl" name="ToolInstance">
-		<table name="lrc_tb_ToolInstance" />
+	<mapped-superclass class="org.lrc.liferay.toolbuilder.model.impl.WrapperStepDefDBEModelImpl">
+		<attributes>
+			<id name="wrapperStepDefDBEId" />
+			<basic name="stepsNumber" />
+			<basic name="sequential" />
+			<basic name="depth" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="org.lrc.liferay.toolbuilder.model.impl.InstalledStepImpl" name="InstalledStep">
+		<table name="lrc_tb_InstalledStep" />
 		<attributes />
 	</entity>
-	<entity class="org.lrc.liferay.toolbuilder.model.impl.WrapperStepImpl" name="WrapperStep">
-		<table name="lrc_tb_WrapperStep" />
+	<entity class="org.lrc.liferay.toolbuilder.model.impl.StepDBEImpl" name="StepDBE">
+		<table name="lrc_tb_StepDBE" />
+		<attributes />
+	</entity>
+	<entity class="org.lrc.liferay.toolbuilder.model.impl.StepDefDBEImpl" name="StepDefDBE">
+		<table name="lrc_tb_StepDefDBE" />
+		<attributes />
+	</entity>
+	<entity class="org.lrc.liferay.toolbuilder.model.impl.ToolDefDBEImpl" name="ToolDefDBE">
+		<table name="lrc_tb_ToolDefDBE" />
+		<attributes />
+	</entity>
+	<entity class="org.lrc.liferay.toolbuilder.model.impl.ToolInstanceDBEImpl" name="ToolInstanceDBE">
+		<table name="lrc_tb_ToolInstanceDBE" />
+		<attributes />
+	</entity>
+	<entity class="org.lrc.liferay.toolbuilder.model.impl.WrapperStepDBEImpl" name="WrapperStepDBE">
+		<table name="lrc_tb_WrapperStepDBE" />
+		<attributes />
+	</entity>
+	<entity class="org.lrc.liferay.toolbuilder.model.impl.WrapperStepDefDBEImpl" name="WrapperStepDefDBE">
+		<table name="lrc_tb_WrapperStepDefDBE" />
 		<attributes />
 	</entity>
 </entity-mappings>

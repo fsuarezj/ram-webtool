@@ -74,11 +74,6 @@ public class ToolInstanceImpl extends ToolInstanceBaseImpl implements Step {
 //	}
 
 	@Override
-	public String getStepName() {
-		return "TOOL-INSTANCE";
-	}
-
-	@Override
 	public String draw() {
 		return view;
 	}

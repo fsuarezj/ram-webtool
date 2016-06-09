@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.lrc.liferay.toolbuilder.steps.StepDef;
 import org.lrc.liferay.toolbuilder.steps.VoidStep;
+import org.lrc.liferay.toolbuilder.steps.wrapper.WrapperStepDef;
 
-public class ToolDef implements StepDef {
+public class ToolDef extends WrapperStepDef {
 	private List<StepDef> steps;
 	private int stepsNumber;
 	private boolean sequential;

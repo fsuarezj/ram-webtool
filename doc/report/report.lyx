@@ -60,13 +60,20 @@
 \begin_body
 
 \begin_layout Standard
-jhgjhg
-\end_layout
+\begin_inset Newpage newpage
+\end_inset
 
-\begin_layout Standard
+
 \begin_inset CommandInset toc
 LatexCommand tableofcontents
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
 \end_inset
 
 
@@ -88,6 +95,26 @@ Introduction
 Development Methodology
 \end_layout
 
+\begin_layout Standard
+Intro
+\end_layout
+
+\begin_layout Subsection
+Implementing agile methodologies (Kanban)
+\end_layout
+
+\begin_layout Subsection
+Branching
+\end_layout
+
+\begin_layout Subsection
+Issues tracking
+\end_layout
+
+\begin_layout Subsection
+Behavior Driven Development
+\end_layout
+
 \begin_layout Section
 Analysis and Requirements
 \end_layout
@@ -96,16 +123,205 @@ Analysis and Requirements
 Design
 \end_layout
 
+\begin_layout Standard
+Intro
+\end_layout
+
+\begin_layout Subsection
+Object Model
+\end_layout
+
+\begin_layout Subsubsection
+Components Design
+\end_layout
+
+\begin_layout Standard
+Components design describing the whole system and unvariable parts
+\end_layout
+
+\begin_layout Subsubsection
+Patterns used 
+\end_layout
+
+\begin_layout Standard
+Factory Pattern to create tool structures from the App Managed Bean.
+\end_layout
+
+\begin_layout Standard
+Prototype Pattern to preload tools from the App Managed Bean.
+\end_layout
+
+\begin_layout Standard
+Composite Pattern for CompositeStep
+\end_layout
+
+\begin_layout Subsection
+Data Model
+\end_layout
+
 \begin_layout Section
 Implementation
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
+First Sprint
+\end_layout
+
+\begin_layout Standard
+Basic System Ram Steps
+\end_layout
+
+\begin_layout Subsubsection
+Design
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
+\end_layout
+
+\begin_layout Subsubsection
+Testing
+\end_layout
+
+\begin_layout Subsection
+Second Sprint
+\end_layout
+
+\begin_layout Standard
+Flowchart Package
+\end_layout
+
+\begin_layout Subsubsection
+Design
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
+\end_layout
+
+\begin_layout Subsubsection
+Testing
+\end_layout
+
+\begin_layout Subsection
+Third Sprint
+\end_layout
+
+\begin_layout Standard
+Simple Toolbuilder.
+ Create CompositeStep
+\end_layout
+
+\begin_layout Subsubsection
+Design
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
+\end_layout
+
+\begin_layout Subsubsection
+Testing
+\end_layout
+
+\begin_layout Standard
+BDD
+\end_layout
+
+\begin_layout Subsection
+Fourth Sprint
+\end_layout
+
+\begin_layout Standard
+StepFactory and symetric StepDef and Step structures
+\end_layout
+
+\begin_layout Subsubsection
+Design
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
+\end_layout
+
+\begin_layout Subsubsection
 Testing
 \end_layout
 
 \begin_layout Section
+Testing Framework
+\end_layout
+
+\begin_layout Standard
+Intro
+\end_layout
+
+\begin_layout Subsection
+Unit Tests / Whitebox
+\end_layout
+
+\begin_layout Subsubsection
+JUnit
+\end_layout
+
+\begin_layout Subsubsection
+Mockito
+\end_layout
+
+\begin_layout Subsection
+Integration and Functional Tests / BlackBox
+\end_layout
+
+\begin_layout Subsubsection
+Arquillian
+\end_layout
+
+\begin_layout Subsubsection
+Selenium
+\end_layout
+
+\begin_layout Subsubsection
+Cucumber-JVM
+\end_layout
+
+\begin_layout Section
 Tools and Technologies
+\end_layout
+
+\begin_layout Standard
+Intro
+\end_layout
+
+\begin_layout Subsection
+Tools
+\end_layout
+
+\begin_layout Subsubsection
+Eclipse
+\end_layout
+
+\begin_layout Subsubsection
+Git
+\end_layout
+
+\begin_layout Subsubsection
+Taiga
+\end_layout
+
+\begin_layout Subsection
+Technologies
+\end_layout
+
+\begin_layout Subsubsection
+Liferay
+\end_layout
+
+\begin_layout Subsubsection
+JavaServer Faces (JSF)
+\end_layout
+
+\begin_layout Subsubsection
+Javadoc
 \end_layout
 
 \begin_layout Section

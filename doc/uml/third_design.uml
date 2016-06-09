@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_w_DAQC2ZEeaoPokH5u8NDw" name="NewModel">
+  <packagedElement xmi:type="uml:Package" xmi:id="_G5ooQC2aEeaoPokH5u8NDw" name="bean">
+    <packagedElement xmi:type="uml:Class" xmi:id="_G5ooQS2aEeaoPokH5u8NDw" name="RamSession">
+      <generalization xmi:id="_G5ooQi2aEeaoPokH5u8NDw" general="_G5ooQy2aEeaoPokH5u8NDw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_G5ooQy2aEeaoPokH5u8NDw" name="AbstractBean"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_G5ooRC2aEeaoPokH5u8NDw" name="AssessmentBacking">
+      <generalization xmi:id="_G5ooRS2aEeaoPokH5u8NDw" general="_G5ooQy2aEeaoPokH5u8NDw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_G5ooRi2aEeaoPokH5u8NDw" memberEnd="_G5ooRy2aEeaoPokH5u8NDw _G5ooSi2aEeaoPokH5u8NDw" navigableOwnedEnd="_G5ooSi2aEeaoPokH5u8NDw">
+      <ownedEnd xmi:id="_G5ooRy2aEeaoPokH5u8NDw" name="ramSessions" type="_G5ooQS2aEeaoPokH5u8NDw" association="_G5ooRi2aEeaoPokH5u8NDw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G5ooSC2aEeaoPokH5u8NDw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G5ooSS2aEeaoPokH5u8NDw" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_G5ooSi2aEeaoPokH5u8NDw" name="assessments" association="_G5ooRi2aEeaoPokH5u8NDw">
+        <type xmi:type="uml:Class" href="first_design.uml#_0uD7kC2MEeaoPokH5u8NDw"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G5ooSy2aEeaoPokH5u8NDw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G5ooTC2aEeaoPokH5u8NDw" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_G5ooTS2aEeaoPokH5u8NDw" memberEnd="_G5ooTi2aEeaoPokH5u8NDw _G5ooUS2aEeaoPokH5u8NDw" navigableOwnedEnd="_G5ooUS2aEeaoPokH5u8NDw">
+      <ownedEnd xmi:id="_G5ooTi2aEeaoPokH5u8NDw" name="assessmentBackings" type="_G5ooRC2aEeaoPokH5u8NDw" association="_G5ooTS2aEeaoPokH5u8NDw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G5ooTy2aEeaoPokH5u8NDw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G5ooUC2aEeaoPokH5u8NDw" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_G5ooUS2aEeaoPokH5u8NDw" name="ramSessions" type="_G5ooQS2aEeaoPokH5u8NDw" association="_G5ooTS2aEeaoPokH5u8NDw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G5ooUi2aEeaoPokH5u8NDw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_G5ooUy2aEeaoPokH5u8NDw" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

@@ -1,9 +1,20 @@
-create index IX_BBECD760 on lrc_tb_Instance (groupId);
-create index IX_B1A01F1F on lrc_tb_Instance (groupId, name);
-create index IX_7D23C6C4 on lrc_tb_Instance (userId);
+create unique index IX_DC6DB0F7 on lrc_tb_InstalledStep (stepType);
 
-create index IX_4241BE28 on lrc_tb_ToolInstance (groupId);
-create index IX_560ECFE7 on lrc_tb_ToolInstance (groupId, name);
-create index IX_68B2E6FC on lrc_tb_ToolInstance (userId);
+create index IX_92ADE7B4 on lrc_tb_StepDBE (stepDBEId);
 
-create index IX_B22AD0B4 on lrc_tb_WrapperStep (wrapperStepId);
+create index IX_E82A48C0 on lrc_tb_StepDefDBE (stepDefDBEId);
+
+create index IX_37079E58 on lrc_tb_ToolDefDBE (toolDefDBEId);
+create index IX_A0E2BFC6 on lrc_tb_ToolDefDBE (toolName);
+
+create index IX_7003C694 on lrc_tb_ToolInstanceDBE (toolInstanceDBEId);
+
+create index IX_46873517 on lrc_tb_WSDef_StepDef (stepDefDBEId);
+create index IX_7916F6D2 on lrc_tb_WSDef_StepDef (wrapperStepDefDBEId);
+
+create index IX_742F32E0 on lrc_tb_WS_Step (stepDBEId);
+create index IX_B48FB65D on lrc_tb_WS_Step (wrapperStepDBEId);
+
+create index IX_792FA474 on lrc_tb_WrapperStepDBE (wrapperStepDBEId);
+
+create index IX_15832034 on lrc_tb_WrapperStepDefDBE (wrapperStepDefDBEId);
