@@ -53,8 +53,8 @@ public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", StepDefDBEId=");
-		sb.append(StepDefDBEId);
+		sb.append(", StepType=");
+		sb.append(StepType);
 		sb.append("}");
 
 		return sb.toString();
@@ -90,7 +90,12 @@ public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 			stepDBEImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		stepDBEImpl.setStepDefDBEId(StepDefDBEId);
+		if (StepType == null) {
+			stepDBEImpl.setStepType(StringPool.BLANK);
+		}
+		else {
+			stepDBEImpl.setStepType(StepType);
+		}
 
 		stepDBEImpl.resetOriginalValues();
 
@@ -106,7 +111,7 @@ public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		StepDefDBEId = objectInput.readLong();
+		StepType = objectInput.readUTF();
 	}
 
 	@Override
@@ -126,7 +131,13 @@ public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
-		objectOutput.writeLong(StepDefDBEId);
+
+		if (StepType == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(StepType);
+		}
 	}
 
 	public long stepDBEId;
@@ -136,5 +147,5 @@ public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long StepDefDBEId;
+	public String StepType;
 }

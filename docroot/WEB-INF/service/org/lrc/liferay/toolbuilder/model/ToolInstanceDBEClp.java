@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import org.lrc.liferay.toolbuilder.service.ClpSerializer;
 import org.lrc.liferay.toolbuilder.service.ToolInstanceDBELocalServiceUtil;
@@ -28,6 +29,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,7 +76,15 @@ public class ToolInstanceDBEClp extends BaseModelImpl<ToolInstanceDBE>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("toolInstanceDBEId", getToolInstanceDBEId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("userId", getUserId());
+		attributes.put("userName", getUserName());
+		attributes.put("createDate", getCreateDate());
+		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("toolDefDBEId", getToolDefDBEId());
+		attributes.put("compositeStepDBEId", getCompositeStepDBEId());
+		attributes.put("toolTitle", getToolTitle());
 
 		return attributes;
 	}
@@ -87,10 +97,58 @@ public class ToolInstanceDBEClp extends BaseModelImpl<ToolInstanceDBE>
 			setToolInstanceDBEId(toolInstanceDBEId);
 		}
 
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Long userId = (Long)attributes.get("userId");
+
+		if (userId != null) {
+			setUserId(userId);
+		}
+
+		String userName = (String)attributes.get("userName");
+
+		if (userName != null) {
+			setUserName(userName);
+		}
+
+		Date createDate = (Date)attributes.get("createDate");
+
+		if (createDate != null) {
+			setCreateDate(createDate);
+		}
+
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
+
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
+		}
+
 		Long toolDefDBEId = (Long)attributes.get("toolDefDBEId");
 
 		if (toolDefDBEId != null) {
 			setToolDefDBEId(toolDefDBEId);
+		}
+
+		Long compositeStepDBEId = (Long)attributes.get("compositeStepDBEId");
+
+		if (compositeStepDBEId != null) {
+			setCompositeStepDBEId(compositeStepDBEId);
+		}
+
+		String toolTitle = (String)attributes.get("toolTitle");
+
+		if (toolTitle != null) {
+			setToolTitle(toolTitle);
 		}
 	}
 
@@ -119,6 +177,154 @@ public class ToolInstanceDBEClp extends BaseModelImpl<ToolInstanceDBE>
 	}
 
 	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_toolInstanceDBERemoteModel != null) {
+			try {
+				Class<?> clazz = _toolInstanceDBERemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_toolInstanceDBERemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_toolInstanceDBERemoteModel != null) {
+			try {
+				Class<?> clazz = _toolInstanceDBERemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_toolInstanceDBERemoteModel, companyId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getUserId() {
+		return _userId;
+	}
+
+	@Override
+	public void setUserId(long userId) {
+		_userId = userId;
+
+		if (_toolInstanceDBERemoteModel != null) {
+			try {
+				Class<?> clazz = _toolInstanceDBERemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUserId", long.class);
+
+				method.invoke(_toolInstanceDBERemoteModel, userId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	@Override
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
+	@Override
+	public String getUserName() {
+		return _userName;
+	}
+
+	@Override
+	public void setUserName(String userName) {
+		_userName = userName;
+
+		if (_toolInstanceDBERemoteModel != null) {
+			try {
+				Class<?> clazz = _toolInstanceDBERemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUserName", String.class);
+
+				method.invoke(_toolInstanceDBERemoteModel, userName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	@Override
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+
+		if (_toolInstanceDBERemoteModel != null) {
+			try {
+				Class<?> clazz = _toolInstanceDBERemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCreateDate", Date.class);
+
+				method.invoke(_toolInstanceDBERemoteModel, createDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	@Override
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+
+		if (_toolInstanceDBERemoteModel != null) {
+			try {
+				Class<?> clazz = _toolInstanceDBERemoteModel.getClass();
+
+				Method method = clazz.getMethod("setModifiedDate", Date.class);
+
+				method.invoke(_toolInstanceDBERemoteModel, modifiedDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getToolDefDBEId() {
 		return _toolDefDBEId;
 	}
@@ -134,6 +340,53 @@ public class ToolInstanceDBEClp extends BaseModelImpl<ToolInstanceDBE>
 				Method method = clazz.getMethod("setToolDefDBEId", long.class);
 
 				method.invoke(_toolInstanceDBERemoteModel, toolDefDBEId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompositeStepDBEId() {
+		return _compositeStepDBEId;
+	}
+
+	@Override
+	public void setCompositeStepDBEId(long compositeStepDBEId) {
+		_compositeStepDBEId = compositeStepDBEId;
+
+		if (_toolInstanceDBERemoteModel != null) {
+			try {
+				Class<?> clazz = _toolInstanceDBERemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompositeStepDBEId",
+						long.class);
+
+				method.invoke(_toolInstanceDBERemoteModel, compositeStepDBEId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getToolTitle() {
+		return _toolTitle;
+	}
+
+	@Override
+	public void setToolTitle(String toolTitle) {
+		_toolTitle = toolTitle;
+
+		if (_toolInstanceDBERemoteModel != null) {
+			try {
+				Class<?> clazz = _toolInstanceDBERemoteModel.getClass();
+
+				Method method = clazz.getMethod("setToolTitle", String.class);
+
+				method.invoke(_toolInstanceDBERemoteModel, toolTitle);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -213,7 +466,15 @@ public class ToolInstanceDBEClp extends BaseModelImpl<ToolInstanceDBE>
 		ToolInstanceDBEClp clone = new ToolInstanceDBEClp();
 
 		clone.setToolInstanceDBEId(getToolInstanceDBEId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
+		clone.setUserId(getUserId());
+		clone.setUserName(getUserName());
+		clone.setCreateDate(getCreateDate());
+		clone.setModifiedDate(getModifiedDate());
 		clone.setToolDefDBEId(getToolDefDBEId());
+		clone.setCompositeStepDBEId(getCompositeStepDBEId());
+		clone.setToolTitle(getToolTitle());
 
 		return clone;
 	}
@@ -266,12 +527,28 @@ public class ToolInstanceDBEClp extends BaseModelImpl<ToolInstanceDBE>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{toolInstanceDBEId=");
 		sb.append(getToolInstanceDBEId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
 		sb.append(", toolDefDBEId=");
 		sb.append(getToolDefDBEId());
+		sb.append(", compositeStepDBEId=");
+		sb.append(getCompositeStepDBEId());
+		sb.append(", toolTitle=");
+		sb.append(getToolTitle());
 		sb.append("}");
 
 		return sb.toString();
@@ -279,7 +556,7 @@ public class ToolInstanceDBEClp extends BaseModelImpl<ToolInstanceDBE>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(10);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("org.lrc.liferay.toolbuilder.model.ToolInstanceDBE");
@@ -290,8 +567,40 @@ public class ToolInstanceDBEClp extends BaseModelImpl<ToolInstanceDBE>
 		sb.append(getToolInstanceDBEId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append(getUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append(getUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append(getCreateDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append(getModifiedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>toolDefDBEId</column-name><column-value><![CDATA[");
 		sb.append(getToolDefDBEId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>compositeStepDBEId</column-name><column-value><![CDATA[");
+		sb.append(getCompositeStepDBEId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>toolTitle</column-name><column-value><![CDATA[");
+		sb.append(getToolTitle());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -300,7 +609,16 @@ public class ToolInstanceDBEClp extends BaseModelImpl<ToolInstanceDBE>
 	}
 
 	private long _toolInstanceDBEId;
+	private long _groupId;
+	private long _companyId;
+	private long _userId;
+	private String _userUuid;
+	private String _userName;
+	private Date _createDate;
+	private Date _modifiedDate;
 	private long _toolDefDBEId;
+	private long _compositeStepDBEId;
+	private String _toolTitle;
 	private BaseModel<?> _toolInstanceDBERemoteModel;
 	private Class<?> _clpSerializerClass = org.lrc.liferay.toolbuilder.service.ClpSerializer.class;
 }

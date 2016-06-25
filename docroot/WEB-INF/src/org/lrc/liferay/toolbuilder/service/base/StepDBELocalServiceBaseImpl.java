@@ -33,13 +33,13 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import org.lrc.liferay.toolbuilder.model.StepDBE;
 import org.lrc.liferay.toolbuilder.service.StepDBELocalService;
+import org.lrc.liferay.toolbuilder.service.persistence.CompositeStepDBEPersistence;
+import org.lrc.liferay.toolbuilder.service.persistence.CompositeStepDefDBEPersistence;
 import org.lrc.liferay.toolbuilder.service.persistence.InstalledStepPersistence;
 import org.lrc.liferay.toolbuilder.service.persistence.StepDBEPersistence;
 import org.lrc.liferay.toolbuilder.service.persistence.StepDefDBEPersistence;
 import org.lrc.liferay.toolbuilder.service.persistence.ToolDefDBEPersistence;
 import org.lrc.liferay.toolbuilder.service.persistence.ToolInstanceDBEPersistence;
-import org.lrc.liferay.toolbuilder.service.persistence.WrapperStepDBEPersistence;
-import org.lrc.liferay.toolbuilder.service.persistence.WrapperStepDefDBEPersistence;
 
 import java.io.Serializable;
 
@@ -280,6 +280,269 @@ public abstract class StepDBELocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void addCompositeStepDBEStepDBE(long compositeStepDBEId,
+		long stepDBEId) throws SystemException {
+		compositeStepDBEPersistence.addStepDBE(compositeStepDBEId, stepDBEId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void addCompositeStepDBEStepDBE(long compositeStepDBEId,
+		StepDBE stepDBE) throws SystemException {
+		compositeStepDBEPersistence.addStepDBE(compositeStepDBEId, stepDBE);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void addCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		long[] stepDBEIds) throws SystemException {
+		compositeStepDBEPersistence.addStepDBEs(compositeStepDBEId, stepDBEIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void addCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		List<StepDBE> StepDBEs) throws SystemException {
+		compositeStepDBEPersistence.addStepDBEs(compositeStepDBEId, StepDBEs);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void clearCompositeStepDBEStepDBEs(long compositeStepDBEId)
+		throws SystemException {
+		compositeStepDBEPersistence.clearStepDBEs(compositeStepDBEId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void deleteCompositeStepDBEStepDBE(long compositeStepDBEId,
+		long stepDBEId) throws SystemException {
+		compositeStepDBEPersistence.removeStepDBE(compositeStepDBEId, stepDBEId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void deleteCompositeStepDBEStepDBE(long compositeStepDBEId,
+		StepDBE stepDBE) throws SystemException {
+		compositeStepDBEPersistence.removeStepDBE(compositeStepDBEId, stepDBE);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void deleteCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		long[] stepDBEIds) throws SystemException {
+		compositeStepDBEPersistence.removeStepDBEs(compositeStepDBEId,
+			stepDBEIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void deleteCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		List<StepDBE> StepDBEs) throws SystemException {
+		compositeStepDBEPersistence.removeStepDBEs(compositeStepDBEId, StepDBEs);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<StepDBE> getCompositeStepDBEStepDBEs(long compositeStepDBEId)
+		throws SystemException {
+		return compositeStepDBEPersistence.getStepDBEs(compositeStepDBEId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<StepDBE> getCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		int start, int end) throws SystemException {
+		return compositeStepDBEPersistence.getStepDBEs(compositeStepDBEId,
+			start, end);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<StepDBE> getCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		return compositeStepDBEPersistence.getStepDBEs(compositeStepDBEId,
+			start, end, orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int getCompositeStepDBEStepDBEsCount(long compositeStepDBEId)
+		throws SystemException {
+		return compositeStepDBEPersistence.getStepDBEsSize(compositeStepDBEId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public boolean hasCompositeStepDBEStepDBE(long compositeStepDBEId,
+		long stepDBEId) throws SystemException {
+		return compositeStepDBEPersistence.containsStepDBE(compositeStepDBEId,
+			stepDBEId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public boolean hasCompositeStepDBEStepDBEs(long compositeStepDBEId)
+		throws SystemException {
+		return compositeStepDBEPersistence.containsStepDBEs(compositeStepDBEId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void setCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		long[] stepDBEIds) throws SystemException {
+		compositeStepDBEPersistence.setStepDBEs(compositeStepDBEId, stepDBEIds);
+	}
+
+	/**
+	 * Returns the composite step d b e local service.
+	 *
+	 * @return the composite step d b e local service
+	 */
+	public org.lrc.liferay.toolbuilder.service.CompositeStepDBELocalService getCompositeStepDBELocalService() {
+		return compositeStepDBELocalService;
+	}
+
+	/**
+	 * Sets the composite step d b e local service.
+	 *
+	 * @param compositeStepDBELocalService the composite step d b e local service
+	 */
+	public void setCompositeStepDBELocalService(
+		org.lrc.liferay.toolbuilder.service.CompositeStepDBELocalService compositeStepDBELocalService) {
+		this.compositeStepDBELocalService = compositeStepDBELocalService;
+	}
+
+	/**
+	 * Returns the composite step d b e remote service.
+	 *
+	 * @return the composite step d b e remote service
+	 */
+	public org.lrc.liferay.toolbuilder.service.CompositeStepDBEService getCompositeStepDBEService() {
+		return compositeStepDBEService;
+	}
+
+	/**
+	 * Sets the composite step d b e remote service.
+	 *
+	 * @param compositeStepDBEService the composite step d b e remote service
+	 */
+	public void setCompositeStepDBEService(
+		org.lrc.liferay.toolbuilder.service.CompositeStepDBEService compositeStepDBEService) {
+		this.compositeStepDBEService = compositeStepDBEService;
+	}
+
+	/**
+	 * Returns the composite step d b e persistence.
+	 *
+	 * @return the composite step d b e persistence
+	 */
+	public CompositeStepDBEPersistence getCompositeStepDBEPersistence() {
+		return compositeStepDBEPersistence;
+	}
+
+	/**
+	 * Sets the composite step d b e persistence.
+	 *
+	 * @param compositeStepDBEPersistence the composite step d b e persistence
+	 */
+	public void setCompositeStepDBEPersistence(
+		CompositeStepDBEPersistence compositeStepDBEPersistence) {
+		this.compositeStepDBEPersistence = compositeStepDBEPersistence;
+	}
+
+	/**
+	 * Returns the composite step def d b e local service.
+	 *
+	 * @return the composite step def d b e local service
+	 */
+	public org.lrc.liferay.toolbuilder.service.CompositeStepDefDBELocalService getCompositeStepDefDBELocalService() {
+		return compositeStepDefDBELocalService;
+	}
+
+	/**
+	 * Sets the composite step def d b e local service.
+	 *
+	 * @param compositeStepDefDBELocalService the composite step def d b e local service
+	 */
+	public void setCompositeStepDefDBELocalService(
+		org.lrc.liferay.toolbuilder.service.CompositeStepDefDBELocalService compositeStepDefDBELocalService) {
+		this.compositeStepDefDBELocalService = compositeStepDefDBELocalService;
+	}
+
+	/**
+	 * Returns the composite step def d b e remote service.
+	 *
+	 * @return the composite step def d b e remote service
+	 */
+	public org.lrc.liferay.toolbuilder.service.CompositeStepDefDBEService getCompositeStepDefDBEService() {
+		return compositeStepDefDBEService;
+	}
+
+	/**
+	 * Sets the composite step def d b e remote service.
+	 *
+	 * @param compositeStepDefDBEService the composite step def d b e remote service
+	 */
+	public void setCompositeStepDefDBEService(
+		org.lrc.liferay.toolbuilder.service.CompositeStepDefDBEService compositeStepDefDBEService) {
+		this.compositeStepDefDBEService = compositeStepDefDBEService;
+	}
+
+	/**
+	 * Returns the composite step def d b e persistence.
+	 *
+	 * @return the composite step def d b e persistence
+	 */
+	public CompositeStepDefDBEPersistence getCompositeStepDefDBEPersistence() {
+		return compositeStepDefDBEPersistence;
+	}
+
+	/**
+	 * Sets the composite step def d b e persistence.
+	 *
+	 * @param compositeStepDefDBEPersistence the composite step def d b e persistence
+	 */
+	public void setCompositeStepDefDBEPersistence(
+		CompositeStepDefDBEPersistence compositeStepDefDBEPersistence) {
+		this.compositeStepDefDBEPersistence = compositeStepDefDBEPersistence;
+	}
+
+	/**
 	 * Returns the installed step local service.
 	 *
 	 * @return the installed step local service
@@ -450,6 +713,25 @@ public abstract class StepDBELocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the tool def d b e local service.
+	 *
+	 * @return the tool def d b e local service
+	 */
+	public org.lrc.liferay.toolbuilder.service.ToolDefDBELocalService getToolDefDBELocalService() {
+		return toolDefDBELocalService;
+	}
+
+	/**
+	 * Sets the tool def d b e local service.
+	 *
+	 * @param toolDefDBELocalService the tool def d b e local service
+	 */
+	public void setToolDefDBELocalService(
+		org.lrc.liferay.toolbuilder.service.ToolDefDBELocalService toolDefDBELocalService) {
+		this.toolDefDBELocalService = toolDefDBELocalService;
+	}
+
+	/**
 	 * Returns the tool def d b e remote service.
 	 *
 	 * @return the tool def d b e remote service
@@ -542,120 +824,6 @@ public abstract class StepDBELocalServiceBaseImpl extends BaseLocalServiceImpl
 	public void setToolInstanceDBEPersistence(
 		ToolInstanceDBEPersistence toolInstanceDBEPersistence) {
 		this.toolInstanceDBEPersistence = toolInstanceDBEPersistence;
-	}
-
-	/**
-	 * Returns the wrapper step d b e local service.
-	 *
-	 * @return the wrapper step d b e local service
-	 */
-	public org.lrc.liferay.toolbuilder.service.WrapperStepDBELocalService getWrapperStepDBELocalService() {
-		return wrapperStepDBELocalService;
-	}
-
-	/**
-	 * Sets the wrapper step d b e local service.
-	 *
-	 * @param wrapperStepDBELocalService the wrapper step d b e local service
-	 */
-	public void setWrapperStepDBELocalService(
-		org.lrc.liferay.toolbuilder.service.WrapperStepDBELocalService wrapperStepDBELocalService) {
-		this.wrapperStepDBELocalService = wrapperStepDBELocalService;
-	}
-
-	/**
-	 * Returns the wrapper step d b e remote service.
-	 *
-	 * @return the wrapper step d b e remote service
-	 */
-	public org.lrc.liferay.toolbuilder.service.WrapperStepDBEService getWrapperStepDBEService() {
-		return wrapperStepDBEService;
-	}
-
-	/**
-	 * Sets the wrapper step d b e remote service.
-	 *
-	 * @param wrapperStepDBEService the wrapper step d b e remote service
-	 */
-	public void setWrapperStepDBEService(
-		org.lrc.liferay.toolbuilder.service.WrapperStepDBEService wrapperStepDBEService) {
-		this.wrapperStepDBEService = wrapperStepDBEService;
-	}
-
-	/**
-	 * Returns the wrapper step d b e persistence.
-	 *
-	 * @return the wrapper step d b e persistence
-	 */
-	public WrapperStepDBEPersistence getWrapperStepDBEPersistence() {
-		return wrapperStepDBEPersistence;
-	}
-
-	/**
-	 * Sets the wrapper step d b e persistence.
-	 *
-	 * @param wrapperStepDBEPersistence the wrapper step d b e persistence
-	 */
-	public void setWrapperStepDBEPersistence(
-		WrapperStepDBEPersistence wrapperStepDBEPersistence) {
-		this.wrapperStepDBEPersistence = wrapperStepDBEPersistence;
-	}
-
-	/**
-	 * Returns the wrapper step def d b e local service.
-	 *
-	 * @return the wrapper step def d b e local service
-	 */
-	public org.lrc.liferay.toolbuilder.service.WrapperStepDefDBELocalService getWrapperStepDefDBELocalService() {
-		return wrapperStepDefDBELocalService;
-	}
-
-	/**
-	 * Sets the wrapper step def d b e local service.
-	 *
-	 * @param wrapperStepDefDBELocalService the wrapper step def d b e local service
-	 */
-	public void setWrapperStepDefDBELocalService(
-		org.lrc.liferay.toolbuilder.service.WrapperStepDefDBELocalService wrapperStepDefDBELocalService) {
-		this.wrapperStepDefDBELocalService = wrapperStepDefDBELocalService;
-	}
-
-	/**
-	 * Returns the wrapper step def d b e remote service.
-	 *
-	 * @return the wrapper step def d b e remote service
-	 */
-	public org.lrc.liferay.toolbuilder.service.WrapperStepDefDBEService getWrapperStepDefDBEService() {
-		return wrapperStepDefDBEService;
-	}
-
-	/**
-	 * Sets the wrapper step def d b e remote service.
-	 *
-	 * @param wrapperStepDefDBEService the wrapper step def d b e remote service
-	 */
-	public void setWrapperStepDefDBEService(
-		org.lrc.liferay.toolbuilder.service.WrapperStepDefDBEService wrapperStepDefDBEService) {
-		this.wrapperStepDefDBEService = wrapperStepDefDBEService;
-	}
-
-	/**
-	 * Returns the wrapper step def d b e persistence.
-	 *
-	 * @return the wrapper step def d b e persistence
-	 */
-	public WrapperStepDefDBEPersistence getWrapperStepDefDBEPersistence() {
-		return wrapperStepDefDBEPersistence;
-	}
-
-	/**
-	 * Sets the wrapper step def d b e persistence.
-	 *
-	 * @param wrapperStepDefDBEPersistence the wrapper step def d b e persistence
-	 */
-	public void setWrapperStepDefDBEPersistence(
-		WrapperStepDefDBEPersistence wrapperStepDefDBEPersistence) {
-		this.wrapperStepDefDBEPersistence = wrapperStepDefDBEPersistence;
 	}
 
 	/**
@@ -834,6 +1002,18 @@ public abstract class StepDBELocalServiceBaseImpl extends BaseLocalServiceImpl
 		}
 	}
 
+	@BeanReference(type = org.lrc.liferay.toolbuilder.service.CompositeStepDBELocalService.class)
+	protected org.lrc.liferay.toolbuilder.service.CompositeStepDBELocalService compositeStepDBELocalService;
+	@BeanReference(type = org.lrc.liferay.toolbuilder.service.CompositeStepDBEService.class)
+	protected org.lrc.liferay.toolbuilder.service.CompositeStepDBEService compositeStepDBEService;
+	@BeanReference(type = CompositeStepDBEPersistence.class)
+	protected CompositeStepDBEPersistence compositeStepDBEPersistence;
+	@BeanReference(type = org.lrc.liferay.toolbuilder.service.CompositeStepDefDBELocalService.class)
+	protected org.lrc.liferay.toolbuilder.service.CompositeStepDefDBELocalService compositeStepDefDBELocalService;
+	@BeanReference(type = org.lrc.liferay.toolbuilder.service.CompositeStepDefDBEService.class)
+	protected org.lrc.liferay.toolbuilder.service.CompositeStepDefDBEService compositeStepDefDBEService;
+	@BeanReference(type = CompositeStepDefDBEPersistence.class)
+	protected CompositeStepDefDBEPersistence compositeStepDefDBEPersistence;
 	@BeanReference(type = org.lrc.liferay.toolbuilder.service.InstalledStepLocalService.class)
 	protected org.lrc.liferay.toolbuilder.service.InstalledStepLocalService installedStepLocalService;
 	@BeanReference(type = org.lrc.liferay.toolbuilder.service.InstalledStepService.class)
@@ -852,6 +1032,8 @@ public abstract class StepDBELocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected org.lrc.liferay.toolbuilder.service.StepDefDBEService stepDefDBEService;
 	@BeanReference(type = StepDefDBEPersistence.class)
 	protected StepDefDBEPersistence stepDefDBEPersistence;
+	@BeanReference(type = org.lrc.liferay.toolbuilder.service.ToolDefDBELocalService.class)
+	protected org.lrc.liferay.toolbuilder.service.ToolDefDBELocalService toolDefDBELocalService;
 	@BeanReference(type = org.lrc.liferay.toolbuilder.service.ToolDefDBEService.class)
 	protected org.lrc.liferay.toolbuilder.service.ToolDefDBEService toolDefDBEService;
 	@BeanReference(type = ToolDefDBEPersistence.class)
@@ -862,18 +1044,6 @@ public abstract class StepDBELocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected org.lrc.liferay.toolbuilder.service.ToolInstanceDBEService toolInstanceDBEService;
 	@BeanReference(type = ToolInstanceDBEPersistence.class)
 	protected ToolInstanceDBEPersistence toolInstanceDBEPersistence;
-	@BeanReference(type = org.lrc.liferay.toolbuilder.service.WrapperStepDBELocalService.class)
-	protected org.lrc.liferay.toolbuilder.service.WrapperStepDBELocalService wrapperStepDBELocalService;
-	@BeanReference(type = org.lrc.liferay.toolbuilder.service.WrapperStepDBEService.class)
-	protected org.lrc.liferay.toolbuilder.service.WrapperStepDBEService wrapperStepDBEService;
-	@BeanReference(type = WrapperStepDBEPersistence.class)
-	protected WrapperStepDBEPersistence wrapperStepDBEPersistence;
-	@BeanReference(type = org.lrc.liferay.toolbuilder.service.WrapperStepDefDBELocalService.class)
-	protected org.lrc.liferay.toolbuilder.service.WrapperStepDefDBELocalService wrapperStepDefDBELocalService;
-	@BeanReference(type = org.lrc.liferay.toolbuilder.service.WrapperStepDefDBEService.class)
-	protected org.lrc.liferay.toolbuilder.service.WrapperStepDefDBEService wrapperStepDefDBEService;
-	@BeanReference(type = WrapperStepDefDBEPersistence.class)
-	protected WrapperStepDefDBEPersistence wrapperStepDefDBEPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

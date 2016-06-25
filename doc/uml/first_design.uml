@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_BTFHcCkQEeaLScfHGLgimA" name="RamInstance">
   <packagedElement xmi:type="uml:Package" xmi:id="_ZFf4kC2WEeaoPokH5u8NDw" name="model">
-    <packagedElement xmi:type="uml:Class" xmi:id="_0uD7kC2MEeaoPokH5u8NDw" name="Assessment"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_0uD7kC2MEeaoPokH5u8NDw" name="Assessment">
+      <ownedAttribute xmi:id="_h22UAC5HEeaoPokH5u8NDw" name="currentStep" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      </ownedAttribute>
+    </packagedElement>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_cRMYgC2WEeaoPokH5u8NDw" name="bean">
     <packagedElement xmi:type="uml:Class" xmi:id="_NmtWgC2VEeaoPokH5u8NDw" name="RamSession">
@@ -33,5 +37,14 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3IWoNC2WEeaoPokH5u8NDw" value="*"/>
       </ownedEnd>
     </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_iN9zoC8wEeaoPokH5u8NDw" client="_SKZkIC2VEeaoPokH5u8NDw" supplier="_U6fycC8wEeaoPokH5u8NDw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_jQzwsC8wEeaoPokH5u8NDw" client="_NmtWgC2VEeaoPokH5u8NDw" supplier="_U6fycC8wEeaoPokH5u8NDw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_mmCnIC8wEeaoPokH5u8NDw" client="_NmtWgC2VEeaoPokH5u8NDw" supplier="_UK0B8C8wEeaoPokH5u8NDw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_nxYY4C8wEeaoPokH5u8NDw" client="_SKZkIC2VEeaoPokH5u8NDw" supplier="_ViEIwC8wEeaoPokH5u8NDw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_SexW4C8wEeaoPokH5u8NDw" name="javax.jsf">
+    <packagedElement xmi:type="uml:Interface" xmi:id="_UK0B8C8wEeaoPokH5u8NDw" name="SessionScoped"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_U6fycC8wEeaoPokH5u8NDw" name="ManagedBean"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_ViEIwC8wEeaoPokH5u8NDw" name="RequestScoped"/>
   </packagedElement>
 </uml:Model>

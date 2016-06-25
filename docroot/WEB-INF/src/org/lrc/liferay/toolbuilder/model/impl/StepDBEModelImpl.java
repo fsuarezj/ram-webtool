@@ -73,9 +73,9 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "StepDefDBEId", Types.BIGINT }
+			{ "StepType", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table lrc_tb_StepDBE (stepDBEId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,StepDefDBEId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table lrc_tb_StepDBE (stepDBEId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,StepType VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table lrc_tb_StepDBE";
 	public static final String ORDER_BY_JPQL = " ORDER BY stepDBE.stepDBEId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY lrc_tb_StepDBE.stepDBEId ASC";
@@ -113,7 +113,7 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setStepDefDBEId(soapModel.getStepDefDBEId());
+		model.setStepType(soapModel.getStepType());
 
 		return model;
 	}
@@ -138,6 +138,14 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 		return models;
 	}
 
+	public static final String MAPPING_TABLE_LRC_TB_CS_STEP_NAME = "lrc_tb_CS_Step";
+	public static final Object[][] MAPPING_TABLE_LRC_TB_CS_STEP_COLUMNS = {
+			{ "compositeStepDBEId", Types.BIGINT },
+			{ "stepDBEId", Types.BIGINT }
+		};
+	public static final String MAPPING_TABLE_LRC_TB_CS_STEP_SQL_CREATE = "create table lrc_tb_CS_Step (compositeStepDBEId LONG not null,stepDBEId LONG not null,primary key (compositeStepDBEId, stepDBEId))";
+	public static final boolean FINDER_CACHE_ENABLED_LRC_TB_CS_STEP = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.finder.cache.enabled.lrc_tb_CS_Step"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.org.lrc.liferay.toolbuilder.model.StepDBE"));
 
@@ -185,7 +193,7 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("StepDefDBEId", getStepDefDBEId());
+		attributes.put("StepType", getStepType());
 
 		return attributes;
 	}
@@ -234,10 +242,10 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 			setModifiedDate(modifiedDate);
 		}
 
-		Long StepDefDBEId = (Long)attributes.get("StepDefDBEId");
+		String StepType = (String)attributes.get("StepType");
 
-		if (StepDefDBEId != null) {
-			setStepDefDBEId(StepDefDBEId);
+		if (StepType != null) {
+			setStepType(StepType);
 		}
 	}
 
@@ -347,13 +355,18 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 
 	@JSON
 	@Override
-	public long getStepDefDBEId() {
-		return _StepDefDBEId;
+	public String getStepType() {
+		if (_StepType == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _StepType;
+		}
 	}
 
 	@Override
-	public void setStepDefDBEId(long StepDefDBEId) {
-		_StepDefDBEId = StepDefDBEId;
+	public void setStepType(String StepType) {
+		_StepType = StepType;
 	}
 
 	public long getColumnBitmask() {
@@ -394,7 +407,7 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 		stepDBEImpl.setUserName(getUserName());
 		stepDBEImpl.setCreateDate(getCreateDate());
 		stepDBEImpl.setModifiedDate(getModifiedDate());
-		stepDBEImpl.setStepDefDBEId(getStepDefDBEId());
+		stepDBEImpl.setStepType(getStepType());
 
 		stepDBEImpl.resetOriginalValues();
 
@@ -492,7 +505,13 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 			stepDBECacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		stepDBECacheModel.StepDefDBEId = getStepDefDBEId();
+		stepDBECacheModel.StepType = getStepType();
+
+		String StepType = stepDBECacheModel.StepType;
+
+		if ((StepType != null) && (StepType.length() == 0)) {
+			stepDBECacheModel.StepType = null;
+		}
 
 		return stepDBECacheModel;
 	}
@@ -515,8 +534,8 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", StepDefDBEId=");
-		sb.append(getStepDefDBEId());
+		sb.append(", StepType=");
+		sb.append(getStepType());
 		sb.append("}");
 
 		return sb.toString();
@@ -559,8 +578,8 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>StepDefDBEId</column-name><column-value><![CDATA[");
-		sb.append(getStepDefDBEId());
+			"<column><column-name>StepType</column-name><column-value><![CDATA[");
+		sb.append(getStepType());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -582,7 +601,7 @@ public class StepDBEModelImpl extends BaseModelImpl<StepDBE>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _StepDefDBEId;
+	private String _StepType;
 	private long _columnBitmask;
 	private StepDBE _escapedModel;
 }

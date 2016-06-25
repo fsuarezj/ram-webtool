@@ -14,7 +14,10 @@
 
 package org.lrc.liferay.toolbuilder.model.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 import org.lrc.liferay.toolbuilder.model.ToolDefDBE;
+import org.lrc.liferay.toolbuilder.service.ToolDefDBELocalServiceUtil;
 
 /**
  * The extended model base implementation for the ToolDefDBE service. Represents a row in the &quot;lrc_tb_ToolDefDBE&quot; database table, with each column mapped to a property of this class.
@@ -35,4 +38,13 @@ public abstract class ToolDefDBEBaseImpl extends ToolDefDBEModelImpl
 	 *
 	 * Never modify or reference this class directly. All methods that expect a tool def d b e model instance should use the {@link ToolDefDBE} interface instead.
 	 */
+	@Override
+	public void persist() throws SystemException {
+		if (this.isNew()) {
+			ToolDefDBELocalServiceUtil.addToolDefDBE(this);
+		}
+		else {
+			ToolDefDBELocalServiceUtil.updateToolDefDBE(this);
+		}
+	}
 }

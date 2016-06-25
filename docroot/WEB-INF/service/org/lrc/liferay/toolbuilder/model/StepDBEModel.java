@@ -190,18 +190,19 @@ public interface StepDBEModel extends BaseModel<StepDBE>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the step def d b e ID of this step d b e.
+	 * Returns the step type of this step d b e.
 	 *
-	 * @return the step def d b e ID of this step d b e
+	 * @return the step type of this step d b e
 	 */
-	public long getStepDefDBEId();
+	@AutoEscape
+	public String getStepType();
 
 	/**
-	 * Sets the step def d b e ID of this step d b e.
+	 * Sets the step type of this step d b e.
 	 *
-	 * @param StepDefDBEId the step def d b e ID of this step d b e
+	 * @param StepType the step type of this step d b e
 	 */
-	public void setStepDefDBEId(long StepDefDBEId);
+	public void setStepType(String StepType);
 
 	@Override
 	public boolean isNew();

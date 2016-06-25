@@ -136,7 +136,7 @@ Components Design
 \end_layout
 
 \begin_layout Standard
-Components design describing de whole system
+Components design describing the whole system and unvariable parts
 \end_layout
 
 \begin_layout Subsubsection
@@ -151,6 +151,10 @@ Factory Pattern to create tool structures from the App Managed Bean.
 Prototype Pattern to preload tools from the App Managed Bean.
 \end_layout
 
+\begin_layout Standard
+Composite Pattern for CompositeStep
+\end_layout
+
 \begin_layout Subsection
 Data Model
 \end_layout
@@ -159,8 +163,93 @@ Data Model
 Implementation
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
+First Sprint
+\end_layout
+
+\begin_layout Standard
+Basic System Ram Steps
+\end_layout
+
+\begin_layout Subsubsection
+Design
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
+\end_layout
+
+\begin_layout Subsubsection
 Testing
+\end_layout
+
+\begin_layout Subsection
+Second Sprint
+\end_layout
+
+\begin_layout Standard
+Flowchart Package
+\end_layout
+
+\begin_layout Subsubsection
+Design
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
+\end_layout
+
+\begin_layout Subsubsection
+Testing
+\end_layout
+
+\begin_layout Subsection
+Third Sprint
+\end_layout
+
+\begin_layout Standard
+Simple Toolbuilder.
+ Create CompositeStep
+\end_layout
+
+\begin_layout Subsubsection
+Design
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
+\end_layout
+
+\begin_layout Subsubsection
+Testing
+\end_layout
+
+\begin_layout Standard
+BDD
+\end_layout
+
+\begin_layout Subsection
+Fourth Sprint
+\end_layout
+
+\begin_layout Standard
+StepFactory and symetric StepDef and Step structures
+\end_layout
+
+\begin_layout Subsubsection
+Design
+\end_layout
+
+\begin_layout Subsubsection
+Implementation
+\end_layout
+
+\begin_layout Subsubsection
+Testing
+\end_layout
+
+\begin_layout Section
+Testing Framework
 \end_layout
 
 \begin_layout Standard
@@ -192,7 +281,7 @@ Selenium
 \end_layout
 
 \begin_layout Subsubsection
-JBehave
+Cucumber-JVM
 \end_layout
 
 \begin_layout Section

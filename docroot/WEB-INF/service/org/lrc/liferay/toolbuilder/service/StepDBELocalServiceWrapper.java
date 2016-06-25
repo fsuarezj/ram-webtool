@@ -257,6 +257,176 @@ public class StepDBELocalServiceWrapper implements StepDBELocalService,
 	}
 
 	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public void addCompositeStepDBEStepDBE(long compositeStepDBEId,
+		long stepDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_stepDBELocalService.addCompositeStepDBEStepDBE(compositeStepDBEId,
+			stepDBEId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public void addCompositeStepDBEStepDBE(long compositeStepDBEId,
+		org.lrc.liferay.toolbuilder.model.StepDBE stepDBE)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_stepDBELocalService.addCompositeStepDBEStepDBE(compositeStepDBEId,
+			stepDBE);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public void addCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		long[] stepDBEIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_stepDBELocalService.addCompositeStepDBEStepDBEs(compositeStepDBEId,
+			stepDBEIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public void addCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		java.util.List<org.lrc.liferay.toolbuilder.model.StepDBE> StepDBEs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_stepDBELocalService.addCompositeStepDBEStepDBEs(compositeStepDBEId,
+			StepDBEs);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public void clearCompositeStepDBEStepDBEs(long compositeStepDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_stepDBELocalService.clearCompositeStepDBEStepDBEs(compositeStepDBEId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public void deleteCompositeStepDBEStepDBE(long compositeStepDBEId,
+		long stepDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_stepDBELocalService.deleteCompositeStepDBEStepDBE(compositeStepDBEId,
+			stepDBEId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public void deleteCompositeStepDBEStepDBE(long compositeStepDBEId,
+		org.lrc.liferay.toolbuilder.model.StepDBE stepDBE)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_stepDBELocalService.deleteCompositeStepDBEStepDBE(compositeStepDBEId,
+			stepDBE);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public void deleteCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		long[] stepDBEIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_stepDBELocalService.deleteCompositeStepDBEStepDBEs(compositeStepDBEId,
+			stepDBEIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public void deleteCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		java.util.List<org.lrc.liferay.toolbuilder.model.StepDBE> StepDBEs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_stepDBELocalService.deleteCompositeStepDBEStepDBEs(compositeStepDBEId,
+			StepDBEs);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.util.List<org.lrc.liferay.toolbuilder.model.StepDBE> getCompositeStepDBEStepDBEs(
+		long compositeStepDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _stepDBELocalService.getCompositeStepDBEStepDBEs(compositeStepDBEId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.util.List<org.lrc.liferay.toolbuilder.model.StepDBE> getCompositeStepDBEStepDBEs(
+		long compositeStepDBEId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _stepDBELocalService.getCompositeStepDBEStepDBEs(compositeStepDBEId,
+			start, end);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.util.List<org.lrc.liferay.toolbuilder.model.StepDBE> getCompositeStepDBEStepDBEs(
+		long compositeStepDBEId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _stepDBELocalService.getCompositeStepDBEStepDBEs(compositeStepDBEId,
+			start, end, orderByComparator);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public int getCompositeStepDBEStepDBEsCount(long compositeStepDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _stepDBELocalService.getCompositeStepDBEStepDBEsCount(compositeStepDBEId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public boolean hasCompositeStepDBEStepDBE(long compositeStepDBEId,
+		long stepDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _stepDBELocalService.hasCompositeStepDBEStepDBE(compositeStepDBEId,
+			stepDBEId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public boolean hasCompositeStepDBEStepDBEs(long compositeStepDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _stepDBELocalService.hasCompositeStepDBEStepDBEs(compositeStepDBEId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public void setCompositeStepDBEStepDBEs(long compositeStepDBEId,
+		long[] stepDBEIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_stepDBELocalService.setCompositeStepDBEStepDBEs(compositeStepDBEId,
+			stepDBEIds);
+	}
+
+	/**
 	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean

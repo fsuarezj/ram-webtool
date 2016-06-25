@@ -56,7 +56,7 @@ public class StepDBEWrapper implements StepDBE, ModelWrapper<StepDBE> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("StepDefDBEId", getStepDefDBEId());
+		attributes.put("StepType", getStepType());
 
 		return attributes;
 	}
@@ -105,10 +105,10 @@ public class StepDBEWrapper implements StepDBE, ModelWrapper<StepDBE> {
 			setModifiedDate(modifiedDate);
 		}
 
-		Long StepDefDBEId = (Long)attributes.get("StepDefDBEId");
+		String StepType = (String)attributes.get("StepType");
 
-		if (StepDefDBEId != null) {
-			setStepDefDBEId(StepDefDBEId);
+		if (StepType != null) {
+			setStepType(StepType);
 		}
 	}
 
@@ -295,23 +295,23 @@ public class StepDBEWrapper implements StepDBE, ModelWrapper<StepDBE> {
 	}
 
 	/**
-	* Returns the step def d b e ID of this step d b e.
+	* Returns the step type of this step d b e.
 	*
-	* @return the step def d b e ID of this step d b e
+	* @return the step type of this step d b e
 	*/
 	@Override
-	public long getStepDefDBEId() {
-		return _stepDBE.getStepDefDBEId();
+	public java.lang.String getStepType() {
+		return _stepDBE.getStepType();
 	}
 
 	/**
-	* Sets the step def d b e ID of this step d b e.
+	* Sets the step type of this step d b e.
 	*
-	* @param StepDefDBEId the step def d b e ID of this step d b e
+	* @param StepType the step type of this step d b e
 	*/
 	@Override
-	public void setStepDefDBEId(long StepDefDBEId) {
-		_stepDBE.setStepDefDBEId(StepDefDBEId);
+	public void setStepType(java.lang.String StepType) {
+		_stepDBE.setStepType(StepType);
 	}
 
 	@Override

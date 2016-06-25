@@ -284,4 +284,197 @@ public interface StepDefDBEPersistence extends BasePersistence<StepDefDBE> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the composite step def d b es associated with the Step Definition.
+	*
+	* @param pk the primary key of the Step Definition
+	* @return the composite step def d b es associated with the Step Definition
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE> getCompositeStepDefDBEs(
+		long pk) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the composite step def d b es associated with the Step Definition.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.lrc.liferay.toolbuilder.model.impl.StepDefDBEModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param pk the primary key of the Step Definition
+	* @param start the lower bound of the range of Step Definitions
+	* @param end the upper bound of the range of Step Definitions (not inclusive)
+	* @return the range of composite step def d b es associated with the Step Definition
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE> getCompositeStepDefDBEs(
+		long pk, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the composite step def d b es associated with the Step Definition.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.lrc.liferay.toolbuilder.model.impl.StepDefDBEModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param pk the primary key of the Step Definition
+	* @param start the lower bound of the range of Step Definitions
+	* @param end the upper bound of the range of Step Definitions (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of composite step def d b es associated with the Step Definition
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE> getCompositeStepDefDBEs(
+		long pk, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of composite step def d b es associated with the Step Definition.
+	*
+	* @param pk the primary key of the Step Definition
+	* @return the number of composite step def d b es associated with the Step Definition
+	* @throws SystemException if a system exception occurred
+	*/
+	public int getCompositeStepDefDBEsSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns <code>true</code> if the composite step def d b e is associated with the Step Definition.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBEPK the primary key of the composite step def d b e
+	* @return <code>true</code> if the composite step def d b e is associated with the Step Definition; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	public boolean containsCompositeStepDefDBE(long pk,
+		long compositeStepDefDBEPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns <code>true</code> if the Step Definition has any composite step def d b es associated with it.
+	*
+	* @param pk the primary key of the Step Definition to check for associations with composite step def d b es
+	* @return <code>true</code> if the Step Definition has any composite step def d b es associated with it; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	public boolean containsCompositeStepDefDBEs(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the Step Definition and the composite step def d b e. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBEPK the primary key of the composite step def d b e
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addCompositeStepDefDBE(long pk, long compositeStepDefDBEPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the Step Definition and the composite step def d b e. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBE the composite step def d b e
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addCompositeStepDefDBE(long pk,
+		org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE compositeStepDefDBE)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the Step Definition and the composite step def d b es. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBEPKs the primary keys of the composite step def d b es
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addCompositeStepDefDBEs(long pk, long[] compositeStepDefDBEPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the Step Definition and the composite step def d b es. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBEs the composite step def d b es
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addCompositeStepDefDBEs(long pk,
+		java.util.List<org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE> compositeStepDefDBEs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Clears all associations between the Step Definition and its composite step def d b es. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition to clear the associated composite step def d b es from
+	* @throws SystemException if a system exception occurred
+	*/
+	public void clearCompositeStepDefDBEs(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the Step Definition and the composite step def d b e. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBEPK the primary key of the composite step def d b e
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeCompositeStepDefDBE(long pk, long compositeStepDefDBEPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the Step Definition and the composite step def d b e. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBE the composite step def d b e
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeCompositeStepDefDBE(long pk,
+		org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE compositeStepDefDBE)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the Step Definition and the composite step def d b es. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBEPKs the primary keys of the composite step def d b es
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeCompositeStepDefDBEs(long pk,
+		long[] compositeStepDefDBEPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the Step Definition and the composite step def d b es. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBEs the composite step def d b es
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeCompositeStepDefDBEs(long pk,
+		java.util.List<org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE> compositeStepDefDBEs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Sets the composite step def d b es associated with the Step Definition, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBEPKs the primary keys of the composite step def d b es to be associated with the Step Definition
+	* @throws SystemException if a system exception occurred
+	*/
+	public void setCompositeStepDefDBEs(long pk, long[] compositeStepDefDBEPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Sets the composite step def d b es associated with the Step Definition, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the Step Definition
+	* @param compositeStepDefDBEs the composite step def d b es to be associated with the Step Definition
+	* @throws SystemException if a system exception occurred
+	*/
+	public void setCompositeStepDefDBEs(long pk,
+		java.util.List<org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE> compositeStepDefDBEs)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

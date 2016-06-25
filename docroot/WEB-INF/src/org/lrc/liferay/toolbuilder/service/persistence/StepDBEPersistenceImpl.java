@@ -14,6 +14,7 @@
 
 package org.lrc.liferay.toolbuilder.service.persistence;
 
+import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -30,6 +31,7 @@ import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -37,6 +39,8 @@ import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.service.persistence.impl.TableMapper;
+import com.liferay.portal.service.persistence.impl.TableMapperFactory;
 
 import org.lrc.liferay.toolbuilder.NoSuchStepDBEException;
 import org.lrc.liferay.toolbuilder.model.StepDBE;
@@ -47,7 +51,9 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The persistence implementation for the step d b e service.
@@ -583,6 +589,8 @@ public class StepDBEPersistenceImpl extends BasePersistenceImpl<StepDBE>
 	protected StepDBE removeImpl(StepDBE stepDBE) throws SystemException {
 		stepDBE = toUnwrappedModel(stepDBE);
 
+		stepDBEToCompositeStepDBETableMapper.deleteLeftPrimaryKeyTableMappings(stepDBE.getPrimaryKey());
+
 		Session session = null;
 
 		try {
@@ -691,7 +699,7 @@ public class StepDBEPersistenceImpl extends BasePersistenceImpl<StepDBE>
 		stepDBEImpl.setUserName(stepDBE.getUserName());
 		stepDBEImpl.setCreateDate(stepDBE.getCreateDate());
 		stepDBEImpl.setModifiedDate(stepDBE.getModifiedDate());
-		stepDBEImpl.setStepDefDBEId(stepDBE.getStepDefDBEId());
+		stepDBEImpl.setStepType(stepDBE.getStepType());
 
 		return stepDBEImpl;
 	}
@@ -967,6 +975,303 @@ public class StepDBEPersistenceImpl extends BasePersistenceImpl<StepDBE>
 	}
 
 	/**
+	 * Returns all the composite step d b es associated with the step d b e.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @return the composite step d b es associated with the step d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<org.lrc.liferay.toolbuilder.model.CompositeStepDBE> getCompositeStepDBEs(
+		long pk) throws SystemException {
+		return getCompositeStepDBEs(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	/**
+	 * Returns a range of all the composite step d b es associated with the step d b e.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.lrc.liferay.toolbuilder.model.impl.StepDBEModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param start the lower bound of the range of step d b es
+	 * @param end the upper bound of the range of step d b es (not inclusive)
+	 * @return the range of composite step d b es associated with the step d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<org.lrc.liferay.toolbuilder.model.CompositeStepDBE> getCompositeStepDBEs(
+		long pk, int start, int end) throws SystemException {
+		return getCompositeStepDBEs(pk, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the composite step d b es associated with the step d b e.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.lrc.liferay.toolbuilder.model.impl.StepDBEModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param start the lower bound of the range of step d b es
+	 * @param end the upper bound of the range of step d b es (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of composite step d b es associated with the step d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<org.lrc.liferay.toolbuilder.model.CompositeStepDBE> getCompositeStepDBEs(
+		long pk, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		return stepDBEToCompositeStepDBETableMapper.getRightBaseModels(pk,
+			start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the number of composite step d b es associated with the step d b e.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @return the number of composite step d b es associated with the step d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int getCompositeStepDBEsSize(long pk) throws SystemException {
+		long[] pks = stepDBEToCompositeStepDBETableMapper.getRightPrimaryKeys(pk);
+
+		return pks.length;
+	}
+
+	/**
+	 * Returns <code>true</code> if the composite step d b e is associated with the step d b e.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBEPK the primary key of the composite step d b e
+	 * @return <code>true</code> if the composite step d b e is associated with the step d b e; <code>false</code> otherwise
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public boolean containsCompositeStepDBE(long pk, long compositeStepDBEPK)
+		throws SystemException {
+		return stepDBEToCompositeStepDBETableMapper.containsTableMapping(pk,
+			compositeStepDBEPK);
+	}
+
+	/**
+	 * Returns <code>true</code> if the step d b e has any composite step d b es associated with it.
+	 *
+	 * @param pk the primary key of the step d b e to check for associations with composite step d b es
+	 * @return <code>true</code> if the step d b e has any composite step d b es associated with it; <code>false</code> otherwise
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public boolean containsCompositeStepDBEs(long pk) throws SystemException {
+		if (getCompositeStepDBEsSize(pk) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * Adds an association between the step d b e and the composite step d b e. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBEPK the primary key of the composite step d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void addCompositeStepDBE(long pk, long compositeStepDBEPK)
+		throws SystemException {
+		stepDBEToCompositeStepDBETableMapper.addTableMapping(pk,
+			compositeStepDBEPK);
+	}
+
+	/**
+	 * Adds an association between the step d b e and the composite step d b e. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBE the composite step d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void addCompositeStepDBE(long pk,
+		org.lrc.liferay.toolbuilder.model.CompositeStepDBE compositeStepDBE)
+		throws SystemException {
+		stepDBEToCompositeStepDBETableMapper.addTableMapping(pk,
+			compositeStepDBE.getPrimaryKey());
+	}
+
+	/**
+	 * Adds an association between the step d b e and the composite step d b es. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBEPKs the primary keys of the composite step d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void addCompositeStepDBEs(long pk, long[] compositeStepDBEPKs)
+		throws SystemException {
+		for (long compositeStepDBEPK : compositeStepDBEPKs) {
+			stepDBEToCompositeStepDBETableMapper.addTableMapping(pk,
+				compositeStepDBEPK);
+		}
+	}
+
+	/**
+	 * Adds an association between the step d b e and the composite step d b es. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBEs the composite step d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void addCompositeStepDBEs(long pk,
+		List<org.lrc.liferay.toolbuilder.model.CompositeStepDBE> compositeStepDBEs)
+		throws SystemException {
+		for (org.lrc.liferay.toolbuilder.model.CompositeStepDBE compositeStepDBE : compositeStepDBEs) {
+			stepDBEToCompositeStepDBETableMapper.addTableMapping(pk,
+				compositeStepDBE.getPrimaryKey());
+		}
+	}
+
+	/**
+	 * Clears all associations between the step d b e and its composite step d b es. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e to clear the associated composite step d b es from
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void clearCompositeStepDBEs(long pk) throws SystemException {
+		stepDBEToCompositeStepDBETableMapper.deleteLeftPrimaryKeyTableMappings(pk);
+	}
+
+	/**
+	 * Removes the association between the step d b e and the composite step d b e. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBEPK the primary key of the composite step d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeCompositeStepDBE(long pk, long compositeStepDBEPK)
+		throws SystemException {
+		stepDBEToCompositeStepDBETableMapper.deleteTableMapping(pk,
+			compositeStepDBEPK);
+	}
+
+	/**
+	 * Removes the association between the step d b e and the composite step d b e. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBE the composite step d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeCompositeStepDBE(long pk,
+		org.lrc.liferay.toolbuilder.model.CompositeStepDBE compositeStepDBE)
+		throws SystemException {
+		stepDBEToCompositeStepDBETableMapper.deleteTableMapping(pk,
+			compositeStepDBE.getPrimaryKey());
+	}
+
+	/**
+	 * Removes the association between the step d b e and the composite step d b es. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBEPKs the primary keys of the composite step d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeCompositeStepDBEs(long pk, long[] compositeStepDBEPKs)
+		throws SystemException {
+		for (long compositeStepDBEPK : compositeStepDBEPKs) {
+			stepDBEToCompositeStepDBETableMapper.deleteTableMapping(pk,
+				compositeStepDBEPK);
+		}
+	}
+
+	/**
+	 * Removes the association between the step d b e and the composite step d b es. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBEs the composite step d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeCompositeStepDBEs(long pk,
+		List<org.lrc.liferay.toolbuilder.model.CompositeStepDBE> compositeStepDBEs)
+		throws SystemException {
+		for (org.lrc.liferay.toolbuilder.model.CompositeStepDBE compositeStepDBE : compositeStepDBEs) {
+			stepDBEToCompositeStepDBETableMapper.deleteTableMapping(pk,
+				compositeStepDBE.getPrimaryKey());
+		}
+	}
+
+	/**
+	 * Sets the composite step d b es associated with the step d b e, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBEPKs the primary keys of the composite step d b es to be associated with the step d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void setCompositeStepDBEs(long pk, long[] compositeStepDBEPKs)
+		throws SystemException {
+		Set<Long> newCompositeStepDBEPKsSet = SetUtil.fromArray(compositeStepDBEPKs);
+		Set<Long> oldCompositeStepDBEPKsSet = SetUtil.fromArray(stepDBEToCompositeStepDBETableMapper.getRightPrimaryKeys(
+					pk));
+
+		Set<Long> removeCompositeStepDBEPKsSet = new HashSet<Long>(oldCompositeStepDBEPKsSet);
+
+		removeCompositeStepDBEPKsSet.removeAll(newCompositeStepDBEPKsSet);
+
+		for (long removeCompositeStepDBEPK : removeCompositeStepDBEPKsSet) {
+			stepDBEToCompositeStepDBETableMapper.deleteTableMapping(pk,
+				removeCompositeStepDBEPK);
+		}
+
+		newCompositeStepDBEPKsSet.removeAll(oldCompositeStepDBEPKsSet);
+
+		for (long newCompositeStepDBEPK : newCompositeStepDBEPKsSet) {
+			stepDBEToCompositeStepDBETableMapper.addTableMapping(pk,
+				newCompositeStepDBEPK);
+		}
+	}
+
+	/**
+	 * Sets the composite step d b es associated with the step d b e, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the step d b e
+	 * @param compositeStepDBEs the composite step d b es to be associated with the step d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void setCompositeStepDBEs(long pk,
+		List<org.lrc.liferay.toolbuilder.model.CompositeStepDBE> compositeStepDBEs)
+		throws SystemException {
+		try {
+			long[] compositeStepDBEPKs = new long[compositeStepDBEs.size()];
+
+			for (int i = 0; i < compositeStepDBEs.size(); i++) {
+				org.lrc.liferay.toolbuilder.model.CompositeStepDBE compositeStepDBE =
+					compositeStepDBEs.get(i);
+
+				compositeStepDBEPKs[i] = compositeStepDBE.getPrimaryKey();
+			}
+
+			setCompositeStepDBEs(pk, compositeStepDBEPKs);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(StepDBEModelImpl.MAPPING_TABLE_LRC_TB_CS_STEP_NAME);
+		}
+	}
+
+	/**
 	 * Initializes the step d b e persistence.
 	 */
 	public void afterPropertiesSet() {
@@ -989,6 +1294,10 @@ public class StepDBEPersistenceImpl extends BasePersistenceImpl<StepDBE>
 				_log.error(e);
 			}
 		}
+
+		stepDBEToCompositeStepDBETableMapper = TableMapperFactory.getTableMapper("lrc_tb_CS_Step",
+				"stepDBEId", "compositeStepDBEId", this,
+				compositeStepDBEPersistence);
 	}
 
 	public void destroy() {
@@ -996,8 +1305,13 @@ public class StepDBEPersistenceImpl extends BasePersistenceImpl<StepDBE>
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		TableMapperFactory.removeTableMapper("lrc_tb_CS_Step");
 	}
 
+	@BeanReference(type = CompositeStepDBEPersistence.class)
+	protected CompositeStepDBEPersistence compositeStepDBEPersistence;
+	protected TableMapper<StepDBE, org.lrc.liferay.toolbuilder.model.CompositeStepDBE> stepDBEToCompositeStepDBETableMapper;
 	private static final String _SQL_SELECT_STEPDBE = "SELECT stepDBE FROM StepDBE stepDBE";
 	private static final String _SQL_SELECT_STEPDBE_WHERE = "SELECT stepDBE FROM StepDBE stepDBE WHERE ";
 	private static final String _SQL_COUNT_STEPDBE = "SELECT COUNT(stepDBE) FROM StepDBE stepDBE";

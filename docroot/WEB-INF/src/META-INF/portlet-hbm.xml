@@ -2,13 +2,30 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="org.lrc.liferay.toolbuilder.model.CompositeStepDBE" />
+	<import class="org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE" />
 	<import class="org.lrc.liferay.toolbuilder.model.InstalledStep" />
 	<import class="org.lrc.liferay.toolbuilder.model.StepDBE" />
 	<import class="org.lrc.liferay.toolbuilder.model.StepDefDBE" />
 	<import class="org.lrc.liferay.toolbuilder.model.ToolDefDBE" />
 	<import class="org.lrc.liferay.toolbuilder.model.ToolInstanceDBE" />
-	<import class="org.lrc.liferay.toolbuilder.model.WrapperStepDBE" />
-	<import class="org.lrc.liferay.toolbuilder.model.WrapperStepDefDBE" />
+	<class name="org.lrc.liferay.toolbuilder.model.impl.CompositeStepDBEImpl" table="lrc_tb_CompositeStepDBE">
+		<cache usage="read-write" />
+		<id name="compositeStepDBEId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="currentStep" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="compositeStepDefDBEId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="org.lrc.liferay.toolbuilder.model.impl.CompositeStepDefDBEImpl" table="lrc_tb_CompositeStepDefDBE">
+		<cache usage="read-write" />
+		<id name="compositeStepDefDBEId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="stepsNumber" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="sequential" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="depth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
 	<class name="org.lrc.liferay.toolbuilder.model.impl.InstalledStepImpl" table="lrc_tb_InstalledStep">
 		<cache usage="read-write" />
 		<id name="stepType" type="java.lang.String">
@@ -34,7 +51,7 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="StepDefDBEId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="StepType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="org.lrc.liferay.toolbuilder.model.impl.StepDefDBEImpl" table="lrc_tb_StepDefDBE">
 		<cache usage="read-write" />
@@ -54,29 +71,28 @@
 		<id name="toolDefDBEId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="toolName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="compositeStepDefDBEId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="org.lrc.liferay.toolbuilder.model.impl.ToolInstanceDBEImpl" table="lrc_tb_ToolInstanceDBE">
 		<cache usage="read-write" />
 		<id name="toolInstanceDBEId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="toolDefDBEId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-	</class>
-	<class name="org.lrc.liferay.toolbuilder.model.impl.WrapperStepDBEImpl" table="lrc_tb_WrapperStepDBE">
-		<cache usage="read-write" />
-		<id name="wrapperStepDBEId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="currentStep" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-	</class>
-	<class name="org.lrc.liferay.toolbuilder.model.impl.WrapperStepDefDBEImpl" table="lrc_tb_WrapperStepDefDBE">
-		<cache usage="read-write" />
-		<id name="wrapperStepDefDBEId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="stepsNumber" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="sequential" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="depth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="compositeStepDBEId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="toolTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

@@ -14,13 +14,18 @@
 
 package org.lrc.liferay.toolbuilder.model;
 
+import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
+
+import java.util.Date;
 
 /**
  * The base model interface for the ToolInstanceDBE service. Represents a row in the &quot;lrc_tb_ToolInstanceDBE&quot; database table, with each column mapped to a property of this class.
@@ -35,7 +40,8 @@ import java.io.Serializable;
  * @see org.lrc.liferay.toolbuilder.model.impl.ToolInstanceDBEModelImpl
  * @generated
  */
-public interface ToolInstanceDBEModel extends BaseModel<ToolInstanceDBE> {
+public interface ToolInstanceDBEModel extends BaseModel<ToolInstanceDBE>,
+	GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -71,6 +77,120 @@ public interface ToolInstanceDBEModel extends BaseModel<ToolInstanceDBE> {
 	public void setToolInstanceDBEId(long toolInstanceDBEId);
 
 	/**
+	 * Returns the group ID of this tool instance d b e.
+	 *
+	 * @return the group ID of this tool instance d b e
+	 */
+	@Override
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this tool instance d b e.
+	 *
+	 * @param groupId the group ID of this tool instance d b e
+	 */
+	@Override
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this tool instance d b e.
+	 *
+	 * @return the company ID of this tool instance d b e
+	 */
+	@Override
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this tool instance d b e.
+	 *
+	 * @param companyId the company ID of this tool instance d b e
+	 */
+	@Override
+	public void setCompanyId(long companyId);
+
+	/**
+	 * Returns the user ID of this tool instance d b e.
+	 *
+	 * @return the user ID of this tool instance d b e
+	 */
+	@Override
+	public long getUserId();
+
+	/**
+	 * Sets the user ID of this tool instance d b e.
+	 *
+	 * @param userId the user ID of this tool instance d b e
+	 */
+	@Override
+	public void setUserId(long userId);
+
+	/**
+	 * Returns the user uuid of this tool instance d b e.
+	 *
+	 * @return the user uuid of this tool instance d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public String getUserUuid() throws SystemException;
+
+	/**
+	 * Sets the user uuid of this tool instance d b e.
+	 *
+	 * @param userUuid the user uuid of this tool instance d b e
+	 */
+	@Override
+	public void setUserUuid(String userUuid);
+
+	/**
+	 * Returns the user name of this tool instance d b e.
+	 *
+	 * @return the user name of this tool instance d b e
+	 */
+	@AutoEscape
+	@Override
+	public String getUserName();
+
+	/**
+	 * Sets the user name of this tool instance d b e.
+	 *
+	 * @param userName the user name of this tool instance d b e
+	 */
+	@Override
+	public void setUserName(String userName);
+
+	/**
+	 * Returns the create date of this tool instance d b e.
+	 *
+	 * @return the create date of this tool instance d b e
+	 */
+	@Override
+	public Date getCreateDate();
+
+	/**
+	 * Sets the create date of this tool instance d b e.
+	 *
+	 * @param createDate the create date of this tool instance d b e
+	 */
+	@Override
+	public void setCreateDate(Date createDate);
+
+	/**
+	 * Returns the modified date of this tool instance d b e.
+	 *
+	 * @return the modified date of this tool instance d b e
+	 */
+	@Override
+	public Date getModifiedDate();
+
+	/**
+	 * Sets the modified date of this tool instance d b e.
+	 *
+	 * @param modifiedDate the modified date of this tool instance d b e
+	 */
+	@Override
+	public void setModifiedDate(Date modifiedDate);
+
+	/**
 	 * Returns the tool def d b e ID of this tool instance d b e.
 	 *
 	 * @return the tool def d b e ID of this tool instance d b e
@@ -83,6 +203,35 @@ public interface ToolInstanceDBEModel extends BaseModel<ToolInstanceDBE> {
 	 * @param toolDefDBEId the tool def d b e ID of this tool instance d b e
 	 */
 	public void setToolDefDBEId(long toolDefDBEId);
+
+	/**
+	 * Returns the composite step d b e ID of this tool instance d b e.
+	 *
+	 * @return the composite step d b e ID of this tool instance d b e
+	 */
+	public long getCompositeStepDBEId();
+
+	/**
+	 * Sets the composite step d b e ID of this tool instance d b e.
+	 *
+	 * @param compositeStepDBEId the composite step d b e ID of this tool instance d b e
+	 */
+	public void setCompositeStepDBEId(long compositeStepDBEId);
+
+	/**
+	 * Returns the tool title of this tool instance d b e.
+	 *
+	 * @return the tool title of this tool instance d b e
+	 */
+	@AutoEscape
+	public String getToolTitle();
+
+	/**
+	 * Sets the tool title of this tool instance d b e.
+	 *
+	 * @param toolTitle the tool title of this tool instance d b e
+	 */
+	public void setToolTitle(String toolTitle);
 
 	@Override
 	public boolean isNew();

@@ -13,11 +13,15 @@ import org.lrc.liferay.toolbuilder.utils.flowcharts.exceptions.NodeException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
-public class DecisionTreeStep implements Step {
+public class DecisionTreeStep extends Step {
 	static final String view = "decisionTreeStepView.xhtml";
 	private Flow<String, Boolean> decisionTree;
 
 	private List<String> nodes = new ArrayList<String>();
+
+	public DecisionTreeStep() {
+		super("DECISION_TREE");
+	}
 
 	public void setDecisionTree(BasicFlowChart<String, Boolean> flowChart) {
 		this.decisionTree = new Flow<String, Boolean>(flowChart);
@@ -88,8 +92,4 @@ public class DecisionTreeStep implements Step {
 		
 	}
 
-	@Override
-	public String getStepName() {
-		return "DECISION_TREE";
-	}
 }

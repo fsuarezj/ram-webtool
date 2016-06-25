@@ -442,6 +442,1037 @@ public class ToolInstanceDBEPersistenceImpl extends BasePersistenceImpl<ToolInst
 
 	private static final String _FINDER_COLUMN_TOOLINSTANCEDBEID_TOOLINSTANCEDBEID_2 =
 		"toolInstanceDBE.toolInstanceDBEId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_TOOLDEFDBEID =
+		new FinderPath(ToolInstanceDBEModelImpl.ENTITY_CACHE_ENABLED,
+			ToolInstanceDBEModelImpl.FINDER_CACHE_ENABLED,
+			ToolInstanceDBEImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByToolDefDBEId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLDEFDBEID =
+		new FinderPath(ToolInstanceDBEModelImpl.ENTITY_CACHE_ENABLED,
+			ToolInstanceDBEModelImpl.FINDER_CACHE_ENABLED,
+			ToolInstanceDBEImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByToolDefDBEId",
+			new String[] { Long.class.getName() },
+			ToolInstanceDBEModelImpl.TOOLDEFDBEID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_TOOLDEFDBEID = new FinderPath(ToolInstanceDBEModelImpl.ENTITY_CACHE_ENABLED,
+			ToolInstanceDBEModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByToolDefDBEId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the tool instance d b es where toolDefDBEId = &#63;.
+	 *
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @return the matching tool instance d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<ToolInstanceDBE> findByToolDefDBEId(long toolDefDBEId)
+		throws SystemException {
+		return findByToolDefDBEId(toolDefDBEId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the tool instance d b es where toolDefDBEId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.lrc.liferay.toolbuilder.model.impl.ToolInstanceDBEModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param start the lower bound of the range of tool instance d b es
+	 * @param end the upper bound of the range of tool instance d b es (not inclusive)
+	 * @return the range of matching tool instance d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<ToolInstanceDBE> findByToolDefDBEId(long toolDefDBEId,
+		int start, int end) throws SystemException {
+		return findByToolDefDBEId(toolDefDBEId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the tool instance d b es where toolDefDBEId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.lrc.liferay.toolbuilder.model.impl.ToolInstanceDBEModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param start the lower bound of the range of tool instance d b es
+	 * @param end the upper bound of the range of tool instance d b es (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching tool instance d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<ToolInstanceDBE> findByToolDefDBEId(long toolDefDBEId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLDEFDBEID;
+			finderArgs = new Object[] { toolDefDBEId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_TOOLDEFDBEID;
+			finderArgs = new Object[] {
+					toolDefDBEId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<ToolInstanceDBE> list = (List<ToolInstanceDBE>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (ToolInstanceDBE toolInstanceDBE : list) {
+				if ((toolDefDBEId != toolInstanceDBE.getToolDefDBEId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_TOOLINSTANCEDBE_WHERE);
+
+			query.append(_FINDER_COLUMN_TOOLDEFDBEID_TOOLDEFDBEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(ToolInstanceDBEModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(toolDefDBEId);
+
+				if (!pagination) {
+					list = (List<ToolInstanceDBE>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<ToolInstanceDBE>(list);
+				}
+				else {
+					list = (List<ToolInstanceDBE>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first tool instance d b e in the ordered set where toolDefDBEId = &#63;.
+	 *
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching tool instance d b e
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException if a matching tool instance d b e could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ToolInstanceDBE findByToolDefDBEId_First(long toolDefDBEId,
+		OrderByComparator orderByComparator)
+		throws NoSuchToolInstanceDBEException, SystemException {
+		ToolInstanceDBE toolInstanceDBE = fetchByToolDefDBEId_First(toolDefDBEId,
+				orderByComparator);
+
+		if (toolInstanceDBE != null) {
+			return toolInstanceDBE;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("toolDefDBEId=");
+		msg.append(toolDefDBEId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchToolInstanceDBEException(msg.toString());
+	}
+
+	/**
+	 * Returns the first tool instance d b e in the ordered set where toolDefDBEId = &#63;.
+	 *
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching tool instance d b e, or <code>null</code> if a matching tool instance d b e could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ToolInstanceDBE fetchByToolDefDBEId_First(long toolDefDBEId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<ToolInstanceDBE> list = findByToolDefDBEId(toolDefDBEId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last tool instance d b e in the ordered set where toolDefDBEId = &#63;.
+	 *
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching tool instance d b e
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException if a matching tool instance d b e could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ToolInstanceDBE findByToolDefDBEId_Last(long toolDefDBEId,
+		OrderByComparator orderByComparator)
+		throws NoSuchToolInstanceDBEException, SystemException {
+		ToolInstanceDBE toolInstanceDBE = fetchByToolDefDBEId_Last(toolDefDBEId,
+				orderByComparator);
+
+		if (toolInstanceDBE != null) {
+			return toolInstanceDBE;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("toolDefDBEId=");
+		msg.append(toolDefDBEId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchToolInstanceDBEException(msg.toString());
+	}
+
+	/**
+	 * Returns the last tool instance d b e in the ordered set where toolDefDBEId = &#63;.
+	 *
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching tool instance d b e, or <code>null</code> if a matching tool instance d b e could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ToolInstanceDBE fetchByToolDefDBEId_Last(long toolDefDBEId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByToolDefDBEId(toolDefDBEId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<ToolInstanceDBE> list = findByToolDefDBEId(toolDefDBEId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the tool instance d b es before and after the current tool instance d b e in the ordered set where toolDefDBEId = &#63;.
+	 *
+	 * @param toolInstanceDBEId the primary key of the current tool instance d b e
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next tool instance d b e
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException if a tool instance d b e with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ToolInstanceDBE[] findByToolDefDBEId_PrevAndNext(
+		long toolInstanceDBEId, long toolDefDBEId,
+		OrderByComparator orderByComparator)
+		throws NoSuchToolInstanceDBEException, SystemException {
+		ToolInstanceDBE toolInstanceDBE = findByPrimaryKey(toolInstanceDBEId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			ToolInstanceDBE[] array = new ToolInstanceDBEImpl[3];
+
+			array[0] = getByToolDefDBEId_PrevAndNext(session, toolInstanceDBE,
+					toolDefDBEId, orderByComparator, true);
+
+			array[1] = toolInstanceDBE;
+
+			array[2] = getByToolDefDBEId_PrevAndNext(session, toolInstanceDBE,
+					toolDefDBEId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected ToolInstanceDBE getByToolDefDBEId_PrevAndNext(Session session,
+		ToolInstanceDBE toolInstanceDBE, long toolDefDBEId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_TOOLINSTANCEDBE_WHERE);
+
+		query.append(_FINDER_COLUMN_TOOLDEFDBEID_TOOLDEFDBEID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(ToolInstanceDBEModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(toolDefDBEId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(toolInstanceDBE);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ToolInstanceDBE> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the tool instance d b es where toolDefDBEId = &#63; from the database.
+	 *
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByToolDefDBEId(long toolDefDBEId)
+		throws SystemException {
+		for (ToolInstanceDBE toolInstanceDBE : findByToolDefDBEId(
+				toolDefDBEId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(toolInstanceDBE);
+		}
+	}
+
+	/**
+	 * Returns the number of tool instance d b es where toolDefDBEId = &#63;.
+	 *
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @return the number of matching tool instance d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByToolDefDBEId(long toolDefDBEId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_TOOLDEFDBEID;
+
+		Object[] finderArgs = new Object[] { toolDefDBEId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_TOOLINSTANCEDBE_WHERE);
+
+			query.append(_FINDER_COLUMN_TOOLDEFDBEID_TOOLDEFDBEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(toolDefDBEId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_TOOLDEFDBEID_TOOLDEFDBEID_2 = "toolInstanceDBE.toolDefDBEId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_T = new FinderPath(ToolInstanceDBEModelImpl.ENTITY_CACHE_ENABLED,
+			ToolInstanceDBEModelImpl.FINDER_CACHE_ENABLED,
+			ToolInstanceDBEImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByG_T",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T = new FinderPath(ToolInstanceDBEModelImpl.ENTITY_CACHE_ENABLED,
+			ToolInstanceDBEModelImpl.FINDER_CACHE_ENABLED,
+			ToolInstanceDBEImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_T",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			ToolInstanceDBEModelImpl.GROUPID_COLUMN_BITMASK |
+			ToolInstanceDBEModelImpl.TOOLDEFDBEID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_T = new FinderPath(ToolInstanceDBEModelImpl.ENTITY_CACHE_ENABLED,
+			ToolInstanceDBEModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_T",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns all the tool instance d b es where groupId = &#63; and toolDefDBEId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @return the matching tool instance d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<ToolInstanceDBE> findByG_T(long groupId, long toolDefDBEId)
+		throws SystemException {
+		return findByG_T(groupId, toolDefDBEId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the tool instance d b es where groupId = &#63; and toolDefDBEId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.lrc.liferay.toolbuilder.model.impl.ToolInstanceDBEModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param start the lower bound of the range of tool instance d b es
+	 * @param end the upper bound of the range of tool instance d b es (not inclusive)
+	 * @return the range of matching tool instance d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<ToolInstanceDBE> findByG_T(long groupId, long toolDefDBEId,
+		int start, int end) throws SystemException {
+		return findByG_T(groupId, toolDefDBEId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the tool instance d b es where groupId = &#63; and toolDefDBEId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.lrc.liferay.toolbuilder.model.impl.ToolInstanceDBEModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param start the lower bound of the range of tool instance d b es
+	 * @param end the upper bound of the range of tool instance d b es (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching tool instance d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<ToolInstanceDBE> findByG_T(long groupId, long toolDefDBEId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T;
+			finderArgs = new Object[] { groupId, toolDefDBEId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_T;
+			finderArgs = new Object[] {
+					groupId, toolDefDBEId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<ToolInstanceDBE> list = (List<ToolInstanceDBE>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (ToolInstanceDBE toolInstanceDBE : list) {
+				if ((groupId != toolInstanceDBE.getGroupId()) ||
+						(toolDefDBEId != toolInstanceDBE.getToolDefDBEId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_TOOLINSTANCEDBE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_T_TOOLDEFDBEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(ToolInstanceDBEModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(toolDefDBEId);
+
+				if (!pagination) {
+					list = (List<ToolInstanceDBE>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<ToolInstanceDBE>(list);
+				}
+				else {
+					list = (List<ToolInstanceDBE>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first tool instance d b e in the ordered set where groupId = &#63; and toolDefDBEId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching tool instance d b e
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException if a matching tool instance d b e could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ToolInstanceDBE findByG_T_First(long groupId, long toolDefDBEId,
+		OrderByComparator orderByComparator)
+		throws NoSuchToolInstanceDBEException, SystemException {
+		ToolInstanceDBE toolInstanceDBE = fetchByG_T_First(groupId,
+				toolDefDBEId, orderByComparator);
+
+		if (toolInstanceDBE != null) {
+			return toolInstanceDBE;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", toolDefDBEId=");
+		msg.append(toolDefDBEId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchToolInstanceDBEException(msg.toString());
+	}
+
+	/**
+	 * Returns the first tool instance d b e in the ordered set where groupId = &#63; and toolDefDBEId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching tool instance d b e, or <code>null</code> if a matching tool instance d b e could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ToolInstanceDBE fetchByG_T_First(long groupId, long toolDefDBEId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<ToolInstanceDBE> list = findByG_T(groupId, toolDefDBEId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last tool instance d b e in the ordered set where groupId = &#63; and toolDefDBEId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching tool instance d b e
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException if a matching tool instance d b e could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ToolInstanceDBE findByG_T_Last(long groupId, long toolDefDBEId,
+		OrderByComparator orderByComparator)
+		throws NoSuchToolInstanceDBEException, SystemException {
+		ToolInstanceDBE toolInstanceDBE = fetchByG_T_Last(groupId,
+				toolDefDBEId, orderByComparator);
+
+		if (toolInstanceDBE != null) {
+			return toolInstanceDBE;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", toolDefDBEId=");
+		msg.append(toolDefDBEId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchToolInstanceDBEException(msg.toString());
+	}
+
+	/**
+	 * Returns the last tool instance d b e in the ordered set where groupId = &#63; and toolDefDBEId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching tool instance d b e, or <code>null</code> if a matching tool instance d b e could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ToolInstanceDBE fetchByG_T_Last(long groupId, long toolDefDBEId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByG_T(groupId, toolDefDBEId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<ToolInstanceDBE> list = findByG_T(groupId, toolDefDBEId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the tool instance d b es before and after the current tool instance d b e in the ordered set where groupId = &#63; and toolDefDBEId = &#63;.
+	 *
+	 * @param toolInstanceDBEId the primary key of the current tool instance d b e
+	 * @param groupId the group ID
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next tool instance d b e
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException if a tool instance d b e with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ToolInstanceDBE[] findByG_T_PrevAndNext(long toolInstanceDBEId,
+		long groupId, long toolDefDBEId, OrderByComparator orderByComparator)
+		throws NoSuchToolInstanceDBEException, SystemException {
+		ToolInstanceDBE toolInstanceDBE = findByPrimaryKey(toolInstanceDBEId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			ToolInstanceDBE[] array = new ToolInstanceDBEImpl[3];
+
+			array[0] = getByG_T_PrevAndNext(session, toolInstanceDBE, groupId,
+					toolDefDBEId, orderByComparator, true);
+
+			array[1] = toolInstanceDBE;
+
+			array[2] = getByG_T_PrevAndNext(session, toolInstanceDBE, groupId,
+					toolDefDBEId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected ToolInstanceDBE getByG_T_PrevAndNext(Session session,
+		ToolInstanceDBE toolInstanceDBE, long groupId, long toolDefDBEId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_TOOLINSTANCEDBE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_T_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_T_TOOLDEFDBEID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(ToolInstanceDBEModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(toolDefDBEId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(toolInstanceDBE);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ToolInstanceDBE> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the tool instance d b es where groupId = &#63; and toolDefDBEId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByG_T(long groupId, long toolDefDBEId)
+		throws SystemException {
+		for (ToolInstanceDBE toolInstanceDBE : findByG_T(groupId, toolDefDBEId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(toolInstanceDBE);
+		}
+	}
+
+	/**
+	 * Returns the number of tool instance d b es where groupId = &#63; and toolDefDBEId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param toolDefDBEId the tool def d b e ID
+	 * @return the number of matching tool instance d b es
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByG_T(long groupId, long toolDefDBEId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_T;
+
+		Object[] finderArgs = new Object[] { groupId, toolDefDBEId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_TOOLINSTANCEDBE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_T_TOOLDEFDBEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(toolDefDBEId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_G_T_GROUPID_2 = "toolInstanceDBE.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_T_TOOLDEFDBEID_2 = "toolInstanceDBE.toolDefDBEId = ?";
 
 	public ToolInstanceDBEPersistenceImpl() {
 		setModelClass(ToolInstanceDBE.class);
@@ -690,6 +1721,46 @@ public class ToolInstanceDBEPersistenceImpl extends BasePersistenceImpl<ToolInst
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLINSTANCEDBEID,
 					args);
 			}
+
+			if ((toolInstanceDBEModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLDEFDBEID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						toolInstanceDBEModelImpl.getOriginalToolDefDBEId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_TOOLDEFDBEID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLDEFDBEID,
+					args);
+
+				args = new Object[] { toolInstanceDBEModelImpl.getToolDefDBEId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_TOOLDEFDBEID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLDEFDBEID,
+					args);
+			}
+
+			if ((toolInstanceDBEModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						toolInstanceDBEModelImpl.getOriginalGroupId(),
+						toolInstanceDBEModelImpl.getOriginalToolDefDBEId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_T, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T,
+					args);
+
+				args = new Object[] {
+						toolInstanceDBEModelImpl.getGroupId(),
+						toolInstanceDBEModelImpl.getToolDefDBEId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_T, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_T,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(ToolInstanceDBEModelImpl.ENTITY_CACHE_ENABLED,
@@ -710,7 +1781,15 @@ public class ToolInstanceDBEPersistenceImpl extends BasePersistenceImpl<ToolInst
 		toolInstanceDBEImpl.setPrimaryKey(toolInstanceDBE.getPrimaryKey());
 
 		toolInstanceDBEImpl.setToolInstanceDBEId(toolInstanceDBE.getToolInstanceDBEId());
+		toolInstanceDBEImpl.setGroupId(toolInstanceDBE.getGroupId());
+		toolInstanceDBEImpl.setCompanyId(toolInstanceDBE.getCompanyId());
+		toolInstanceDBEImpl.setUserId(toolInstanceDBE.getUserId());
+		toolInstanceDBEImpl.setUserName(toolInstanceDBE.getUserName());
+		toolInstanceDBEImpl.setCreateDate(toolInstanceDBE.getCreateDate());
+		toolInstanceDBEImpl.setModifiedDate(toolInstanceDBE.getModifiedDate());
 		toolInstanceDBEImpl.setToolDefDBEId(toolInstanceDBE.getToolDefDBEId());
+		toolInstanceDBEImpl.setCompositeStepDBEId(toolInstanceDBE.getCompositeStepDBEId());
+		toolInstanceDBEImpl.setToolTitle(toolInstanceDBE.getToolTitle());
 
 		return toolInstanceDBEImpl;
 	}

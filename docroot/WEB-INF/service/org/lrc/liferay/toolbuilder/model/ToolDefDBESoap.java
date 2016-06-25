@@ -17,6 +17,7 @@ package org.lrc.liferay.toolbuilder.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +32,14 @@ public class ToolDefDBESoap implements Serializable {
 		ToolDefDBESoap soapModel = new ToolDefDBESoap();
 
 		soapModel.setToolDefDBEId(model.getToolDefDBEId());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setUserId(model.getUserId());
+		soapModel.setUserName(model.getUserName());
+		soapModel.setCreateDate(model.getCreateDate());
+		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setToolName(model.getToolName());
+		soapModel.setCompositeStepDefDBEId(model.getCompositeStepDefDBEId());
 
 		return soapModel;
 	}
@@ -92,6 +100,54 @@ public class ToolDefDBESoap implements Serializable {
 		_toolDefDBEId = toolDefDBEId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public long getUserId() {
+		return _userId;
+	}
+
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
+	public String getUserName() {
+		return _userName;
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
 	public String getToolName() {
 		return _toolName;
 	}
@@ -100,6 +156,21 @@ public class ToolDefDBESoap implements Serializable {
 		_toolName = toolName;
 	}
 
+	public long getCompositeStepDefDBEId() {
+		return _compositeStepDefDBEId;
+	}
+
+	public void setCompositeStepDefDBEId(long compositeStepDefDBEId) {
+		_compositeStepDefDBEId = compositeStepDefDBEId;
+	}
+
 	private long _toolDefDBEId;
+	private long _groupId;
+	private long _companyId;
+	private long _userId;
+	private String _userName;
+	private Date _createDate;
+	private Date _modifiedDate;
 	private String _toolName;
+	private long _compositeStepDefDBEId;
 }

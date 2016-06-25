@@ -24,6 +24,9 @@ package org.lrc.liferay.toolbuilder.model.impl;
  * @author Fernando Suárez
  */
 public class StepDefDBEImpl extends StepDefDBEBaseImpl {
+
+	private static final long serialVersionUID = -568335081701066370L;
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

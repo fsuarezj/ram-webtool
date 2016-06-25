@@ -138,6 +138,14 @@ public class StepDefDBEModelImpl extends BaseModelImpl<StepDefDBE>
 		return models;
 	}
 
+	public static final String MAPPING_TABLE_LRC_TB_CSDEF_STEPDEF_NAME = "lrc_tb_CSDef_StepDef";
+	public static final Object[][] MAPPING_TABLE_LRC_TB_CSDEF_STEPDEF_COLUMNS = {
+			{ "compositeStepDefDBEId", Types.BIGINT },
+			{ "stepDefDBEId", Types.BIGINT }
+		};
+	public static final String MAPPING_TABLE_LRC_TB_CSDEF_STEPDEF_SQL_CREATE = "create table lrc_tb_CSDef_StepDef (compositeStepDefDBEId LONG not null,stepDefDBEId LONG not null,primary key (compositeStepDefDBEId, stepDefDBEId))";
+	public static final boolean FINDER_CACHE_ENABLED_LRC_TB_CSDEF_STEPDEF = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.finder.cache.enabled.lrc_tb_CSDef_StepDef"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.org.lrc.liferay.toolbuilder.model.StepDefDBE"));
 

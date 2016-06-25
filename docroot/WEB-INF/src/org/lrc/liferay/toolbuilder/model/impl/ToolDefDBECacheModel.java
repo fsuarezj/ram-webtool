@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing ToolDefDBE in entity cache.
  *
@@ -36,12 +38,26 @@ public class ToolDefDBECacheModel implements CacheModel<ToolDefDBE>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{toolDefDBEId=");
 		sb.append(toolDefDBEId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
+		sb.append(", userId=");
+		sb.append(userId);
+		sb.append(", userName=");
+		sb.append(userName);
+		sb.append(", createDate=");
+		sb.append(createDate);
+		sb.append(", modifiedDate=");
+		sb.append(modifiedDate);
 		sb.append(", toolName=");
 		sb.append(toolName);
+		sb.append(", compositeStepDefDBEId=");
+		sb.append(compositeStepDefDBEId);
 		sb.append("}");
 
 		return sb.toString();
@@ -52,6 +68,30 @@ public class ToolDefDBECacheModel implements CacheModel<ToolDefDBE>,
 		ToolDefDBEImpl toolDefDBEImpl = new ToolDefDBEImpl();
 
 		toolDefDBEImpl.setToolDefDBEId(toolDefDBEId);
+		toolDefDBEImpl.setGroupId(groupId);
+		toolDefDBEImpl.setCompanyId(companyId);
+		toolDefDBEImpl.setUserId(userId);
+
+		if (userName == null) {
+			toolDefDBEImpl.setUserName(StringPool.BLANK);
+		}
+		else {
+			toolDefDBEImpl.setUserName(userName);
+		}
+
+		if (createDate == Long.MIN_VALUE) {
+			toolDefDBEImpl.setCreateDate(null);
+		}
+		else {
+			toolDefDBEImpl.setCreateDate(new Date(createDate));
+		}
+
+		if (modifiedDate == Long.MIN_VALUE) {
+			toolDefDBEImpl.setModifiedDate(null);
+		}
+		else {
+			toolDefDBEImpl.setModifiedDate(new Date(modifiedDate));
+		}
 
 		if (toolName == null) {
 			toolDefDBEImpl.setToolName(StringPool.BLANK);
@@ -59,6 +99,8 @@ public class ToolDefDBECacheModel implements CacheModel<ToolDefDBE>,
 		else {
 			toolDefDBEImpl.setToolName(toolName);
 		}
+
+		toolDefDBEImpl.setCompositeStepDefDBEId(compositeStepDefDBEId);
 
 		toolDefDBEImpl.resetOriginalValues();
 
@@ -68,13 +110,33 @@ public class ToolDefDBECacheModel implements CacheModel<ToolDefDBE>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		toolDefDBEId = objectInput.readLong();
+		groupId = objectInput.readLong();
+		companyId = objectInput.readLong();
+		userId = objectInput.readLong();
+		userName = objectInput.readUTF();
+		createDate = objectInput.readLong();
+		modifiedDate = objectInput.readLong();
 		toolName = objectInput.readUTF();
+		compositeStepDefDBEId = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(toolDefDBEId);
+		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(companyId);
+		objectOutput.writeLong(userId);
+
+		if (userName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(userName);
+		}
+
+		objectOutput.writeLong(createDate);
+		objectOutput.writeLong(modifiedDate);
 
 		if (toolName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -82,8 +144,17 @@ public class ToolDefDBECacheModel implements CacheModel<ToolDefDBE>,
 		else {
 			objectOutput.writeUTF(toolName);
 		}
+
+		objectOutput.writeLong(compositeStepDefDBEId);
 	}
 
 	public long toolDefDBEId;
+	public long groupId;
+	public long companyId;
+	public long userId;
+	public String userName;
+	public long createDate;
+	public long modifiedDate;
 	public String toolName;
+	public long compositeStepDefDBEId;
 }

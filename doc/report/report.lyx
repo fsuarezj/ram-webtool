@@ -139,6 +139,16 @@ Components Design
 Components design describing the whole system and unvariable parts
 \end_layout
 
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/jsf_scheme.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Patterns used 
 \end_layout
@@ -175,6 +185,15 @@ Basic System Ram Steps
 Design
 \end_layout
 
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/ferda/informatica/development/liferay/portlets/tool-builder-portlet/doc/uml/exported/First Sprint Class Diagram.png
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Implementation
 \end_layout
@@ -193,6 +212,15 @@ Flowchart Package
 
 \begin_layout Subsubsection
 Design
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/ferda/informatica/development/liferay/portlets/tool-builder-portlet/doc/uml/exported/flowcharts Class Diagram.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -214,6 +242,15 @@ Simple Toolbuilder.
 
 \begin_layout Subsubsection
 Design
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/ferda/informatica/development/liferay/portlets/tool-builder-portlet/doc/uml/exported/Third Sprint Class Diagram.png
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection

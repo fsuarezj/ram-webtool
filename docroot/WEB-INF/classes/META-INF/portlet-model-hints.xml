@@ -1,6 +1,17 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="org.lrc.liferay.toolbuilder.model.CompositeStepDBE">
+		<field name="compositeStepDBEId" type="long" />
+		<field name="currentStep" type="int" />
+		<field name="compositeStepDefDBEId" type="long" />
+	</model>
+	<model name="org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE">
+		<field name="compositeStepDefDBEId" type="long" />
+		<field name="stepsNumber" type="int" />
+		<field name="sequential" type="boolean" />
+		<field name="depth" type="int" />
+	</model>
 	<model name="org.lrc.liferay.toolbuilder.model.InstalledStep">
 		<field name="stepType" type="String" />
 		<field name="groupId" type="long" />
@@ -20,7 +31,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="StepDefDBEId" type="long" />
+		<field name="StepType" type="String" />
 	</model>
 	<model name="org.lrc.liferay.toolbuilder.model.StepDefDBE">
 		<field name="stepDefDBEId" type="long" />
@@ -34,20 +45,25 @@
 	</model>
 	<model name="org.lrc.liferay.toolbuilder.model.ToolDefDBE">
 		<field name="toolDefDBEId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
 		<field name="toolName" type="String" />
+		<field name="compositeStepDefDBEId" type="long" />
 	</model>
 	<model name="org.lrc.liferay.toolbuilder.model.ToolInstanceDBE">
 		<field name="toolInstanceDBEId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
 		<field name="toolDefDBEId" type="long" />
-	</model>
-	<model name="org.lrc.liferay.toolbuilder.model.WrapperStepDBE">
-		<field name="wrapperStepDBEId" type="long" />
-		<field name="currentStep" type="int" />
-	</model>
-	<model name="org.lrc.liferay.toolbuilder.model.WrapperStepDefDBE">
-		<field name="wrapperStepDefDBEId" type="long" />
-		<field name="stepsNumber" type="int" />
-		<field name="sequential" type="boolean" />
-		<field name="depth" type="int" />
+		<field name="compositeStepDBEId" type="long" />
+		<field name="toolTitle" type="String" />
 	</model>
 </model-hints>

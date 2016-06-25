@@ -6,11 +6,11 @@
   <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_UBjPQB58Eea7eqst6uHYVQ"/>
   <packagedElement xmi:type="uml:InterfaceRealization" xmi:id="_UBoHwB58Eea7eqst6uHYVQ"/>
   <packagedElement xmi:type="uml:Package" xmi:id="_W9nyQB6REea7eqst6uHYVQ" name="steps">
-    <packagedElement xmi:type="uml:Package" xmi:id="_UBoHwR58Eea7eqst6uHYVQ" name="wrapper">
-      <packagedElement xmi:type="uml:Class" xmi:id="_2UfUAB58Eea7eqst6uHYVQ" name="WrapperStep">
+    <packagedElement xmi:type="uml:Package" xmi:id="_UBoHwR58Eea7eqst6uHYVQ" name="composite">
+      <packagedElement xmi:type="uml:Class" xmi:id="_2UfUAB58Eea7eqst6uHYVQ" name="CompositeStep">
         <generalization xmi:id="_kk8tgCirEeaLScfHGLgimA"/>
         <generalization xmi:id="_CEbGcCiwEeaLScfHGLgimA" general="_z805oCivEeaLScfHGLgimA"/>
-        <ownedAttribute xmi:id="_sm0_EB6AEea7eqst6uHYVQ" name="wrapperStepDef" visibility="private" type="_6CblYB58Eea7eqst6uHYVQ">
+        <ownedAttribute xmi:id="_sm0_EB6AEea7eqst6uHYVQ" name="compositeStepDef" visibility="private" type="_6CblYB58Eea7eqst6uHYVQ">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yzhK0B6AEea7eqst6uHYVQ" value="1"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_C8mQwB6NEea7eqst6uHYVQ" name="steps" visibility="private">
@@ -19,7 +19,7 @@
         </ownedAttribute>
         <interfaceRealization xmi:id="_FhN84B59Eea7eqst6uHYVQ" client="_2UfUAB58Eea7eqst6uHYVQ"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_6CblYB58Eea7eqst6uHYVQ" name="WrapperStepDef">
+      <packagedElement xmi:type="uml:Class" xmi:id="_6CblYB58Eea7eqst6uHYVQ" name="CompositeStepDef">
         <generalization xmi:id="_n6K84CirEeaLScfHGLgimA"/>
         <generalization xmi:id="_oOgRUCivEeaLScfHGLgimA" general="_1wEOUCiuEeaLScfHGLgimA"/>
         <ownedAttribute xmi:id="_DF5r0B6PEea7eqst6uHYVQ" name="stepDefs" visibility="private">
@@ -55,6 +55,26 @@
         <ownedEnd xmi:id="_2oVlAiisEeaLScfHGLgimA" name="wrapperStepDefBDEs" type="_jW2tQCisEeaLScfHGLgimA" association="_2oU98CisEeaLScfHGLgimA">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2oVlAyisEeaLScfHGLgimA"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2oVlBCisEeaLScfHGLgimA" value="*"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_Zk7kcC80EeaoPokH5u8NDw" memberEnd="_Zk8LgC80EeaoPokH5u8NDw _Zk9ZoC80EeaoPokH5u8NDw" navigableOwnedEnd="_Zk9ZoC80EeaoPokH5u8NDw">
+        <ownedEnd xmi:id="_Zk8LgC80EeaoPokH5u8NDw" name="compositeStepDefs" type="_6CblYB58Eea7eqst6uHYVQ" aggregation="composite" association="_Zk7kcC80EeaoPokH5u8NDw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Zk8ykC80EeaoPokH5u8NDw"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Zk8ykS80EeaoPokH5u8NDw" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_Zk9ZoC80EeaoPokH5u8NDw" name="stepDefs" type="_1wEOUCiuEeaLScfHGLgimA" association="_Zk7kcC80EeaoPokH5u8NDw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Zk9ZoS80EeaoPokH5u8NDw"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Zk-AsC80EeaoPokH5u8NDw" value="*"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_evbTYC80EeaoPokH5u8NDw" memberEnd="_evbTYS80EeaoPokH5u8NDw _evb6cC80EeaoPokH5u8NDw" navigableOwnedEnd="_evb6cC80EeaoPokH5u8NDw">
+        <ownedEnd xmi:id="_evbTYS80EeaoPokH5u8NDw" name="compositeSteps" type="_2UfUAB58Eea7eqst6uHYVQ" aggregation="composite" association="_evbTYC80EeaoPokH5u8NDw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_evbTYi80EeaoPokH5u8NDw"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_evbTYy80EeaoPokH5u8NDw" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_evb6cC80EeaoPokH5u8NDw" name="steps" type="_z805oCivEeaLScfHGLgimA" association="_evbTYC80EeaoPokH5u8NDw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_evb6cS80EeaoPokH5u8NDw"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_evb6ci80EeaoPokH5u8NDw" value="*"/>
         </ownedEnd>
       </packagedElement>
     </packagedElement>
@@ -147,16 +167,6 @@
       <ownedEnd xmi:id="_EXQEsSiwEeaLScfHGLgimA" name="stepDBEs" type="_hs20ICitEeaLScfHGLgimA" association="_EXPdoCiwEeaLScfHGLgimA">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EXQEsiiwEeaLScfHGLgimA"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EXQEsyiwEeaLScfHGLgimA" value="*"/>
-      </ownedEnd>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Association" xmi:id="_ImgTYCiwEeaLScfHGLgimA" name="defined_by" memberEnd="_ImgTYSiwEeaLScfHGLgimA _ImgTZCiwEeaLScfHGLgimA" navigableOwnedEnd="_ImgTZCiwEeaLScfHGLgimA">
-      <ownedEnd xmi:id="_ImgTYSiwEeaLScfHGLgimA" name="steps" type="_z805oCivEeaLScfHGLgimA" association="_ImgTYCiwEeaLScfHGLgimA">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ImgTYiiwEeaLScfHGLgimA"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ImgTYyiwEeaLScfHGLgimA" value="*"/>
-      </ownedEnd>
-      <ownedEnd xmi:id="_ImgTZCiwEeaLScfHGLgimA" name="stepDefs" type="_1wEOUCiuEeaLScfHGLgimA" association="_ImgTYCiwEeaLScfHGLgimA">
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ImgTZSiwEeaLScfHGLgimA" value="1"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Img6cCiwEeaLScfHGLgimA" value="1"/>
       </ownedEnd>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_FH2JQCiyEeaLScfHGLgimA" name="StepFactory"/>

@@ -236,6 +236,125 @@ public interface StepDefDBELocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addCompositeStepDefDBEStepDefDBE(long compositeStepDefDBEId,
+		long stepDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addCompositeStepDefDBEStepDefDBE(long compositeStepDefDBEId,
+		org.lrc.liferay.toolbuilder.model.StepDefDBE stepDefDBE)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addCompositeStepDefDBEStepDefDBEs(long compositeStepDefDBEId,
+		long[] stepDefDBEIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addCompositeStepDefDBEStepDefDBEs(long compositeStepDefDBEId,
+		java.util.List<org.lrc.liferay.toolbuilder.model.StepDefDBE> StepDefDBEs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void clearCompositeStepDefDBEStepDefDBEs(long compositeStepDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void deleteCompositeStepDefDBEStepDefDBE(
+		long compositeStepDefDBEId, long stepDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void deleteCompositeStepDefDBEStepDefDBE(
+		long compositeStepDefDBEId,
+		org.lrc.liferay.toolbuilder.model.StepDefDBE stepDefDBE)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void deleteCompositeStepDefDBEStepDefDBEs(
+		long compositeStepDefDBEId, long[] stepDefDBEIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void deleteCompositeStepDefDBEStepDefDBEs(
+		long compositeStepDefDBEId,
+		java.util.List<org.lrc.liferay.toolbuilder.model.StepDefDBE> StepDefDBEs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<org.lrc.liferay.toolbuilder.model.StepDefDBE> getCompositeStepDefDBEStepDefDBEs(
+		long compositeStepDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<org.lrc.liferay.toolbuilder.model.StepDefDBE> getCompositeStepDefDBEStepDefDBEs(
+		long compositeStepDefDBEId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<org.lrc.liferay.toolbuilder.model.StepDefDBE> getCompositeStepDefDBEStepDefDBEs(
+		long compositeStepDefDBEId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCompositeStepDefDBEStepDefDBEsCount(
+		long compositeStepDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasCompositeStepDefDBEStepDefDBE(
+		long compositeStepDefDBEId, long stepDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasCompositeStepDefDBEStepDefDBEs(long compositeStepDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void setCompositeStepDefDBEStepDefDBEs(long compositeStepDefDBEId,
+		long[] stepDefDBEIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean

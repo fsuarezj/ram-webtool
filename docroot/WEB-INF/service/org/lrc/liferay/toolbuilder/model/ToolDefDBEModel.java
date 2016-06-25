@@ -15,13 +15,17 @@
 package org.lrc.liferay.toolbuilder.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
+
+import java.util.Date;
 
 /**
  * The base model interface for the ToolDefDBE service. Represents a row in the &quot;lrc_tb_ToolDefDBE&quot; database table, with each column mapped to a property of this class.
@@ -36,7 +40,7 @@ import java.io.Serializable;
  * @see org.lrc.liferay.toolbuilder.model.impl.ToolDefDBEModelImpl
  * @generated
  */
-public interface ToolDefDBEModel extends BaseModel<ToolDefDBE> {
+public interface ToolDefDBEModel extends BaseModel<ToolDefDBE>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -72,6 +76,120 @@ public interface ToolDefDBEModel extends BaseModel<ToolDefDBE> {
 	public void setToolDefDBEId(long toolDefDBEId);
 
 	/**
+	 * Returns the group ID of this tool def d b e.
+	 *
+	 * @return the group ID of this tool def d b e
+	 */
+	@Override
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this tool def d b e.
+	 *
+	 * @param groupId the group ID of this tool def d b e
+	 */
+	@Override
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this tool def d b e.
+	 *
+	 * @return the company ID of this tool def d b e
+	 */
+	@Override
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this tool def d b e.
+	 *
+	 * @param companyId the company ID of this tool def d b e
+	 */
+	@Override
+	public void setCompanyId(long companyId);
+
+	/**
+	 * Returns the user ID of this tool def d b e.
+	 *
+	 * @return the user ID of this tool def d b e
+	 */
+	@Override
+	public long getUserId();
+
+	/**
+	 * Sets the user ID of this tool def d b e.
+	 *
+	 * @param userId the user ID of this tool def d b e
+	 */
+	@Override
+	public void setUserId(long userId);
+
+	/**
+	 * Returns the user uuid of this tool def d b e.
+	 *
+	 * @return the user uuid of this tool def d b e
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public String getUserUuid() throws SystemException;
+
+	/**
+	 * Sets the user uuid of this tool def d b e.
+	 *
+	 * @param userUuid the user uuid of this tool def d b e
+	 */
+	@Override
+	public void setUserUuid(String userUuid);
+
+	/**
+	 * Returns the user name of this tool def d b e.
+	 *
+	 * @return the user name of this tool def d b e
+	 */
+	@AutoEscape
+	@Override
+	public String getUserName();
+
+	/**
+	 * Sets the user name of this tool def d b e.
+	 *
+	 * @param userName the user name of this tool def d b e
+	 */
+	@Override
+	public void setUserName(String userName);
+
+	/**
+	 * Returns the create date of this tool def d b e.
+	 *
+	 * @return the create date of this tool def d b e
+	 */
+	@Override
+	public Date getCreateDate();
+
+	/**
+	 * Sets the create date of this tool def d b e.
+	 *
+	 * @param createDate the create date of this tool def d b e
+	 */
+	@Override
+	public void setCreateDate(Date createDate);
+
+	/**
+	 * Returns the modified date of this tool def d b e.
+	 *
+	 * @return the modified date of this tool def d b e
+	 */
+	@Override
+	public Date getModifiedDate();
+
+	/**
+	 * Sets the modified date of this tool def d b e.
+	 *
+	 * @param modifiedDate the modified date of this tool def d b e
+	 */
+	@Override
+	public void setModifiedDate(Date modifiedDate);
+
+	/**
 	 * Returns the tool name of this tool def d b e.
 	 *
 	 * @return the tool name of this tool def d b e
@@ -85,6 +203,20 @@ public interface ToolDefDBEModel extends BaseModel<ToolDefDBE> {
 	 * @param toolName the tool name of this tool def d b e
 	 */
 	public void setToolName(String toolName);
+
+	/**
+	 * Returns the composite step def d b e ID of this tool def d b e.
+	 *
+	 * @return the composite step def d b e ID of this tool def d b e
+	 */
+	public long getCompositeStepDefDBEId();
+
+	/**
+	 * Sets the composite step def d b e ID of this tool def d b e.
+	 *
+	 * @param compositeStepDefDBEId the composite step def d b e ID of this tool def d b e
+	 */
+	public void setCompositeStepDefDBEId(long compositeStepDefDBEId);
 
 	@Override
 	public boolean isNew();

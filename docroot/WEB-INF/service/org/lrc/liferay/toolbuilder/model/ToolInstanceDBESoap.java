@@ -17,6 +17,7 @@ package org.lrc.liferay.toolbuilder.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,7 +32,15 @@ public class ToolInstanceDBESoap implements Serializable {
 		ToolInstanceDBESoap soapModel = new ToolInstanceDBESoap();
 
 		soapModel.setToolInstanceDBEId(model.getToolInstanceDBEId());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setUserId(model.getUserId());
+		soapModel.setUserName(model.getUserName());
+		soapModel.setCreateDate(model.getCreateDate());
+		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setToolDefDBEId(model.getToolDefDBEId());
+		soapModel.setCompositeStepDBEId(model.getCompositeStepDBEId());
+		soapModel.setToolTitle(model.getToolTitle());
 
 		return soapModel;
 	}
@@ -94,6 +103,54 @@ public class ToolInstanceDBESoap implements Serializable {
 		_toolInstanceDBEId = toolInstanceDBEId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public long getUserId() {
+		return _userId;
+	}
+
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
+	public String getUserName() {
+		return _userName;
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
 	public long getToolDefDBEId() {
 		return _toolDefDBEId;
 	}
@@ -102,6 +159,30 @@ public class ToolInstanceDBESoap implements Serializable {
 		_toolDefDBEId = toolDefDBEId;
 	}
 
+	public long getCompositeStepDBEId() {
+		return _compositeStepDBEId;
+	}
+
+	public void setCompositeStepDBEId(long compositeStepDBEId) {
+		_compositeStepDBEId = compositeStepDBEId;
+	}
+
+	public String getToolTitle() {
+		return _toolTitle;
+	}
+
+	public void setToolTitle(String toolTitle) {
+		_toolTitle = toolTitle;
+	}
+
 	private long _toolInstanceDBEId;
+	private long _groupId;
+	private long _companyId;
+	private long _userId;
+	private String _userName;
+	private Date _createDate;
+	private Date _modifiedDate;
 	private long _toolDefDBEId;
+	private long _compositeStepDBEId;
+	private String _toolTitle;
 }

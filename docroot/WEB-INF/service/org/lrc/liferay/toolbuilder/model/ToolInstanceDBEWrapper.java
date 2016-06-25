@@ -17,6 +17,7 @@ package org.lrc.liferay.toolbuilder.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +51,15 @@ public class ToolInstanceDBEWrapper implements ToolInstanceDBE,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("toolInstanceDBEId", getToolInstanceDBEId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("userId", getUserId());
+		attributes.put("userName", getUserName());
+		attributes.put("createDate", getCreateDate());
+		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("toolDefDBEId", getToolDefDBEId());
+		attributes.put("compositeStepDBEId", getCompositeStepDBEId());
+		attributes.put("toolTitle", getToolTitle());
 
 		return attributes;
 	}
@@ -63,10 +72,58 @@ public class ToolInstanceDBEWrapper implements ToolInstanceDBE,
 			setToolInstanceDBEId(toolInstanceDBEId);
 		}
 
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Long userId = (Long)attributes.get("userId");
+
+		if (userId != null) {
+			setUserId(userId);
+		}
+
+		String userName = (String)attributes.get("userName");
+
+		if (userName != null) {
+			setUserName(userName);
+		}
+
+		Date createDate = (Date)attributes.get("createDate");
+
+		if (createDate != null) {
+			setCreateDate(createDate);
+		}
+
+		Date modifiedDate = (Date)attributes.get("modifiedDate");
+
+		if (modifiedDate != null) {
+			setModifiedDate(modifiedDate);
+		}
+
 		Long toolDefDBEId = (Long)attributes.get("toolDefDBEId");
 
 		if (toolDefDBEId != null) {
 			setToolDefDBEId(toolDefDBEId);
+		}
+
+		Long compositeStepDBEId = (Long)attributes.get("compositeStepDBEId");
+
+		if (compositeStepDBEId != null) {
+			setCompositeStepDBEId(compositeStepDBEId);
+		}
+
+		String toolTitle = (String)attributes.get("toolTitle");
+
+		if (toolTitle != null) {
+			setToolTitle(toolTitle);
 		}
 	}
 
@@ -111,6 +168,148 @@ public class ToolInstanceDBEWrapper implements ToolInstanceDBE,
 	}
 
 	/**
+	* Returns the group ID of this tool instance d b e.
+	*
+	* @return the group ID of this tool instance d b e
+	*/
+	@Override
+	public long getGroupId() {
+		return _toolInstanceDBE.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this tool instance d b e.
+	*
+	* @param groupId the group ID of this tool instance d b e
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_toolInstanceDBE.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this tool instance d b e.
+	*
+	* @return the company ID of this tool instance d b e
+	*/
+	@Override
+	public long getCompanyId() {
+		return _toolInstanceDBE.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this tool instance d b e.
+	*
+	* @param companyId the company ID of this tool instance d b e
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_toolInstanceDBE.setCompanyId(companyId);
+	}
+
+	/**
+	* Returns the user ID of this tool instance d b e.
+	*
+	* @return the user ID of this tool instance d b e
+	*/
+	@Override
+	public long getUserId() {
+		return _toolInstanceDBE.getUserId();
+	}
+
+	/**
+	* Sets the user ID of this tool instance d b e.
+	*
+	* @param userId the user ID of this tool instance d b e
+	*/
+	@Override
+	public void setUserId(long userId) {
+		_toolInstanceDBE.setUserId(userId);
+	}
+
+	/**
+	* Returns the user uuid of this tool instance d b e.
+	*
+	* @return the user uuid of this tool instance d b e
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _toolInstanceDBE.getUserUuid();
+	}
+
+	/**
+	* Sets the user uuid of this tool instance d b e.
+	*
+	* @param userUuid the user uuid of this tool instance d b e
+	*/
+	@Override
+	public void setUserUuid(java.lang.String userUuid) {
+		_toolInstanceDBE.setUserUuid(userUuid);
+	}
+
+	/**
+	* Returns the user name of this tool instance d b e.
+	*
+	* @return the user name of this tool instance d b e
+	*/
+	@Override
+	public java.lang.String getUserName() {
+		return _toolInstanceDBE.getUserName();
+	}
+
+	/**
+	* Sets the user name of this tool instance d b e.
+	*
+	* @param userName the user name of this tool instance d b e
+	*/
+	@Override
+	public void setUserName(java.lang.String userName) {
+		_toolInstanceDBE.setUserName(userName);
+	}
+
+	/**
+	* Returns the create date of this tool instance d b e.
+	*
+	* @return the create date of this tool instance d b e
+	*/
+	@Override
+	public java.util.Date getCreateDate() {
+		return _toolInstanceDBE.getCreateDate();
+	}
+
+	/**
+	* Sets the create date of this tool instance d b e.
+	*
+	* @param createDate the create date of this tool instance d b e
+	*/
+	@Override
+	public void setCreateDate(java.util.Date createDate) {
+		_toolInstanceDBE.setCreateDate(createDate);
+	}
+
+	/**
+	* Returns the modified date of this tool instance d b e.
+	*
+	* @return the modified date of this tool instance d b e
+	*/
+	@Override
+	public java.util.Date getModifiedDate() {
+		return _toolInstanceDBE.getModifiedDate();
+	}
+
+	/**
+	* Sets the modified date of this tool instance d b e.
+	*
+	* @param modifiedDate the modified date of this tool instance d b e
+	*/
+	@Override
+	public void setModifiedDate(java.util.Date modifiedDate) {
+		_toolInstanceDBE.setModifiedDate(modifiedDate);
+	}
+
+	/**
 	* Returns the tool def d b e ID of this tool instance d b e.
 	*
 	* @return the tool def d b e ID of this tool instance d b e
@@ -128,6 +327,46 @@ public class ToolInstanceDBEWrapper implements ToolInstanceDBE,
 	@Override
 	public void setToolDefDBEId(long toolDefDBEId) {
 		_toolInstanceDBE.setToolDefDBEId(toolDefDBEId);
+	}
+
+	/**
+	* Returns the composite step d b e ID of this tool instance d b e.
+	*
+	* @return the composite step d b e ID of this tool instance d b e
+	*/
+	@Override
+	public long getCompositeStepDBEId() {
+		return _toolInstanceDBE.getCompositeStepDBEId();
+	}
+
+	/**
+	* Sets the composite step d b e ID of this tool instance d b e.
+	*
+	* @param compositeStepDBEId the composite step d b e ID of this tool instance d b e
+	*/
+	@Override
+	public void setCompositeStepDBEId(long compositeStepDBEId) {
+		_toolInstanceDBE.setCompositeStepDBEId(compositeStepDBEId);
+	}
+
+	/**
+	* Returns the tool title of this tool instance d b e.
+	*
+	* @return the tool title of this tool instance d b e
+	*/
+	@Override
+	public java.lang.String getToolTitle() {
+		return _toolInstanceDBE.getToolTitle();
+	}
+
+	/**
+	* Sets the tool title of this tool instance d b e.
+	*
+	* @param toolTitle the tool title of this tool instance d b e
+	*/
+	@Override
+	public void setToolTitle(java.lang.String toolTitle) {
+		_toolInstanceDBE.setToolTitle(toolTitle);
 	}
 
 	@Override

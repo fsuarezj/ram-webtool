@@ -434,19 +434,9 @@ public class ToolDefDBEPersistenceImpl extends BasePersistenceImpl<ToolDefDBE>
 	}
 
 	private static final String _FINDER_COLUMN_TOOLDEFDBEID_TOOLDEFDBEID_2 = "toolDefDBE.toolDefDBEId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_TOOLNAME = new FinderPath(ToolDefDBEModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_TOOLNAME = new FinderPath(ToolDefDBEModelImpl.ENTITY_CACHE_ENABLED,
 			ToolDefDBEModelImpl.FINDER_CACHE_ENABLED, ToolDefDBEImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByToolName",
-			new String[] {
-				String.class.getName(),
-				
-			Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLNAME =
-		new FinderPath(ToolDefDBEModelImpl.ENTITY_CACHE_ENABLED,
-			ToolDefDBEModelImpl.FINDER_CACHE_ENABLED, ToolDefDBEImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByToolName",
+			FINDER_CLASS_NAME_ENTITY, "fetchByToolName",
 			new String[] { String.class.getName() },
 			ToolDefDBEModelImpl.TOOLNAME_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_TOOLNAME = new FinderPath(ToolDefDBEModelImpl.ENTITY_CACHE_ENABLED,
@@ -455,93 +445,81 @@ public class ToolDefDBEPersistenceImpl extends BasePersistenceImpl<ToolDefDBE>
 			new String[] { String.class.getName() });
 
 	/**
-	 * Returns all the tool def d b es where toolName = &#63;.
+	 * Returns the tool def d b e where toolName = &#63; or throws a {@link org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException} if it could not be found.
 	 *
 	 * @param toolName the tool name
-	 * @return the matching tool def d b es
+	 * @return the matching tool def d b e
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException if a matching tool def d b e could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ToolDefDBE> findByToolName(String toolName)
-		throws SystemException {
-		return findByToolName(toolName, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+	public ToolDefDBE findByToolName(String toolName)
+		throws NoSuchToolDefDBEException, SystemException {
+		ToolDefDBE toolDefDBE = fetchByToolName(toolName);
+
+		if (toolDefDBE == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("toolName=");
+			msg.append(toolName);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchToolDefDBEException(msg.toString());
+		}
+
+		return toolDefDBE;
 	}
 
 	/**
-	 * Returns a range of all the tool def d b es where toolName = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.lrc.liferay.toolbuilder.model.impl.ToolDefDBEModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
+	 * Returns the tool def d b e where toolName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param toolName the tool name
-	 * @param start the lower bound of the range of tool def d b es
-	 * @param end the upper bound of the range of tool def d b es (not inclusive)
-	 * @return the range of matching tool def d b es
+	 * @return the matching tool def d b e, or <code>null</code> if a matching tool def d b e could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ToolDefDBE> findByToolName(String toolName, int start, int end)
+	public ToolDefDBE fetchByToolName(String toolName)
 		throws SystemException {
-		return findByToolName(toolName, start, end, null);
+		return fetchByToolName(toolName, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the tool def d b es where toolName = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link org.lrc.liferay.toolbuilder.model.impl.ToolDefDBEModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
+	 * Returns the tool def d b e where toolName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param toolName the tool name
-	 * @param start the lower bound of the range of tool def d b es
-	 * @param end the upper bound of the range of tool def d b es (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching tool def d b es
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching tool def d b e, or <code>null</code> if a matching tool def d b e could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ToolDefDBE> findByToolName(String toolName, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
+	public ToolDefDBE fetchByToolName(String toolName, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { toolName };
 
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-				(orderByComparator == null)) {
-			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLNAME;
-			finderArgs = new Object[] { toolName };
-		}
-		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_TOOLNAME;
-			finderArgs = new Object[] { toolName, start, end, orderByComparator };
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_TOOLNAME,
+					finderArgs, this);
 		}
 
-		List<ToolDefDBE> list = (List<ToolDefDBE>)FinderCacheUtil.getResult(finderPath,
-				finderArgs, this);
+		if (result instanceof ToolDefDBE) {
+			ToolDefDBE toolDefDBE = (ToolDefDBE)result;
 
-		if ((list != null) && !list.isEmpty()) {
-			for (ToolDefDBE toolDefDBE : list) {
-				if (!Validator.equals(toolName, toolDefDBE.getToolName())) {
-					list = null;
-
-					break;
-				}
+			if (!Validator.equals(toolName, toolDefDBE.getToolName())) {
+				result = null;
 			}
 		}
 
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_SELECT_TOOLDEFDBE_WHERE);
 
@@ -559,15 +537,6 @@ public class ToolDefDBEPersistenceImpl extends BasePersistenceImpl<ToolDefDBE>
 				query.append(_FINDER_COLUMN_TOOLNAME_TOOLNAME_2);
 			}
 
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-			else
-			 if (pagination) {
-				query.append(ToolDefDBEModelImpl.ORDER_BY_JPQL);
-			}
-
 			String sql = query.toString();
 
 			Session session = null;
@@ -583,25 +552,36 @@ public class ToolDefDBEPersistenceImpl extends BasePersistenceImpl<ToolDefDBE>
 					qPos.add(toolName);
 				}
 
-				if (!pagination) {
-					list = (List<ToolDefDBE>)QueryUtil.list(q, getDialect(),
-							start, end, false);
+				List<ToolDefDBE> list = q.list();
 
-					Collections.sort(list);
-
-					list = new UnmodifiableList<ToolDefDBE>(list);
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_TOOLNAME,
+						finderArgs, list);
 				}
 				else {
-					list = (List<ToolDefDBE>)QueryUtil.list(q, getDialect(),
-							start, end);
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"ToolDefDBEPersistenceImpl.fetchByToolName(String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					ToolDefDBE toolDefDBE = list.get(0);
+
+					result = toolDefDBE;
+
+					cacheResult(toolDefDBE);
+
+					if ((toolDefDBE.getToolName() == null) ||
+							!toolDefDBE.getToolName().equals(toolName)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_TOOLNAME,
+							finderArgs, toolDefDBE);
+					}
 				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(finderPath, finderArgs, list);
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(finderPath, finderArgs);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_TOOLNAME,
+					finderArgs);
 
 				throw processException(e);
 			}
@@ -610,291 +590,27 @@ public class ToolDefDBEPersistenceImpl extends BasePersistenceImpl<ToolDefDBE>
 			}
 		}
 
-		return list;
-	}
-
-	/**
-	 * Returns the first tool def d b e in the ordered set where toolName = &#63;.
-	 *
-	 * @param toolName the tool name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching tool def d b e
-	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException if a matching tool def d b e could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ToolDefDBE findByToolName_First(String toolName,
-		OrderByComparator orderByComparator)
-		throws NoSuchToolDefDBEException, SystemException {
-		ToolDefDBE toolDefDBE = fetchByToolName_First(toolName,
-				orderByComparator);
-
-		if (toolDefDBE != null) {
-			return toolDefDBE;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("toolName=");
-		msg.append(toolName);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchToolDefDBEException(msg.toString());
-	}
-
-	/**
-	 * Returns the first tool def d b e in the ordered set where toolName = &#63;.
-	 *
-	 * @param toolName the tool name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching tool def d b e, or <code>null</code> if a matching tool def d b e could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ToolDefDBE fetchByToolName_First(String toolName,
-		OrderByComparator orderByComparator) throws SystemException {
-		List<ToolDefDBE> list = findByToolName(toolName, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last tool def d b e in the ordered set where toolName = &#63;.
-	 *
-	 * @param toolName the tool name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching tool def d b e
-	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException if a matching tool def d b e could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ToolDefDBE findByToolName_Last(String toolName,
-		OrderByComparator orderByComparator)
-		throws NoSuchToolDefDBEException, SystemException {
-		ToolDefDBE toolDefDBE = fetchByToolName_Last(toolName, orderByComparator);
-
-		if (toolDefDBE != null) {
-			return toolDefDBE;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("toolName=");
-		msg.append(toolName);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchToolDefDBEException(msg.toString());
-	}
-
-	/**
-	 * Returns the last tool def d b e in the ordered set where toolName = &#63;.
-	 *
-	 * @param toolName the tool name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching tool def d b e, or <code>null</code> if a matching tool def d b e could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ToolDefDBE fetchByToolName_Last(String toolName,
-		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByToolName(toolName);
-
-		if (count == 0) {
+		if (result instanceof List<?>) {
 			return null;
 		}
-
-		List<ToolDefDBE> list = findByToolName(toolName, count - 1, count,
-				orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
+		else {
+			return (ToolDefDBE)result;
 		}
-
-		return null;
 	}
 
 	/**
-	 * Returns the tool def d b es before and after the current tool def d b e in the ordered set where toolName = &#63;.
+	 * Removes the tool def d b e where toolName = &#63; from the database.
 	 *
-	 * @param toolDefDBEId the primary key of the current tool def d b e
 	 * @param toolName the tool name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next tool def d b e
-	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException if a tool def d b e with the primary key could not be found
+	 * @return the tool def d b e that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ToolDefDBE[] findByToolName_PrevAndNext(long toolDefDBEId,
-		String toolName, OrderByComparator orderByComparator)
+	public ToolDefDBE removeByToolName(String toolName)
 		throws NoSuchToolDefDBEException, SystemException {
-		ToolDefDBE toolDefDBE = findByPrimaryKey(toolDefDBEId);
+		ToolDefDBE toolDefDBE = findByToolName(toolName);
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			ToolDefDBE[] array = new ToolDefDBEImpl[3];
-
-			array[0] = getByToolName_PrevAndNext(session, toolDefDBE, toolName,
-					orderByComparator, true);
-
-			array[1] = toolDefDBE;
-
-			array[2] = getByToolName_PrevAndNext(session, toolDefDBE, toolName,
-					orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected ToolDefDBE getByToolName_PrevAndNext(Session session,
-		ToolDefDBE toolDefDBE, String toolName,
-		OrderByComparator orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_TOOLDEFDBE_WHERE);
-
-		boolean bindToolName = false;
-
-		if (toolName == null) {
-			query.append(_FINDER_COLUMN_TOOLNAME_TOOLNAME_1);
-		}
-		else if (toolName.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_TOOLNAME_TOOLNAME_3);
-		}
-		else {
-			bindToolName = true;
-
-			query.append(_FINDER_COLUMN_TOOLNAME_TOOLNAME_2);
-		}
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(ToolDefDBEModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		if (bindToolName) {
-			qPos.add(toolName);
-		}
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByConditionValues(toolDefDBE);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<ToolDefDBE> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the tool def d b es where toolName = &#63; from the database.
-	 *
-	 * @param toolName the tool name
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public void removeByToolName(String toolName) throws SystemException {
-		for (ToolDefDBE toolDefDBE : findByToolName(toolName,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
-			remove(toolDefDBE);
-		}
+		return remove(toolDefDBE);
 	}
 
 	/**
@@ -982,6 +698,9 @@ public class ToolDefDBEPersistenceImpl extends BasePersistenceImpl<ToolDefDBE>
 		EntityCacheUtil.putResult(ToolDefDBEModelImpl.ENTITY_CACHE_ENABLED,
 			ToolDefDBEImpl.class, toolDefDBE.getPrimaryKey(), toolDefDBE);
 
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_TOOLNAME,
+			new Object[] { toolDefDBE.getToolName() }, toolDefDBE);
+
 		toolDefDBE.resetOriginalValues();
 	}
 
@@ -1038,6 +757,8 @@ public class ToolDefDBEPersistenceImpl extends BasePersistenceImpl<ToolDefDBE>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(toolDefDBE);
 	}
 
 	@Override
@@ -1048,6 +769,49 @@ public class ToolDefDBEPersistenceImpl extends BasePersistenceImpl<ToolDefDBE>
 		for (ToolDefDBE toolDefDBE : toolDefDBEs) {
 			EntityCacheUtil.removeResult(ToolDefDBEModelImpl.ENTITY_CACHE_ENABLED,
 				ToolDefDBEImpl.class, toolDefDBE.getPrimaryKey());
+
+			clearUniqueFindersCache(toolDefDBE);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(ToolDefDBE toolDefDBE) {
+		if (toolDefDBE.isNew()) {
+			Object[] args = new Object[] { toolDefDBE.getToolName() };
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TOOLNAME, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_TOOLNAME, args,
+				toolDefDBE);
+		}
+		else {
+			ToolDefDBEModelImpl toolDefDBEModelImpl = (ToolDefDBEModelImpl)toolDefDBE;
+
+			if ((toolDefDBEModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_TOOLNAME.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { toolDefDBE.getToolName() };
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TOOLNAME, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_TOOLNAME, args,
+					toolDefDBE);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(ToolDefDBE toolDefDBE) {
+		ToolDefDBEModelImpl toolDefDBEModelImpl = (ToolDefDBEModelImpl)toolDefDBE;
+
+		Object[] args = new Object[] { toolDefDBE.getToolName() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_TOOLNAME, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_TOOLNAME, args);
+
+		if ((toolDefDBEModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_TOOLNAME.getColumnBitmask()) != 0) {
+			args = new Object[] { toolDefDBEModelImpl.getOriginalToolName() };
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_TOOLNAME, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_TOOLNAME, args);
 		}
 	}
 
@@ -1211,27 +975,13 @@ public class ToolDefDBEPersistenceImpl extends BasePersistenceImpl<ToolDefDBE>
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLDEFDBEID,
 					args);
 			}
-
-			if ((toolDefDBEModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLNAME.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						toolDefDBEModelImpl.getOriginalToolName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_TOOLNAME, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLNAME,
-					args);
-
-				args = new Object[] { toolDefDBEModelImpl.getToolName() };
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_TOOLNAME, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TOOLNAME,
-					args);
-			}
 		}
 
 		EntityCacheUtil.putResult(ToolDefDBEModelImpl.ENTITY_CACHE_ENABLED,
 			ToolDefDBEImpl.class, toolDefDBE.getPrimaryKey(), toolDefDBE);
+
+		clearUniqueFindersCache(toolDefDBE);
+		cacheUniqueFindersCache(toolDefDBE);
 
 		return toolDefDBE;
 	}
@@ -1247,7 +997,14 @@ public class ToolDefDBEPersistenceImpl extends BasePersistenceImpl<ToolDefDBE>
 		toolDefDBEImpl.setPrimaryKey(toolDefDBE.getPrimaryKey());
 
 		toolDefDBEImpl.setToolDefDBEId(toolDefDBE.getToolDefDBEId());
+		toolDefDBEImpl.setGroupId(toolDefDBE.getGroupId());
+		toolDefDBEImpl.setCompanyId(toolDefDBE.getCompanyId());
+		toolDefDBEImpl.setUserId(toolDefDBE.getUserId());
+		toolDefDBEImpl.setUserName(toolDefDBE.getUserName());
+		toolDefDBEImpl.setCreateDate(toolDefDBE.getCreateDate());
+		toolDefDBEImpl.setModifiedDate(toolDefDBE.getModifiedDate());
 		toolDefDBEImpl.setToolName(toolDefDBE.getToolName());
+		toolDefDBEImpl.setCompositeStepDefDBEId(toolDefDBE.getCompositeStepDefDBEId());
 
 		return toolDefDBEImpl;
 	}

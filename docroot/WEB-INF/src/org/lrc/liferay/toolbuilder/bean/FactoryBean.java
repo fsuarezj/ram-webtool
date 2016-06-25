@@ -5,11 +5,13 @@ import javax.faces.bean.ManagedBean;
 
 import org.lrc.liferay.toolbuilder.StepFactory;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 @ManagedBean(eager = true)
 @ApplicationScoped
 public class FactoryBean extends AbstractBaseBean {
 
-	public FactoryBean() {
+	public FactoryBean() throws SystemException {
 		new StepFactory();
 	}
 

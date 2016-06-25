@@ -14,6 +14,8 @@
 
 package org.lrc.liferay.toolbuilder.model;
 
+import com.liferay.portal.model.PersistedModel;
+
 /**
  * The extended model interface for the ToolDefDBE service. Represents a row in the &quot;lrc_tb_ToolDefDBE&quot; database table, with each column mapped to a property of this class.
  *
@@ -23,7 +25,7 @@ package org.lrc.liferay.toolbuilder.model;
  * @see org.lrc.liferay.toolbuilder.model.impl.ToolDefDBEModelImpl
  * @generated
  */
-public interface ToolDefDBE extends ToolDefDBEModel {
+public interface ToolDefDBE extends ToolDefDBEModel, PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
