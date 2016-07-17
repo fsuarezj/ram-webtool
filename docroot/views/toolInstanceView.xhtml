@@ -6,38 +6,39 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html" 
     xmlns:ui="http://java.sun.com/jsf/facelets">
+<!-- 	xmlns:liferay-ui="http://liferay.com/faces/ui" -->
     
     <h:head />
     <h:body>
-	    <h:message globalOnly="true" layout="table" />
+	    <h:messages id="errorMessage" globalOnly="true" /> <!-- layout="table" /> -->
 	    <h:form id="toolInstanceForm">
 	    <c:choose>
 	    	<c:when test="#{toolSession.configuringInstance}">
 	    		<h3><h:outputText value="#{i18n['new-ram']}" /></h3>
-	    		<ui:include src="/views/editInstanceForm.xhtml" />
+	    		<ui:include src="/views/editToolInstanceForm.xhtml" />
 	    	</c:when>
 	    	<c:otherwise>
-    			<h:outputLabel class="instance-name"><h:outputText value="#{i18n['ram-name']}: #{toolSession.selectedToolInstance.name}" /></h:outputLabel>
+    			<h:outputLabel class="instance-name"><h:outputText value="#{i18n['ram-name']}: #{toolSession.selectedToolInstance.toolTitle}" /></h:outputLabel>
 	    		<h:outputLabel id="toolInstanceContent">
 	    			<c:choose>
-	    				<c:when test="#{instanceBacking.getStep() == 1}">
+	    				<c:when test="#{toolInstanceBacking.getStep() == 1}">
 	    					<ui:include src="/views/ramSteps/ramStep1.xhtml" />
 	    				</c:when>
-	    				<c:when test="#{instanceBacking.getStep() == 2}">
+	    				<c:when test="#{toolInstanceBacking.getStep() == 2}">
 	    					<ui:include src="/views/ramSteps/ramStep2.xhtml" />
 	    				</c:when>
-	    				<c:when test="#{instanceBacking.getStep() == 3}">
+	    				<c:when test="#{toolInstanceBacking.getStep() == 3}">
 	    					<ui:include src="/views/ramSteps/ramStep3.xhtml" />
 	    				</c:when>
-	    				<c:when test="#{instanceBacking.getStep() == 4}">
+	    				<c:when test="#{toolInstanceBacking.getStep() == 4}">
 	    					<ui:include src="/views/ramSteps/ramStep4.xhtml" />
 	    				</c:when>
-	    				<c:when test="#{instanceBacking.getStep() == 5}">
+	    				<c:when test="#{toolInstanceBacking.getStep() == 5}">
 	    					<ui:include src="/views/ramSteps/ramStep5.xhtml" />
 	    				</c:when>
 	    			</c:choose>
 				</h:outputLabel>
-	    		<h:commandButton id="stepForwardButton" action="#{instanceBacking.stepForward}" value="#{i18n['step-forward']}">
+	    		<h:commandButton id="stepForwardButton" action="#{toolInstanceBacking.stepForward}" value="#{i18n['step-forward']}">
 	    			<f:ajax render="toolInstanceContent" />
 	    		</h:commandButton>
 	    	</c:otherwise>

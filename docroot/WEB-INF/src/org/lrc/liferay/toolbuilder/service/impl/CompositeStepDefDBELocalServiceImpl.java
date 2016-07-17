@@ -14,7 +14,13 @@
 
 package org.lrc.liferay.toolbuilder.service.impl;
 
+import org.lrc.liferay.toolbuilder.CompositeStepDefDBEException;
+import org.lrc.liferay.toolbuilder.NoSuchCompositeStepDefDBEException;
+import org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE;
 import org.lrc.liferay.toolbuilder.service.base.CompositeStepDefDBELocalServiceBaseImpl;
+import org.lrc.liferay.toolbuilder.service.persistence.CompositeStepDefDBEUtil;
+
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the composite step def d b e local service.
@@ -37,4 +43,39 @@ public class CompositeStepDefDBELocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link org.lrc.liferay.toolbuilder.service.CompositeStepDefDBELocalServiceUtil} to access the composite step def d b e local service.
 	 */
+	public CompositeStepDefDBE getCompositeStepDefDBE(long compositeStepDefDBEId) throws SystemException, NoSuchCompositeStepDefDBEException {
+		return compositeStepDefDBEPersistence.findByPrimaryKey(compositeStepDefDBEId);
+	}
+	
+	private void validate(int depth) throws CompositeStepDefDBEException {
+		if (depth < 0) {
+			throw new CompositeStepDefDBEException();
+		}
+	}
+	
+	public CompositeStepDefDBE addCompositeStepDefDBE(boolean sequential, int depth) throws CompositeStepDefDBEException, SystemException {
+
+		validate(depth);
+		
+		long compositeStepDefDBEId = counterLocalService.increment(CompositeStepDefDBE.class.getName());
+		System.out.println("Creating CompositeStepDef with ID " + compositeStepDefDBEId);
+		CompositeStepDefDBE compositeStepDefDBE = CompositeStepDefDBEUtil.create(compositeStepDefDBEId);
+
+		compositeStepDefDBE.setSequential(sequential);
+		compositeStepDefDBE.setDepth(depth);
+		compositeStepDefDBE.setStepsNumber(0);
+		
+		// TODO Decidir si grabo cuando construyo o no, en ese caso tendría que borrar cuando cancelo
+//		stepDefDBEPersistence.update(stepDefDBE);
+		
+		return compositeStepDefDBE;
+	}
+	
+//	@Override
+//	public CompositeStepDefDBE addCompositeStepDefDBE(CompositeStepDefDBE compositeStepDefDBE) throws SystemException {
+//		long compositeStepDefDBEId = counterLocalService.increment(CompositeStepDefDBE.class.getName());
+//		compositeStepDefDBE.setCompositeStepDefDBEId(compositeStepDefDBEId);
+//		
+//		return super.addCompositeStepDefDBE(compositeStepDefDBE);
+//	}
 }

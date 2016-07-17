@@ -20,5 +20,10 @@ abstract class AbstractBaseBean {
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		liferayFacesContext.addGlobalUnexpectedErrorMessage();
 	}
+	
+	public void addGlobalErrorMessage(String errorMessage) {
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		liferayFacesContext.addGlobalErrorMessage(errorMessage);
+	}
 
 }

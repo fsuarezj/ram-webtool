@@ -1,10 +1,13 @@
 package org.lrc.liferay.toolbuilder.steps;
 
+import org.lrc.liferay.toolbuilder.NoSuchInstalledStepException;
+import org.lrc.liferay.toolbuilder.StepDBEException;
+import org.lrc.liferay.toolbuilder.StepDefDBEException;
 import org.lrc.liferay.toolbuilder.model.StepDBE;
 import org.lrc.liferay.toolbuilder.service.StepDBELocalServiceUtil;
-import org.lrc.liferay.toolbuilder.service.persistence.StepDBEUtil;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
@@ -12,15 +15,11 @@ public abstract class Step {
 	
 	protected StepDBE stepDBE;
 	
-	public Step(String StepType) {
-
-		stepDBE = StepDBEUtil.create(0L);
+	public Step(String stepType) throws NoSuchUserException, NoSuchInstalledStepException, StepDBEException, StepDefDBEException, SystemException {
 
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		stepDBE.setGroupId(liferayFacesContext.getScopeGroupId());
-		stepDBE.setCompanyId(liferayFacesContext.getCompanyId());
-		stepDBE.setUserId(liferayFacesContext.getUserId());
-		stepDBE.setStepType(StepType);
+		System.out.println("Creating step of type " + stepType);
+		this.stepDBE = StepDBELocalServiceUtil.addStepDBE(stepType, liferayFacesContext);
 	}
 	
 	public Step(StepDBE stepDBE) {
@@ -40,5 +39,17 @@ public abstract class Step {
 
 	public void delete() throws PortalException, SystemException {
 		StepDBELocalServiceUtil.deleteStepDBE(this.stepDBE.getStepDBEId());
+	}
+	
+	public long getStepDBEId() {
+		return this.stepDBE.getStepDBEId();
+	}
+	
+	public StepDBE getStepDBE() {
+		return this.stepDBE;
+	}
+	
+	public void setStepTypeId(long stepTypeId) {
+		this.stepDBE.setStepTypeId(stepTypeId);
 	}
 }

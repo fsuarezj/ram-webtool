@@ -113,6 +113,27 @@ public class ToolDefDBELocalServiceClpInvoker {
 		_methodName71 = "setBeanIdentifier";
 
 		_methodParameterTypes71 = new String[] { "java.lang.String" };
+
+		_methodName76 = "getToolDefDBE";
+
+		_methodParameterTypes76 = new String[] { "long" };
+
+		_methodName77 = "getToolDefDBE";
+
+		_methodParameterTypes77 = new String[] { "java.lang.String" };
+
+		_methodName79 = "addToolDefDBE";
+
+		_methodParameterTypes79 = new String[] {
+				"java.lang.String",
+				"com.liferay.faces.portal.context.LiferayFacesContext"
+			};
+
+		_methodName80 = "addToolDefDBE";
+
+		_methodParameterTypes80 = new String[] {
+				"org.lrc.liferay.toolbuilder.model.ToolDefDBE"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +237,27 @@ public class ToolDefDBELocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+			return ToolDefDBELocalServiceUtil.getToolDefDBE(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName77.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+			return ToolDefDBELocalServiceUtil.getToolDefDBE((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+			return ToolDefDBELocalServiceUtil.addToolDefDBE((java.lang.String)arguments[0],
+				(com.liferay.faces.portal.context.LiferayFacesContext)arguments[1]);
+		}
+
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+			return ToolDefDBELocalServiceUtil.addToolDefDBE((org.lrc.liferay.toolbuilder.model.ToolDefDBE)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +297,12 @@ public class ToolDefDBELocalServiceClpInvoker {
 	private String[] _methodParameterTypes70;
 	private String _methodName71;
 	private String[] _methodParameterTypes71;
+	private String _methodName76;
+	private String[] _methodParameterTypes76;
+	private String _methodName77;
+	private String[] _methodParameterTypes77;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
+	private String _methodName80;
+	private String[] _methodParameterTypes80;
 }

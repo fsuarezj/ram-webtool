@@ -184,6 +184,17 @@ public class StepDefDBELocalServiceClpInvoker {
 		_methodName87 = "setBeanIdentifier";
 
 		_methodParameterTypes87 = new String[] { "java.lang.String" };
+
+		_methodName92 = "getStepDefDBE";
+
+		_methodParameterTypes92 = new String[] { "long" };
+
+		_methodName94 = "addStepDefDBE";
+
+		_methodParameterTypes94 = new String[] {
+				"java.lang.String",
+				"com.liferay.faces.portal.context.LiferayFacesContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -402,6 +413,17 @@ public class StepDefDBELocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName92.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
+			return StepDefDBELocalServiceUtil.getStepDefDBE(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName94.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
+			return StepDefDBELocalServiceUtil.addStepDefDBE((java.lang.String)arguments[0],
+				(com.liferay.faces.portal.context.LiferayFacesContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -473,4 +495,8 @@ public class StepDefDBELocalServiceClpInvoker {
 	private String[] _methodParameterTypes86;
 	private String _methodName87;
 	private String[] _methodParameterTypes87;
+	private String _methodName92;
+	private String[] _methodParameterTypes92;
+	private String _methodName94;
+	private String[] _methodParameterTypes94;
 }

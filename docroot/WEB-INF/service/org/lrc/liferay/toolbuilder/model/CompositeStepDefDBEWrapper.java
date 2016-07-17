@@ -306,9 +306,10 @@ public class CompositeStepDefDBEWrapper implements CompositeStepDefDBE,
 	}
 
 	@Override
-	public void addStepDefDBEToList(
-		org.lrc.liferay.toolbuilder.model.StepDefDBE stepDefDBE) {
-		_compositeStepDefDBE.addStepDefDBEToList(stepDefDBE);
+	public void addStepDefDBE(
+		org.lrc.liferay.toolbuilder.model.StepDefDBE stepDefDBE)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_compositeStepDefDBE.addStepDefDBE(stepDefDBE);
 	}
 
 	@Override

@@ -43,7 +43,8 @@ create table lrc_tb_StepDBE (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	StepType VARCHAR(75) null
+	stepType VARCHAR(75) null,
+	stepTypeId LONG
 );
 
 create table lrc_tb_StepDefDBE (
@@ -54,7 +55,8 @@ create table lrc_tb_StepDefDBE (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	stepType VARCHAR(75) null
+	stepType VARCHAR(75) null,
+	stepTypeId LONG
 );
 
 create table lrc_tb_StepDef_CSDef (

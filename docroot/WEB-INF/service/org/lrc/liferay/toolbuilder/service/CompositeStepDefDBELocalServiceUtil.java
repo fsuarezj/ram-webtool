@@ -194,11 +194,13 @@ public class CompositeStepDefDBELocalServiceUtil {
 	* @return the composite step def d b e
 	* @throws PortalException if a composite step def d b e with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws org.lrc.liferay.toolbuilder.NoSuchCompositeStepDefDBEException
 	*/
 	public static org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE getCompositeStepDefDBE(
 		long compositeStepDefDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchCompositeStepDefDBEException {
 		return getService().getCompositeStepDefDBE(compositeStepDefDBEId);
 	}
 
@@ -437,6 +439,13 @@ public class CompositeStepDefDBELocalServiceUtil {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
 		return getService().invokeMethod(name, parameterTypes, arguments);
+	}
+
+	public static org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE addCompositeStepDefDBE(
+		boolean sequential, int depth)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.CompositeStepDefDBEException {
+		return getService().addCompositeStepDefDBE(sequential, depth);
 	}
 
 	public static void clearService() {

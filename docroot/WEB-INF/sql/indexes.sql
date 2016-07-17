@@ -17,7 +17,7 @@ create index IX_E82A48C0 on lrc_tb_StepDefDBE (stepDefDBEId);
 create index IX_D2C971DA on lrc_tb_StepDef_CSDef (compositeStepDefDBEId);
 
 create index IX_37079E58 on lrc_tb_ToolDefDBE (toolDefDBEId);
-create index IX_A0E2BFC6 on lrc_tb_ToolDefDBE (toolName);
+create unique index IX_A0E2BFC6 on lrc_tb_ToolDefDBE (toolName);
 
 create index IX_56F9B982 on lrc_tb_ToolInstanceDBE (groupId, toolDefDBEId);
 create index IX_5D83B5DA on lrc_tb_ToolInstanceDBE (toolDefDBEId);

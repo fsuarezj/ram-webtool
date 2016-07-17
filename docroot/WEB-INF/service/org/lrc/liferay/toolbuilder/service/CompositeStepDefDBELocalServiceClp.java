@@ -186,6 +186,10 @@ public class CompositeStepDefDBELocalServiceClp
 		_methodName33 = "setBeanIdentifier";
 
 		_methodParameterTypes33 = new String[] { "java.lang.String" };
+
+		_methodName35 = "addCompositeStepDefDBE";
+
+		_methodParameterTypes35 = new String[] { "boolean", "int" };
 	}
 
 	@Override
@@ -543,7 +547,8 @@ public class CompositeStepDefDBELocalServiceClp
 	public org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE getCompositeStepDefDBE(
 		long compositeStepDefDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchCompositeStepDefDBEException {
 		Object returnObj = null;
 
 		try {
@@ -560,6 +565,10 @@ public class CompositeStepDefDBELocalServiceClp
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.NoSuchCompositeStepDefDBEException) {
+				throw (org.lrc.liferay.toolbuilder.NoSuchCompositeStepDefDBEException)t;
 			}
 
 			if (t instanceof RuntimeException) {
@@ -1218,6 +1227,40 @@ public class CompositeStepDefDBELocalServiceClp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE addCompositeStepDefDBE(
+		boolean sequential, int depth)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.CompositeStepDefDBEException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName35,
+					_methodParameterTypes35, new Object[] { sequential, depth });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.CompositeStepDefDBEException) {
+				throw (org.lrc.liferay.toolbuilder.CompositeStepDefDBEException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1287,4 +1330,6 @@ public class CompositeStepDefDBELocalServiceClp
 	private String[] _methodParameterTypes32;
 	private String _methodName33;
 	private String[] _methodParameterTypes33;
+	private String _methodName35;
+	private String[] _methodParameterTypes35;
 }

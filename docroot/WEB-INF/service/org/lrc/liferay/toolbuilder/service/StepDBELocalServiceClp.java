@@ -184,6 +184,13 @@ public class StepDBELocalServiceClp implements StepDBELocalService {
 		_methodName33 = "setBeanIdentifier";
 
 		_methodParameterTypes33 = new String[] { "java.lang.String" };
+
+		_methodName35 = "addStepDBE";
+
+		_methodParameterTypes35 = new String[] {
+				"java.lang.String",
+				"com.liferay.faces.portal.context.LiferayFacesContext"
+			};
 	}
 
 	@Override
@@ -533,7 +540,8 @@ public class StepDBELocalServiceClp implements StepDBELocalService {
 	@Override
 	public org.lrc.liferay.toolbuilder.model.StepDBE getStepDBE(long stepDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchStepDBEException {
 		Object returnObj = null;
 
 		try {
@@ -549,6 +557,10 @@ public class StepDBELocalServiceClp implements StepDBELocalService {
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.NoSuchStepDBEException) {
+				throw (org.lrc.liferay.toolbuilder.NoSuchStepDBEException)t;
 			}
 
 			if (t instanceof RuntimeException) {
@@ -1205,6 +1217,61 @@ public class StepDBELocalServiceClp implements StepDBELocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public org.lrc.liferay.toolbuilder.model.StepDBE addStepDBE(
+		java.lang.String stepType,
+		com.liferay.faces.portal.context.LiferayFacesContext liferayFacesContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchInstalledStepException,
+			org.lrc.liferay.toolbuilder.StepDBEException,
+			org.lrc.liferay.toolbuilder.StepDefDBEException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName35,
+					_methodParameterTypes35,
+					new Object[] {
+						ClpSerializer.translateInput(stepType),
+						
+					ClpSerializer.translateInput(liferayFacesContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.NoSuchUserException) {
+				throw (com.liferay.portal.NoSuchUserException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.NoSuchInstalledStepException) {
+				throw (org.lrc.liferay.toolbuilder.NoSuchInstalledStepException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.StepDBEException) {
+				throw (org.lrc.liferay.toolbuilder.StepDBEException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.StepDefDBEException) {
+				throw (org.lrc.liferay.toolbuilder.StepDefDBEException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (org.lrc.liferay.toolbuilder.model.StepDBE)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1274,4 +1341,6 @@ public class StepDBELocalServiceClp implements StepDBELocalService {
 	private String[] _methodParameterTypes32;
 	private String _methodName33;
 	private String[] _methodParameterTypes33;
+	private String _methodName35;
+	private String[] _methodParameterTypes35;
 }

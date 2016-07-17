@@ -182,12 +182,14 @@ public interface CompositeStepDBELocalService extends BaseLocalService,
 	* @return the composite step d b e
 	* @throws PortalException if a composite step d b e with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws org.lrc.liferay.toolbuilder.NoSuchCompositeStepDBEException
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public org.lrc.liferay.toolbuilder.model.CompositeStepDBE getCompositeStepDBE(
 		long compositeStepDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchCompositeStepDBEException;
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -369,4 +371,9 @@ public interface CompositeStepDBELocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public org.lrc.liferay.toolbuilder.model.CompositeStepDBE addCompositeStepDBE(
+		long stepDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.CompositeStepDBEException;
 }

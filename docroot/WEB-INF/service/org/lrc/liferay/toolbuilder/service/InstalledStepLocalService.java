@@ -253,4 +253,17 @@ public interface InstalledStepLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public void validate(java.lang.String stepType, java.lang.String namespace,
+		java.lang.String className)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.InstalledStepException;
+
+	public org.lrc.liferay.toolbuilder.model.InstalledStep addInstalledStep(
+		java.lang.String stepType, java.lang.String namespace,
+		java.lang.String className,
+		com.liferay.faces.portal.context.LiferayFacesContext liferayFacesContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.InstalledStepException;
 }

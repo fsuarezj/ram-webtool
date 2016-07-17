@@ -31,7 +31,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="StepType" type="String" />
+		<field name="stepType" type="String" />
+		<field name="stepTypeId" type="long" />
 	</model>
 	<model name="org.lrc.liferay.toolbuilder.model.StepDefDBE">
 		<field name="stepDefDBEId" type="long" />
@@ -42,6 +43,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="stepType" type="String" />
+		<field name="stepTypeId" type="long" />
 	</model>
 	<model name="org.lrc.liferay.toolbuilder.model.ToolDefDBE">
 		<field name="toolDefDBEId" type="long" />

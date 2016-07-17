@@ -33,6 +33,6 @@ public interface CompositeStepDBE extends CompositeStepDBEModel, PersistedModel 
 	 */
 	public java.util.List<org.lrc.liferay.toolbuilder.model.StepDBE> getStepDBEs();
 
-	public void addStepDBEToList(
-		org.lrc.liferay.toolbuilder.model.StepDBE stepDBE);
+	public void addStepDBE(org.lrc.liferay.toolbuilder.model.StepDBE stepDBE)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

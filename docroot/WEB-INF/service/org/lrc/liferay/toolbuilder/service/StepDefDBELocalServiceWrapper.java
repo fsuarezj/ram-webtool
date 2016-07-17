@@ -197,12 +197,14 @@ public class StepDefDBELocalServiceWrapper implements StepDefDBELocalService,
 	* @return the Step Definition
 	* @throws PortalException if a Step Definition with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws org.lrc.liferay.toolbuilder.NoSuchStepDefDBEException
 	*/
 	@Override
 	public org.lrc.liferay.toolbuilder.model.StepDefDBE getStepDefDBE(
 		long stepDefDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchStepDefDBEException {
 		return _stepDefDBELocalService.getStepDefDBE(stepDefDBEId);
 	}
 
@@ -458,6 +460,18 @@ public class StepDefDBELocalServiceWrapper implements StepDefDBELocalService,
 		throws java.lang.Throwable {
 		return _stepDefDBELocalService.invokeMethod(name, parameterTypes,
 			arguments);
+	}
+
+	@Override
+	public org.lrc.liferay.toolbuilder.model.StepDefDBE addStepDefDBE(
+		java.lang.String stepType,
+		com.liferay.faces.portal.context.LiferayFacesContext liferayFacesContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchInstalledStepException,
+			org.lrc.liferay.toolbuilder.StepDefDBEException {
+		return _stepDefDBELocalService.addStepDefDBE(stepType,
+			liferayFacesContext);
 	}
 
 	/**

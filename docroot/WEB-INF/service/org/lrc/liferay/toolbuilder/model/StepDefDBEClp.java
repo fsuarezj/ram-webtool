@@ -83,6 +83,7 @@ public class StepDefDBEClp extends BaseModelImpl<StepDefDBE>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("stepType", getStepType());
+		attributes.put("stepTypeId", getStepTypeId());
 
 		return attributes;
 	}
@@ -135,6 +136,12 @@ public class StepDefDBEClp extends BaseModelImpl<StepDefDBE>
 
 		if (stepType != null) {
 			setStepType(stepType);
+		}
+
+		Long stepTypeId = (Long)attributes.get("stepTypeId");
+
+		if (stepTypeId != null) {
+			setStepTypeId(stepTypeId);
 		}
 	}
 
@@ -332,6 +339,29 @@ public class StepDefDBEClp extends BaseModelImpl<StepDefDBE>
 		}
 	}
 
+	@Override
+	public long getStepTypeId() {
+		return _stepTypeId;
+	}
+
+	@Override
+	public void setStepTypeId(long stepTypeId) {
+		_stepTypeId = stepTypeId;
+
+		if (_stepDefDBERemoteModel != null) {
+			try {
+				Class<?> clazz = _stepDefDBERemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStepTypeId", long.class);
+
+				method.invoke(_stepDefDBERemoteModel, stepTypeId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getStepDefDBERemoteModel() {
 		return _stepDefDBERemoteModel;
 	}
@@ -409,6 +439,7 @@ public class StepDefDBEClp extends BaseModelImpl<StepDefDBE>
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setStepType(getStepType());
+		clone.setStepTypeId(getStepTypeId());
 
 		return clone;
 	}
@@ -461,7 +492,7 @@ public class StepDefDBEClp extends BaseModelImpl<StepDefDBE>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{stepDefDBEId=");
 		sb.append(getStepDefDBEId());
@@ -479,6 +510,8 @@ public class StepDefDBEClp extends BaseModelImpl<StepDefDBE>
 		sb.append(getModifiedDate());
 		sb.append(", stepType=");
 		sb.append(getStepType());
+		sb.append(", stepTypeId=");
+		sb.append(getStepTypeId());
 		sb.append("}");
 
 		return sb.toString();
@@ -486,7 +519,7 @@ public class StepDefDBEClp extends BaseModelImpl<StepDefDBE>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("org.lrc.liferay.toolbuilder.model.StepDefDBE");
@@ -524,6 +557,10 @@ public class StepDefDBEClp extends BaseModelImpl<StepDefDBE>
 			"<column><column-name>stepType</column-name><column-value><![CDATA[");
 		sb.append(getStepType());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>stepTypeId</column-name><column-value><![CDATA[");
+		sb.append(getStepTypeId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -539,6 +576,7 @@ public class StepDefDBEClp extends BaseModelImpl<StepDefDBE>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _stepType;
+	private long _stepTypeId;
 	private BaseModel<?> _stepDefDBERemoteModel;
 	private Class<?> _clpSerializerClass = org.lrc.liferay.toolbuilder.service.ClpSerializer.class;
 }

@@ -194,11 +194,13 @@ public class StepDBELocalServiceUtil {
 	* @return the step d b e
 	* @throws PortalException if a step d b e with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws org.lrc.liferay.toolbuilder.NoSuchStepDBEException
 	*/
 	public static org.lrc.liferay.toolbuilder.model.StepDBE getStepDBE(
 		long stepDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchStepDBEException {
 		return getService().getStepDBE(stepDBEId);
 	}
 
@@ -420,6 +422,17 @@ public class StepDBELocalServiceUtil {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
 		return getService().invokeMethod(name, parameterTypes, arguments);
+	}
+
+	public static org.lrc.liferay.toolbuilder.model.StepDBE addStepDBE(
+		java.lang.String stepType,
+		com.liferay.faces.portal.context.LiferayFacesContext liferayFacesContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchInstalledStepException,
+			org.lrc.liferay.toolbuilder.StepDBEException,
+			org.lrc.liferay.toolbuilder.StepDefDBEException {
+		return getService().addStepDBE(stepType, liferayFacesContext);
 	}
 
 	public static void clearService() {

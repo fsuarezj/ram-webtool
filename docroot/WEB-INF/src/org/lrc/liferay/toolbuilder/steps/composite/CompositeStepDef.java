@@ -4,36 +4,45 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lrc.liferay.toolbuilder.CompositeStepDBEException;
+import org.lrc.liferay.toolbuilder.CompositeStepDefDBEException;
+import org.lrc.liferay.toolbuilder.NoSuchInstalledStepException;
+import org.lrc.liferay.toolbuilder.StepDBEException;
+import org.lrc.liferay.toolbuilder.StepDefDBEException;
 import org.lrc.liferay.toolbuilder.StepFactory;
 import org.lrc.liferay.toolbuilder.model.CompositeStepDefDBE;
 import org.lrc.liferay.toolbuilder.model.StepDefDBE;
 import org.lrc.liferay.toolbuilder.service.CompositeStepDefDBELocalServiceUtil;
 import org.lrc.liferay.toolbuilder.service.StepDefDBELocalServiceUtil;
-import org.lrc.liferay.toolbuilder.service.persistence.CompositeStepDefDBEUtil;
 import org.lrc.liferay.toolbuilder.steps.Step;
 import org.lrc.liferay.toolbuilder.steps.StepDef;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 public class CompositeStepDef extends StepDef {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7733476918496135630L;
 	private CompositeStepDefDBE compositeStepDefDBE;
 	private List<StepDef> stepDefs;
 
 	/* CONSTRUCTORS */
-	public CompositeStepDef() {
+	public CompositeStepDef() throws NoSuchUserException, NoSuchInstalledStepException, StepDefDBEException, SystemException, CompositeStepDefDBEException {
 		super("COMPOSITE");
-		this.compositeStepDefDBE = CompositeStepDefDBEUtil.create(this.stepDefDBE.getStepDefDBEId());
+		System.out.println("It is going to create new Composite Step with ID " + this.stepDefDBE.getStepDefDBEId());
+		this.compositeStepDefDBE = CompositeStepDefDBELocalServiceUtil.addCompositeStepDefDBE(true, 0);
+		this.setStepTypeId(this.compositeStepDefDBE.getCompositeStepDefDBEId());
 		this.stepDefs = new ArrayList<StepDef>();
-		this.setStepsNumber();
-		this.compositeStepDefDBE.setSequential(true);
-		this.compositeStepDefDBE.setDepth(0);
 	}
 
 	public CompositeStepDef(StepDefDBE stepDefDBE) throws PortalException, SystemException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		super(stepDefDBE);
-		this.compositeStepDefDBE = CompositeStepDefDBELocalServiceUtil.getCompositeStepDefDBE(stepDefDBE.getStepDefDBEId());
+		this.compositeStepDefDBE = CompositeStepDefDBELocalServiceUtil.getCompositeStepDefDBE(stepDefDBE.getStepTypeId());
+		this.buildStepDefs();
 	}
 	
 //	public CompositeStepDef(CompositeStepDefDBE compositeStepDefDBE) {
@@ -79,9 +88,9 @@ public class CompositeStepDef extends StepDef {
 	public void addStepDef(StepDef stepDef) throws SystemException {
 		try {
 			// Includes new StepDef in the tables
-			this.save();
-			stepDef.save();
-			this.compositeStepDefDBE.addStepDefDBEToList(this.stepDefDBE);
+//			this.save();
+//			stepDef.save();
+			this.compositeStepDefDBE.addStepDefDBE(stepDef.getStepDefDBE());
 			this.stepDefs.add(stepDef);
 			// Increments stepNumber
 			this.setStepsNumber();
@@ -103,18 +112,24 @@ public class CompositeStepDef extends StepDef {
 			StepDefDBELocalServiceUtil.addCompositeStepDefDBEStepDefDBEs
 				(this.compositeStepDefDBE.getCompositeStepDefDBEId(), this.compositeStepDefDBE.getStepDefDBEs());
 		}
+		for (StepDef stepDef: this.stepDefs) {
+			stepDef.save();
+		}
 	}
 	
 	@Override
-	public Step buildStep() throws SystemException {
+	public Step buildStep() throws SystemException, NoSuchUserException, NoSuchInstalledStepException, StepDBEException, StepDefDBEException, CompositeStepDBEException {
 		CompositeStep builtStep = new CompositeStep(this);
+		System.out.println("Building composite step");
 		for (StepDef stepDef: this.stepDefs) {
+			System.out.println("Building substep of type " + stepDef.getStepType());
 			builtStep.addStep(stepDef.buildStep());
 		}
 		return builtStep;
 	}
 
-	public void rebuildStepDefs() throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SystemException {
+	public void buildStepDefs() throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SystemException {
+		System.out.println("It is going to rebuild steps defs for composite def with ID " + this.getCompositeStepDefDBEId());
 		List<StepDefDBE> stepDefDBEs = StepDefDBELocalServiceUtil.getCompositeStepDefDBEStepDefDBEs(this.getCompositeStepDefDBEId());
 		this.stepDefs = new ArrayList<StepDef>();
 		for (StepDefDBE stepDefDBE: stepDefDBEs) {

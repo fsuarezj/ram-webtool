@@ -114,6 +114,19 @@ public class InstalledStepLocalServiceClp implements InstalledStepLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "validate";
+
+		_methodParameterTypes19 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName20 = "addInstalledStep";
+
+		_methodParameterTypes20 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"com.liferay.faces.portal.context.LiferayFacesContext"
+			};
 	}
 
 	@Override
@@ -670,6 +683,93 @@ public class InstalledStepLocalServiceClp implements InstalledStepLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public void validate(java.lang.String stepType, java.lang.String namespace,
+		java.lang.String className)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.InstalledStepException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName19,
+				_methodParameterTypes19,
+				new Object[] {
+					ClpSerializer.translateInput(stepType),
+					
+				ClpSerializer.translateInput(namespace),
+					
+				ClpSerializer.translateInput(className)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.InstalledStepException) {
+				throw (org.lrc.liferay.toolbuilder.InstalledStepException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public org.lrc.liferay.toolbuilder.model.InstalledStep addInstalledStep(
+		java.lang.String stepType, java.lang.String namespace,
+		java.lang.String className,
+		com.liferay.faces.portal.context.LiferayFacesContext liferayFacesContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.InstalledStepException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] {
+						ClpSerializer.translateInput(stepType),
+						
+					ClpSerializer.translateInput(namespace),
+						
+					ClpSerializer.translateInput(className),
+						
+					ClpSerializer.translateInput(liferayFacesContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.NoSuchUserException) {
+				throw (com.liferay.portal.NoSuchUserException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.InstalledStepException) {
+				throw (org.lrc.liferay.toolbuilder.InstalledStepException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (org.lrc.liferay.toolbuilder.model.InstalledStep)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -707,4 +807,8 @@ public class InstalledStepLocalServiceClp implements InstalledStepLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

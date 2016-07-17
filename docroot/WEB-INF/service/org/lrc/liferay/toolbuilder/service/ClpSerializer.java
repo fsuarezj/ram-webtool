@@ -579,8 +579,35 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
-					"org.lrc.liferay.toolbuilder.InstanceNameException")) {
-			return new org.lrc.liferay.toolbuilder.InstanceNameException();
+					"org.lrc.liferay.toolbuilder.CompositeStepDBEException")) {
+			return new org.lrc.liferay.toolbuilder.CompositeStepDBEException();
+		}
+
+		if (className.equals(
+					"org.lrc.liferay.toolbuilder.CompositeStepDefDBEException")) {
+			return new org.lrc.liferay.toolbuilder.CompositeStepDefDBEException();
+		}
+
+		if (className.equals(
+					"org.lrc.liferay.toolbuilder.InstalledStepException")) {
+			return new org.lrc.liferay.toolbuilder.InstalledStepException();
+		}
+
+		if (className.equals("org.lrc.liferay.toolbuilder.StepDBEException")) {
+			return new org.lrc.liferay.toolbuilder.StepDBEException();
+		}
+
+		if (className.equals("org.lrc.liferay.toolbuilder.StepDefDBEException")) {
+			return new org.lrc.liferay.toolbuilder.StepDefDBEException();
+		}
+
+		if (className.equals("org.lrc.liferay.toolbuilder.ToolDefDBEException")) {
+			return new org.lrc.liferay.toolbuilder.ToolDefDBEException();
+		}
+
+		if (className.equals(
+					"org.lrc.liferay.toolbuilder.ToolInstaceDBEException")) {
+			return new org.lrc.liferay.toolbuilder.ToolInstaceDBEException();
 		}
 
 		if (className.equals(

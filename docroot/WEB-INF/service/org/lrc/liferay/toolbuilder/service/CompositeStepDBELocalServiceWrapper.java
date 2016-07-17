@@ -199,12 +199,14 @@ public class CompositeStepDBELocalServiceWrapper
 	* @return the composite step d b e
 	* @throws PortalException if a composite step d b e with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws org.lrc.liferay.toolbuilder.NoSuchCompositeStepDBEException
 	*/
 	@Override
 	public org.lrc.liferay.toolbuilder.model.CompositeStepDBE getCompositeStepDBE(
 		long compositeStepDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchCompositeStepDBEException {
 		return _compositeStepDBELocalService.getCompositeStepDBE(compositeStepDBEId);
 	}
 
@@ -457,6 +459,14 @@ public class CompositeStepDBELocalServiceWrapper
 		throws java.lang.Throwable {
 		return _compositeStepDBELocalService.invokeMethod(name, parameterTypes,
 			arguments);
+	}
+
+	@Override
+	public org.lrc.liferay.toolbuilder.model.CompositeStepDBE addCompositeStepDBE(
+		long stepDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.CompositeStepDBEException {
+		return _compositeStepDBELocalService.addCompositeStepDBE(stepDefDBEId);
 	}
 
 	/**

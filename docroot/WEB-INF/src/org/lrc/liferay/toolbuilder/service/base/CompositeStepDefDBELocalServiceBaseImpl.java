@@ -231,10 +231,13 @@ public abstract class CompositeStepDefDBELocalServiceBaseImpl
 	 * @return the composite step def d b e
 	 * @throws PortalException if a composite step def d b e with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchCompositeStepDefDBEException
 	 */
 	@Override
 	public CompositeStepDefDBE getCompositeStepDefDBE(
-		long compositeStepDefDBEId) throws PortalException, SystemException {
+		long compositeStepDefDBEId)
+		throws PortalException, SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchCompositeStepDefDBEException {
 		return compositeStepDefDBEPersistence.findByPrimaryKey(compositeStepDefDBEId);
 	}
 

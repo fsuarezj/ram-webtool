@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lrc.liferay.toolbuilder.model.StepDBE;
+import org.lrc.liferay.toolbuilder.service.CompositeStepDBELocalServiceUtil;
+
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The extended model implementation for the CompositeStepDBE service. Represents a row in the &quot;lrc_tb_CompositeStepDBE&quot; database table, with each column mapped to a property of this class.
@@ -29,6 +32,10 @@ import org.lrc.liferay.toolbuilder.model.StepDBE;
  * @author Fernando Suárez
  */
 public class CompositeStepDBEImpl extends CompositeStepDBEBaseImpl {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1861338934141581838L;
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -48,7 +55,9 @@ public class CompositeStepDBEImpl extends CompositeStepDBEBaseImpl {
 		return this.stepDBEs;
 	}
 	
-	public void addStepDBEToList(StepDBE stepDBE) {
+	public void addStepDBE(StepDBE stepDBE) throws SystemException {
+		System.out.println("Saving relationship between steps " + stepDBE.getStepDBEId() + " and " + this.getCompositeStepDBEId());
+		CompositeStepDBELocalServiceUtil.addStepDBECompositeStepDBE(stepDBE.getStepDBEId(), this.getCompositeStepDBEId());
 		this.stepDBEs.add(stepDBE);
 	}
 }

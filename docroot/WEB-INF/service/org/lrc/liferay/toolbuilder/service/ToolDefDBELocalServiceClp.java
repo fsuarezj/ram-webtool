@@ -114,6 +114,17 @@ public class ToolDefDBELocalServiceClp implements ToolDefDBELocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "getToolDefDBE";
+
+		_methodParameterTypes19 = new String[] { "java.lang.String" };
+
+		_methodName20 = "addToolDefDBE";
+
+		_methodParameterTypes20 = new String[] {
+				"java.lang.String",
+				"com.liferay.faces.portal.context.LiferayFacesContext"
+			};
 	}
 
 	@Override
@@ -464,7 +475,8 @@ public class ToolDefDBELocalServiceClp implements ToolDefDBELocalService {
 	public org.lrc.liferay.toolbuilder.model.ToolDefDBE getToolDefDBE(
 		long toolDefDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException {
 		Object returnObj = null;
 
 		try {
@@ -480,6 +492,10 @@ public class ToolDefDBELocalServiceClp implements ToolDefDBELocalService {
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException) {
+				throw (org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException)t;
 			}
 
 			if (t instanceof RuntimeException) {
@@ -666,6 +682,86 @@ public class ToolDefDBELocalServiceClp implements ToolDefDBELocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public org.lrc.liferay.toolbuilder.model.ToolDefDBE getToolDefDBE(
+		java.lang.String toolName)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] { ClpSerializer.translateInput(toolName) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException) {
+				throw (org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (org.lrc.liferay.toolbuilder.model.ToolDefDBE)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public org.lrc.liferay.toolbuilder.model.ToolDefDBE addToolDefDBE(
+		java.lang.String toolName,
+		com.liferay.faces.portal.context.LiferayFacesContext liferayFacesContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.ToolDefDBEException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] {
+						ClpSerializer.translateInput(toolName),
+						
+					ClpSerializer.translateInput(liferayFacesContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.NoSuchUserException) {
+				throw (com.liferay.portal.NoSuchUserException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.ToolDefDBEException) {
+				throw (org.lrc.liferay.toolbuilder.ToolDefDBEException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (org.lrc.liferay.toolbuilder.model.ToolDefDBE)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -703,4 +799,8 @@ public class ToolDefDBELocalServiceClp implements ToolDefDBELocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

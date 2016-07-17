@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lrc.liferay.toolbuilder.model.StepDefDBE;
-import org.lrc.liferay.toolbuilder.service.StepDefDBELocalServiceUtil;
+import org.lrc.liferay.toolbuilder.service.CompositeStepDefDBELocalServiceUtil;
 
 import com.liferay.portal.kernel.exception.SystemException;
 
@@ -32,6 +32,10 @@ import com.liferay.portal.kernel.exception.SystemException;
  * @author Fernando Suárez
  */
 public class CompositeStepDefDBEImpl extends CompositeStepDefDBEBaseImpl {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7114416091211882248L;
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -51,7 +55,9 @@ public class CompositeStepDefDBEImpl extends CompositeStepDefDBEBaseImpl {
 		return this.stepDefDBEs;
 	}
 	
-	public void addStepDefDBEToList(StepDefDBE stepDefDBE) {
+	public void addStepDefDBE(StepDefDBE stepDefDBE) throws SystemException {
+		System.out.println("Saving relationship between step defs " + stepDefDBE.getStepDefDBEId() + " and " + this.getCompositeStepDefDBEId());
+		CompositeStepDefDBELocalServiceUtil.addStepDefDBECompositeStepDefDBE(stepDefDBE.getStepDefDBEId(), this.getCompositeStepDefDBEId());
 		this.stepDefDBEs.add(stepDefDBE);
 	}
 }

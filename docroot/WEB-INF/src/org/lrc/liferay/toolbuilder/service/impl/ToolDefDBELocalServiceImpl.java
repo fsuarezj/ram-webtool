@@ -14,7 +14,17 @@
 
 package org.lrc.liferay.toolbuilder.service.impl;
 
+import org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException;
+import org.lrc.liferay.toolbuilder.ToolDefDBEException;
+import org.lrc.liferay.toolbuilder.model.ToolDefDBE;
 import org.lrc.liferay.toolbuilder.service.base.ToolDefDBELocalServiceBaseImpl;
+import org.lrc.liferay.toolbuilder.service.persistence.ToolDefDBEUtil;
+
+import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 
 /**
  * The implementation of the tool def d b e local service.
@@ -36,4 +46,44 @@ public class ToolDefDBELocalServiceImpl extends ToolDefDBELocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link org.lrc.liferay.toolbuilder.service.ToolDefDBELocalServiceUtil} to access the tool def d b e local service.
 	 */
+	public ToolDefDBE getToolDefDBE(long toolDefDBEId) throws NoSuchToolDefDBEException, SystemException {
+		return toolDefDBEPersistence.findByPrimaryKey(toolDefDBEId);
+	}
+
+	public ToolDefDBE getToolDefDBE(String toolName) throws NoSuchToolDefDBEException, SystemException {
+		return toolDefDBEPersistence.findByToolName(toolName);
+	}
+	
+	protected void validate(String toolName) throws ToolDefDBEException {
+		if (Validator.isNull(toolName))
+			throw new ToolDefDBEException();
+	}
+
+	public ToolDefDBE addToolDefDBE(String toolName, LiferayFacesContext liferayFacesContext) throws ToolDefDBEException, SystemException, NoSuchUserException {
+		User user = userPersistence.findByPrimaryKey(liferayFacesContext.getUserId());
+//		Date now = new Date();
+		long toolDefDBEId = counterLocalService.increment(ToolDefDBE.class.getName());
+		
+		validate(toolName);
+
+		ToolDefDBE toolDefDBE = ToolDefDBEUtil.create(toolDefDBEId);
+
+		toolDefDBE.setGroupId(liferayFacesContext.getScopeGroupId());
+		toolDefDBE.setCompanyId(liferayFacesContext.getCompanyId());
+		toolDefDBE.setUserId(liferayFacesContext.getUserId());
+		toolDefDBE.setUserName(user.getFullName());
+		toolDefDBE.setToolName(toolName);
+		
+//		toolDefDBEPersistence.update(toolDefDBE);
+		
+		return toolDefDBE;
+	}
+	
+	@Override
+	public ToolDefDBE addToolDefDBE(ToolDefDBE toolDefDBE) throws SystemException {
+		long toolDefDBEId = counterLocalService.increment(ToolDefDBE.class.getName());
+		toolDefDBE.setToolDefDBEId(toolDefDBEId);
+		
+		return super.addToolDefDBE(toolDefDBE);
+	}
 }

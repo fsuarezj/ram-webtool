@@ -39,6 +39,7 @@ public class StepDefDBESoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setStepType(model.getStepType());
+		soapModel.setStepTypeId(model.getStepTypeId());
 
 		return soapModel;
 	}
@@ -155,6 +156,14 @@ public class StepDefDBESoap implements Serializable {
 		_stepType = stepType;
 	}
 
+	public long getStepTypeId() {
+		return _stepTypeId;
+	}
+
+	public void setStepTypeId(long stepTypeId) {
+		_stepTypeId = stepTypeId;
+	}
+
 	private long _stepDefDBEId;
 	private long _groupId;
 	private long _companyId;
@@ -163,4 +172,5 @@ public class StepDefDBESoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _stepType;
+	private long _stepTypeId;
 }

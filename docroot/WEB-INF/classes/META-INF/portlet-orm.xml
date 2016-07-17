@@ -62,7 +62,8 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="StepType" />
+			<basic name="stepType" />
+			<basic name="stepTypeId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -83,6 +84,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="stepType" />
+			<basic name="stepTypeId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

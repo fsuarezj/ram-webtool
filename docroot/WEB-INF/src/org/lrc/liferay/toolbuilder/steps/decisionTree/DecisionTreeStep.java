@@ -3,6 +3,9 @@ package org.lrc.liferay.toolbuilder.steps.decisionTree;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lrc.liferay.toolbuilder.NoSuchInstalledStepException;
+import org.lrc.liferay.toolbuilder.StepDBEException;
+import org.lrc.liferay.toolbuilder.StepDefDBEException;
 import org.lrc.liferay.toolbuilder.steps.Step;
 import org.lrc.liferay.toolbuilder.utils.flowcharts.BasicFlowChart;
 import org.lrc.liferay.toolbuilder.utils.flowcharts.Flow;
@@ -10,6 +13,7 @@ import org.lrc.liferay.toolbuilder.utils.flowcharts.exceptions.FlowException;
 import org.lrc.liferay.toolbuilder.utils.flowcharts.exceptions.NodeContentException;
 import org.lrc.liferay.toolbuilder.utils.flowcharts.exceptions.NodeException;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
@@ -19,7 +23,7 @@ public class DecisionTreeStep extends Step {
 
 	private List<String> nodes = new ArrayList<String>();
 
-	public DecisionTreeStep() {
+	public DecisionTreeStep() throws NoSuchUserException, NoSuchInstalledStepException, StepDBEException, StepDefDBEException, SystemException {
 		super("DECISION_TREE");
 	}
 

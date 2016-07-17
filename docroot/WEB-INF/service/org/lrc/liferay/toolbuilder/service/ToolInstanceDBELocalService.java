@@ -182,12 +182,14 @@ public interface ToolInstanceDBELocalService extends BaseLocalService,
 	* @return the tool instance d b e
 	* @throws PortalException if a tool instance d b e with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public org.lrc.liferay.toolbuilder.model.ToolInstanceDBE getToolInstanceDBE(
 		long toolInstanceDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException;
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -253,4 +255,16 @@ public interface ToolInstanceDBELocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public org.lrc.liferay.toolbuilder.model.ToolInstanceDBE addToolInstanceDBE(
+		long toolDefDBEId, long compositeStepDBEId,
+		com.liferay.faces.portal.context.LiferayFacesContext liferayFacesContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<org.lrc.liferay.toolbuilder.model.ToolInstanceDBE> getToolInstanceDBEs(
+		long groupId, long toolDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -113,6 +113,23 @@ public class InstalledStepLocalServiceClpInvoker {
 		_methodName71 = "setBeanIdentifier";
 
 		_methodParameterTypes71 = new String[] { "java.lang.String" };
+
+		_methodName76 = "getInstalledStep";
+
+		_methodParameterTypes76 = new String[] { "java.lang.String" };
+
+		_methodName77 = "validate";
+
+		_methodParameterTypes77 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName78 = "addInstalledStep";
+
+		_methodParameterTypes78 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"com.liferay.faces.portal.context.LiferayFacesContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +233,26 @@ public class InstalledStepLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+			return InstalledStepLocalServiceUtil.getInstalledStep((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName77.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+			InstalledStepLocalServiceUtil.validate((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+
+			return null;
+		}
+
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+			return InstalledStepLocalServiceUtil.addInstalledStep((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(com.liferay.faces.portal.context.LiferayFacesContext)arguments[3]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +292,10 @@ public class InstalledStepLocalServiceClpInvoker {
 	private String[] _methodParameterTypes70;
 	private String _methodName71;
 	private String[] _methodParameterTypes71;
+	private String _methodName76;
+	private String[] _methodParameterTypes76;
+	private String _methodName77;
+	private String[] _methodParameterTypes77;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
 }

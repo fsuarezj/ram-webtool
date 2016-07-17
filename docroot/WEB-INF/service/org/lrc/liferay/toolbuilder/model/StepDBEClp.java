@@ -81,7 +81,8 @@ public class StepDBEClp extends BaseModelImpl<StepDBE> implements StepDBE {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("StepType", getStepType());
+		attributes.put("stepType", getStepType());
+		attributes.put("stepTypeId", getStepTypeId());
 
 		return attributes;
 	}
@@ -130,10 +131,16 @@ public class StepDBEClp extends BaseModelImpl<StepDBE> implements StepDBE {
 			setModifiedDate(modifiedDate);
 		}
 
-		String StepType = (String)attributes.get("StepType");
+		String stepType = (String)attributes.get("stepType");
 
-		if (StepType != null) {
-			setStepType(StepType);
+		if (stepType != null) {
+			setStepType(stepType);
+		}
+
+		Long stepTypeId = (Long)attributes.get("stepTypeId");
+
+		if (stepTypeId != null) {
+			setStepTypeId(stepTypeId);
 		}
 	}
 
@@ -310,12 +317,12 @@ public class StepDBEClp extends BaseModelImpl<StepDBE> implements StepDBE {
 
 	@Override
 	public String getStepType() {
-		return _StepType;
+		return _stepType;
 	}
 
 	@Override
-	public void setStepType(String StepType) {
-		_StepType = StepType;
+	public void setStepType(String stepType) {
+		_stepType = stepType;
 
 		if (_stepDBERemoteModel != null) {
 			try {
@@ -323,7 +330,30 @@ public class StepDBEClp extends BaseModelImpl<StepDBE> implements StepDBE {
 
 				Method method = clazz.getMethod("setStepType", String.class);
 
-				method.invoke(_stepDBERemoteModel, StepType);
+				method.invoke(_stepDBERemoteModel, stepType);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getStepTypeId() {
+		return _stepTypeId;
+	}
+
+	@Override
+	public void setStepTypeId(long stepTypeId) {
+		_stepTypeId = stepTypeId;
+
+		if (_stepDBERemoteModel != null) {
+			try {
+				Class<?> clazz = _stepDBERemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStepTypeId", long.class);
+
+				method.invoke(_stepDBERemoteModel, stepTypeId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -408,6 +438,7 @@ public class StepDBEClp extends BaseModelImpl<StepDBE> implements StepDBE {
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setStepType(getStepType());
+		clone.setStepTypeId(getStepTypeId());
 
 		return clone;
 	}
@@ -460,7 +491,7 @@ public class StepDBEClp extends BaseModelImpl<StepDBE> implements StepDBE {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{stepDBEId=");
 		sb.append(getStepDBEId());
@@ -476,8 +507,10 @@ public class StepDBEClp extends BaseModelImpl<StepDBE> implements StepDBE {
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", StepType=");
+		sb.append(", stepType=");
 		sb.append(getStepType());
+		sb.append(", stepTypeId=");
+		sb.append(getStepTypeId());
 		sb.append("}");
 
 		return sb.toString();
@@ -485,7 +518,7 @@ public class StepDBEClp extends BaseModelImpl<StepDBE> implements StepDBE {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("org.lrc.liferay.toolbuilder.model.StepDBE");
@@ -520,8 +553,12 @@ public class StepDBEClp extends BaseModelImpl<StepDBE> implements StepDBE {
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>StepType</column-name><column-value><![CDATA[");
+			"<column><column-name>stepType</column-name><column-value><![CDATA[");
 		sb.append(getStepType());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>stepTypeId</column-name><column-value><![CDATA[");
+		sb.append(getStepTypeId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -537,7 +574,8 @@ public class StepDBEClp extends BaseModelImpl<StepDBE> implements StepDBE {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _StepType;
+	private String _stepType;
+	private long _stepTypeId;
 	private BaseModel<?> _stepDBERemoteModel;
 	private Class<?> _clpSerializerClass = org.lrc.liferay.toolbuilder.service.ClpSerializer.class;
 }

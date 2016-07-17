@@ -182,12 +182,14 @@ public interface StepDefDBELocalService extends BaseLocalService,
 	* @return the Step Definition
 	* @throws PortalException if a Step Definition with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws org.lrc.liferay.toolbuilder.NoSuchStepDefDBEException
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public org.lrc.liferay.toolbuilder.model.StepDefDBE getStepDefDBE(
 		long stepDefDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchStepDefDBEException;
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -372,4 +374,12 @@ public interface StepDefDBELocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public org.lrc.liferay.toolbuilder.model.StepDefDBE addStepDefDBE(
+		java.lang.String stepType,
+		com.liferay.faces.portal.context.LiferayFacesContext liferayFacesContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchInstalledStepException,
+			org.lrc.liferay.toolbuilder.StepDefDBEException;
 }

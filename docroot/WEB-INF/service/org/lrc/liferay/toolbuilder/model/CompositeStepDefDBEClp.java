@@ -209,10 +209,10 @@ public class CompositeStepDefDBEClp extends BaseModelImpl<CompositeStepDefDBE>
 	}
 
 	@Override
-	public void addStepDefDBEToList(
+	public void addStepDefDBE(
 		org.lrc.liferay.toolbuilder.model.StepDefDBE stepDefDBE) {
 		try {
-			String methodName = "addStepDefDBEToList";
+			String methodName = "addStepDefDBE";
 
 			Class<?>[] parameterTypes = new Class<?>[] {
 					org.lrc.liferay.toolbuilder.model.StepDefDBE.class

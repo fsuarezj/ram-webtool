@@ -275,6 +275,25 @@ public class InstalledStepLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static void validate(java.lang.String stepType,
+		java.lang.String namespace, java.lang.String className)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.InstalledStepException {
+		getService().validate(stepType, namespace, className);
+	}
+
+	public static org.lrc.liferay.toolbuilder.model.InstalledStep addInstalledStep(
+		java.lang.String stepType, java.lang.String namespace,
+		java.lang.String className,
+		com.liferay.faces.portal.context.LiferayFacesContext liferayFacesContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.InstalledStepException {
+		return getService()
+				   .addInstalledStep(stepType, namespace, className,
+			liferayFacesContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

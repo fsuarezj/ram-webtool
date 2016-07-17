@@ -269,9 +269,9 @@ public class CompositeStepDBEWrapper implements CompositeStepDBE,
 	}
 
 	@Override
-	public void addStepDBEToList(
-		org.lrc.liferay.toolbuilder.model.StepDBE stepDBE) {
-		_compositeStepDBE.addStepDBEToList(stepDBE);
+	public void addStepDBE(org.lrc.liferay.toolbuilder.model.StepDBE stepDBE)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_compositeStepDBE.addStepDBE(stepDBE);
 	}
 
 	@Override

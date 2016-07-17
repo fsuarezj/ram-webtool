@@ -14,7 +14,18 @@
 
 package org.lrc.liferay.toolbuilder.service.impl;
 
+import java.util.List;
+
+import org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException;
+import org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException;
+import org.lrc.liferay.toolbuilder.model.ToolInstanceDBE;
 import org.lrc.liferay.toolbuilder.service.base.ToolInstanceDBELocalServiceBaseImpl;
+import org.lrc.liferay.toolbuilder.service.persistence.ToolInstanceDBEUtil;
+
+import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.User;
 
 /**
  * The implementation of the tool instance d b e local service.
@@ -37,4 +48,43 @@ public class ToolInstanceDBELocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link org.lrc.liferay.toolbuilder.service.ToolInstanceDBELocalServiceUtil} to access the tool instance d b e local service.
 	 */
+	
+	private void validate(long toolDefDBEId) throws NoSuchToolDefDBEException, SystemException {
+		toolDefDBEPersistence.findByPrimaryKey(toolDefDBEId);
+	}
+
+	public ToolInstanceDBE addToolInstanceDBE(long toolDefDBEId, long compositeStepDBEId, LiferayFacesContext liferayFacesContext) throws NoSuchUserException, SystemException, NoSuchToolDefDBEException {
+		User user = userPersistence.findByPrimaryKey(liferayFacesContext.getUserId());
+		
+		long toolInstanceDBEId = counterLocalService.increment(ToolInstanceDBE.class.getName());
+
+		validate(toolDefDBEId);
+
+		ToolInstanceDBE toolInstanceDBE = ToolInstanceDBEUtil.create(toolInstanceDBEId);
+
+		toolInstanceDBE.setUserId(liferayFacesContext.getUserId());
+		toolInstanceDBE.setGroupId(liferayFacesContext.getScopeGroupId());
+		toolInstanceDBE.setCompanyId(liferayFacesContext.getCompanyId());
+		toolInstanceDBE.setUserId(liferayFacesContext.getUserId());
+		toolInstanceDBE.setUserName(user.getFullName());
+		toolInstanceDBE.setToolDefDBEId(toolDefDBEId);
+		
+		return toolInstanceDBE;
+	}
+	
+	public ToolInstanceDBE getToolInstanceDBE(long toolInstanceDBEId) throws NoSuchToolInstanceDBEException, SystemException {
+		return toolInstanceDBEPersistence.findByPrimaryKey(toolInstanceDBEId);
+	}
+	
+	public List<ToolInstanceDBE> getToolInstanceDBEs(long groupId, long toolDefDBEId) throws SystemException {
+		return toolInstanceDBEPersistence.findByG_T(groupId, toolDefDBEId);
+	}
+	
+	@Override
+	public ToolInstanceDBE addToolInstanceDBE(ToolInstanceDBE toolInstanceDBE) throws SystemException {
+		long toolInstanceDBEId = counterLocalService.increment(ToolInstanceDBE.class.getName());
+		toolInstanceDBE.setToolInstanceDBEId(toolInstanceDBEId);
+		
+		return super.addToolInstanceDBE(toolInstanceDBE);
+	}
 }

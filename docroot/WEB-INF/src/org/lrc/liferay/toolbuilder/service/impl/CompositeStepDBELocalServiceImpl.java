@@ -14,7 +14,13 @@
 
 package org.lrc.liferay.toolbuilder.service.impl;
 
+import org.lrc.liferay.toolbuilder.CompositeStepDBEException;
+import org.lrc.liferay.toolbuilder.NoSuchCompositeStepDBEException;
+import org.lrc.liferay.toolbuilder.model.CompositeStepDBE;
 import org.lrc.liferay.toolbuilder.service.base.CompositeStepDBELocalServiceBaseImpl;
+import org.lrc.liferay.toolbuilder.service.persistence.CompositeStepDBEUtil;
+
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the composite step d b e local service.
@@ -37,4 +43,30 @@ public class CompositeStepDBELocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link org.lrc.liferay.toolbuilder.service.CompositeStepDBELocalServiceUtil} to access the composite step d b e local service.
 	 */
+	
+	public CompositeStepDBE getCompositeStepDBE(long compositeStepDBEId) throws NoSuchCompositeStepDBEException, SystemException {
+		return compositeStepDBEPersistence.findByPrimaryKey(compositeStepDBEId);
+	}
+	
+	public CompositeStepDBE addCompositeStepDBE(long stepDefDBEId) throws CompositeStepDBEException, SystemException {
+
+		long compositeStepDBEId = counterLocalService.increment(CompositeStepDBE.class.getName());
+		CompositeStepDBE compositeStepDBE = CompositeStepDBEUtil.create(compositeStepDBEId);
+
+		compositeStepDBE.setCurrentStep(0);
+		compositeStepDBE.setCompositeStepDefDBEId(stepDefDBEId);
+		
+		// TODO Decidir si grabo cuando construyo o no, en ese caso tendría que borrar cuando cancelo
+//		stepDefDBEPersistence.update(stepDefDBE);
+		
+		return compositeStepDBE;
+	}
+
+//	@Override
+//	public CompositeStepDBE addCompositeStepDBE(CompositeStepDBE compositeStepDBE) throws SystemException {
+//		long compositeStepDBEId = counterLocalService.increment(CompositeStepDBE.class.getName());
+//		compositeStepDBE.setCompositeStepDBEId(compositeStepDBEId);
+//		
+//		return super.addCompositeStepDBE(compositeStepDBE);
+//	}
 }

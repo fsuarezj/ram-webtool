@@ -200,9 +200,23 @@ public interface StepDBEModel extends BaseModel<StepDBE>, GroupedModel {
 	/**
 	 * Sets the step type of this step d b e.
 	 *
-	 * @param StepType the step type of this step d b e
+	 * @param stepType the step type of this step d b e
 	 */
-	public void setStepType(String StepType);
+	public void setStepType(String stepType);
+
+	/**
+	 * Returns the step type ID of this step d b e.
+	 *
+	 * @return the step type ID of this step d b e
+	 */
+	public long getStepTypeId();
+
+	/**
+	 * Sets the step type ID of this step d b e.
+	 *
+	 * @param stepTypeId the step type ID of this step d b e
+	 */
+	public void setStepTypeId(long stepTypeId);
 
 	@Override
 	public boolean isNew();

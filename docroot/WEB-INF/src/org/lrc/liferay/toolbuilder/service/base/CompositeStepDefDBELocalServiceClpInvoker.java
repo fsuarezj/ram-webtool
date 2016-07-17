@@ -184,6 +184,14 @@ public class CompositeStepDefDBELocalServiceClpInvoker {
 		_methodName87 = "setBeanIdentifier";
 
 		_methodParameterTypes87 = new String[] { "java.lang.String" };
+
+		_methodName92 = "getCompositeStepDefDBE";
+
+		_methodParameterTypes92 = new String[] { "long" };
+
+		_methodName94 = "addCompositeStepDefDBE";
+
+		_methodParameterTypes94 = new String[] { "boolean", "int" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -402,6 +410,17 @@ public class CompositeStepDefDBELocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName92.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
+			return CompositeStepDefDBELocalServiceUtil.getCompositeStepDefDBE(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName94.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
+			return CompositeStepDefDBELocalServiceUtil.addCompositeStepDefDBE(((Boolean)arguments[0]).booleanValue(),
+				((Integer)arguments[1]).intValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -473,4 +492,8 @@ public class CompositeStepDefDBELocalServiceClpInvoker {
 	private String[] _methodParameterTypes86;
 	private String _methodName87;
 	private String[] _methodParameterTypes87;
+	private String _methodName92;
+	private String[] _methodParameterTypes92;
+	private String _methodName94;
+	private String[] _methodParameterTypes94;
 }

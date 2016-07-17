@@ -37,7 +37,7 @@ import java.util.Date;
 public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{stepDBEId=");
 		sb.append(stepDBEId);
@@ -53,8 +53,10 @@ public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", StepType=");
-		sb.append(StepType);
+		sb.append(", stepType=");
+		sb.append(stepType);
+		sb.append(", stepTypeId=");
+		sb.append(stepTypeId);
 		sb.append("}");
 
 		return sb.toString();
@@ -90,12 +92,14 @@ public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 			stepDBEImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		if (StepType == null) {
+		if (stepType == null) {
 			stepDBEImpl.setStepType(StringPool.BLANK);
 		}
 		else {
-			stepDBEImpl.setStepType(StepType);
+			stepDBEImpl.setStepType(stepType);
 		}
+
+		stepDBEImpl.setStepTypeId(stepTypeId);
 
 		stepDBEImpl.resetOriginalValues();
 
@@ -111,7 +115,8 @@ public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		StepType = objectInput.readUTF();
+		stepType = objectInput.readUTF();
+		stepTypeId = objectInput.readLong();
 	}
 
 	@Override
@@ -132,12 +137,14 @@ public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		if (StepType == null) {
+		if (stepType == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(StepType);
+			objectOutput.writeUTF(stepType);
 		}
+
+		objectOutput.writeLong(stepTypeId);
 	}
 
 	public long stepDBEId;
@@ -147,5 +154,6 @@ public class StepDBECacheModel implements CacheModel<StepDBE>, Externalizable {
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public String StepType;
+	public String stepType;
+	public long stepTypeId;
 }

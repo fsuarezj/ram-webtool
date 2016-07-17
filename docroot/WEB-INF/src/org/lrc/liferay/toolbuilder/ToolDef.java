@@ -1,5 +1,6 @@
 package org.lrc.liferay.toolbuilder;
 
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 
 import org.lrc.liferay.toolbuilder.model.StepDefDBE;
@@ -11,40 +12,25 @@ import org.lrc.liferay.toolbuilder.steps.composite.CompositeStep;
 import org.lrc.liferay.toolbuilder.steps.composite.CompositeStepDef;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
-public class ToolDef {
+public class ToolDef implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3469229446098569636L;
 	private CompositeStepDef compositeStepDef;
 	private ToolDefDBE toolDefDBE;
 	
-	public ToolDef(String toolName) throws Exception {
-//		List<ToolDefDBE> toolsList = ToolDefDBEUtil.findByToolName(toolName);
-		ToolDefDBE toolDefDBE = ToolDefDBEUtil.findByToolName(toolName);
-		if (toolDefDBE != null) {
-			this.toolDefDBE = toolDefDBE;
-			this.compositeStepDef = new CompositeStepDef
-					(StepDefDBELocalServiceUtil.getStepDefDBE(this.toolDefDBE.getCompositeStepDefDBEId()));
-		} else {
-			// TODO: Declare Specific Exception
-			// throw new Exception("None tool with given name");
+	public ToolDef(String toolName) throws NoSuchUserException, NoSuchInstalledStepException, ToolDefDBEException, InstalledStepException, StepDefDBEException, CompositeStepDefDBEException, SystemException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchToolDefDBEException {
+		if (toolName.equals("Test Tool")) {
 			this.createTestToolDef();
+		} else {
+			//TODO: Create new exception
+			throw new NoSuchToolDefDBEException();
 		}
-//		if (toolsList.size() > 1) {
-//			// TODO: Declare Specific Exception
-//			throw new Exception("Two tools with the same name");
-//		} else if (toolsList.size() == 1) {
-//			this.toolDefDBE = toolsList.get(0);
-//			this.compositeStepDef = new CompositeStepDef
-//					(StepDefDBELocalServiceUtil.getStepDefDBE(this.toolDefDBE.getCompositeStepDefDBEId()));
-//		} else if (toolsList.size() == 0) {
-//			// TODO: Declare Specific Exception
-//			// throw new Exception("None tool with given name");
-//			this.createTestToolDef();
-//		} else {
-//			// TODO: Declare Specific Exception
-//			throw new Exception("Unknown behavior");
-//		}
 	}
 
 	public ToolDef(ToolDefDBE toolDefDBE) throws PortalException, SystemException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -53,17 +39,16 @@ public class ToolDef {
 		this.compositeStepDef = new CompositeStepDef(stepDefDBE);
 	}
 
-	private void createTestToolDef() throws SystemException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	private void createTestToolDef() throws SystemException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchUserException, ToolDefDBEException, InstalledStepException, NoSuchInstalledStepException, StepDefDBEException, CompositeStepDefDBEException {
 		// TODO Auto-generated constructor stub
 		this.toolDefDBE = ToolDefDBEUtil.create(0L);
 		
+		System.out.println("Creando Test Tool Def");
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		this.toolDefDBE.setGroupId(liferayFacesContext.getScopeGroupId());
-		this.toolDefDBE.setCompanyId(liferayFacesContext.getCompanyId());
-		this.toolDefDBE.setUserId(liferayFacesContext.getUserId());
-		this.toolDefDBE.setToolName("Test Tool");
+		this.toolDefDBE = ToolDefDBELocalServiceUtil.addToolDefDBE("Test Tool", liferayFacesContext);
 
-		this.compositeStepDef = new CompositeStepDef();
+//		this.compositeStepDef = new CompositeStepDef();
+		this.compositeStepDef = (CompositeStepDef) StepFactory.getStepDef("COMPOSITE");
 
 		this.compositeStepDef.addStepDef(StepFactory.getStepDef("MOCK"));
 		this.compositeStepDef.addStepDef(StepFactory.getStepDef("MOCK"));
@@ -72,7 +57,7 @@ public class ToolDef {
 		this.compositeStepDef.addStepDef(StepFactory.getStepDef("MOCK"));
 		
 		this.compositeStepDef.save();
-		this.toolDefDBE.setCompositeStepDefDBEId(this.compositeStepDef.getCompositeStepDefDBEId());
+		this.toolDefDBE.setCompositeStepDefDBEId(this.compositeStepDef.getStepDefDBEId());
 		ToolDefDBELocalServiceUtil.addToolDefDBE(this.toolDefDBE);
 	}
 	
@@ -80,11 +65,11 @@ public class ToolDef {
 		return this.toolDefDBE.getToolDefDBEId();
 	}
 
-	public ToolInstance buildInstance() throws SystemException {
+	public ToolInstance buildInstance() throws SystemException, NoSuchUserException, NoSuchInstalledStepException, StepDBEException, StepDefDBEException, CompositeStepDBEException, NoSuchToolDefDBEException {
 		return new ToolInstance(this, (CompositeStep) this.compositeStepDef.buildStep());
 	}
 
 	public void rebuildSteps() throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SystemException {
-		this.compositeStepDef.rebuildStepDefs();
+		this.compositeStepDef.buildStepDefs();
 	}
 }

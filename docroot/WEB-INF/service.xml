@@ -51,7 +51,7 @@
 			unique="false">
 			<finder-column name="toolDefDBEId"></finder-column>
 		</finder>
-		<finder name="ToolName" return-type="ToolDefDBE" unique="false">
+		<finder name="ToolName" return-type="ToolDefDBE" unique="true" db-index="true">
 			<finder-column name="toolName"></finder-column>
 		</finder>
 
@@ -102,7 +102,7 @@
 
 		<!-- PK fields -->
 
-		<column name="stepDefDBEId" type="long" primary="true" id-type="increment"></column>
+		<column name="stepDefDBEId" type="long" primary="true"></column>
 
 		<!-- Group instance -->
 
@@ -116,6 +116,7 @@
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>
 		<column name="stepType" type="String"></column>
+        <column name="stepTypeId" type="long"></column>
         <column name="compositeStepDefs" type="Collection" entity="CompositeStepDefDBE" mapping-table="CSDef_StepDef"></column>
 
         <finder name="StepDefDBEId" return-type="Collection">
@@ -126,8 +127,7 @@
 
 		<!-- PK fields -->
 
-		<column name="stepDBEId" type="long" primary="true"
-			id-type="increment">
+		<column name="stepDBEId" type="long" primary="true">
 		</column>
 
 		<!-- Group instance -->
@@ -142,7 +142,8 @@
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>
         <column name="compositeSteps" type="Collection" entity="CompositeStepDBE" mapping-table="CS_Step"></column>
-        <column name="StepType" type="String"></column>
+        <column name="stepType" type="String"></column>
+        <column name="stepTypeId" type="long"></column>
 		<finder name="StepDBEId" return-type="Collection">
 			<finder-column name="stepDBEId"></finder-column>
 		</finder>
@@ -178,7 +179,13 @@
         </finder>
 	</entity>
     <exceptions>
-        <exception>InstanceName</exception>
+        <exception>InstalledStep</exception>
+        <exception>ToolDefDBE</exception>
+        <exception>ToolInstaceDBE</exception>
+        <exception>StepDefDBE</exception>
+        <exception>StepDBE</exception>
+        <exception>CompositeStepDefDBE</exception>
+        <exception>CompositeStepDBE</exception>
     </exceptions>
 
 </service-builder>

@@ -230,10 +230,12 @@ public abstract class StepDefDBELocalServiceBaseImpl
 	 * @return the Step Definition
 	 * @throws PortalException if a Step Definition with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchStepDefDBEException
 	 */
 	@Override
 	public StepDefDBE getStepDefDBE(long stepDefDBEId)
-		throws PortalException, SystemException {
+		throws PortalException, SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchStepDefDBEException {
 		return stepDefDBEPersistence.findByPrimaryKey(stepDefDBEId);
 	}
 

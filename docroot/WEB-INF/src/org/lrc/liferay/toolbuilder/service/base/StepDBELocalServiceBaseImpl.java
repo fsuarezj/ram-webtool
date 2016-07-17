@@ -224,10 +224,12 @@ public abstract class StepDBELocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the step d b e
 	 * @throws PortalException if a step d b e with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchStepDBEException
 	 */
 	@Override
 	public StepDBE getStepDBE(long stepDBEId)
-		throws PortalException, SystemException {
+		throws PortalException, SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchStepDBEException {
 		return stepDBEPersistence.findByPrimaryKey(stepDBEId);
 	}
 

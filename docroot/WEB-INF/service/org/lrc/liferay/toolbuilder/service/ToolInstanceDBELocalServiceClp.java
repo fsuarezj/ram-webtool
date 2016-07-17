@@ -115,6 +115,17 @@ public class ToolInstanceDBELocalServiceClp
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "addToolInstanceDBE";
+
+		_methodParameterTypes19 = new String[] {
+				"long", "long",
+				"com.liferay.faces.portal.context.LiferayFacesContext"
+			};
+
+		_methodName20 = "getToolInstanceDBEs";
+
+		_methodParameterTypes20 = new String[] { "long", "long" };
 	}
 
 	@Override
@@ -465,7 +476,8 @@ public class ToolInstanceDBELocalServiceClp
 	public org.lrc.liferay.toolbuilder.model.ToolInstanceDBE getToolInstanceDBE(
 		long toolInstanceDBEId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException {
 		Object returnObj = null;
 
 		try {
@@ -481,6 +493,10 @@ public class ToolInstanceDBELocalServiceClp
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException) {
+				throw (org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException)t;
 			}
 
 			if (t instanceof RuntimeException) {
@@ -667,6 +683,83 @@ public class ToolInstanceDBELocalServiceClp
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public org.lrc.liferay.toolbuilder.model.ToolInstanceDBE addToolInstanceDBE(
+		long toolDefDBEId, long compositeStepDBEId,
+		com.liferay.faces.portal.context.LiferayFacesContext liferayFacesContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						toolDefDBEId,
+						
+					compositeStepDBEId,
+						
+					ClpSerializer.translateInput(liferayFacesContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.NoSuchUserException) {
+				throw (com.liferay.portal.NoSuchUserException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException) {
+				throw (org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (org.lrc.liferay.toolbuilder.model.ToolInstanceDBE)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<org.lrc.liferay.toolbuilder.model.ToolInstanceDBE> getToolInstanceDBEs(
+		long groupId, long toolDefDBEId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] { groupId, toolDefDBEId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<org.lrc.liferay.toolbuilder.model.ToolInstanceDBE>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -704,4 +797,8 @@ public class ToolInstanceDBELocalServiceClp
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

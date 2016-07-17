@@ -230,10 +230,12 @@ public abstract class ToolInstanceDBELocalServiceBaseImpl
 	 * @return the tool instance d b e
 	 * @throws PortalException if a tool instance d b e with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
+	 * @throws org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException
 	 */
 	@Override
 	public ToolInstanceDBE getToolInstanceDBE(long toolInstanceDBEId)
-		throws PortalException, SystemException {
+		throws PortalException, SystemException,
+			org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException {
 		return toolInstanceDBEPersistence.findByPrimaryKey(toolInstanceDBEId);
 	}
 

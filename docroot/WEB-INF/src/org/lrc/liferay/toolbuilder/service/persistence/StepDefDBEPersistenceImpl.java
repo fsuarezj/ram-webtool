@@ -711,6 +711,7 @@ public class StepDefDBEPersistenceImpl extends BasePersistenceImpl<StepDefDBE>
 		stepDefDBEImpl.setCreateDate(stepDefDBE.getCreateDate());
 		stepDefDBEImpl.setModifiedDate(stepDefDBE.getModifiedDate());
 		stepDefDBEImpl.setStepType(stepDefDBE.getStepType());
+		stepDefDBEImpl.setStepTypeId(stepDefDBE.getStepTypeId());
 
 		return stepDefDBEImpl;
 	}

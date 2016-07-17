@@ -14,7 +14,19 @@
 
 package org.lrc.liferay.toolbuilder.service.impl;
 
+import org.lrc.liferay.toolbuilder.NoSuchInstalledStepException;
+import org.lrc.liferay.toolbuilder.NoSuchStepDBEException;
+import org.lrc.liferay.toolbuilder.StepDBEException;
+import org.lrc.liferay.toolbuilder.StepDefDBEException;
+import org.lrc.liferay.toolbuilder.model.StepDBE;
 import org.lrc.liferay.toolbuilder.service.base.StepDBELocalServiceBaseImpl;
+import org.lrc.liferay.toolbuilder.service.persistence.StepDBEUtil;
+
+import com.liferay.faces.portal.context.LiferayFacesContext;
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 
 /**
  * The implementation of the step d b e local service.
@@ -36,4 +48,42 @@ public class StepDBELocalServiceImpl extends StepDBELocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link org.lrc.liferay.toolbuilder.service.StepDBELocalServiceUtil} to access the step d b e local service.
 	 */
+	public StepDBE getStepDBE(long stepDBEId) throws NoSuchStepDBEException, SystemException {
+		return stepDBEPersistence.findByPrimaryKey(stepDBEId);
+	}
+	
+	private void validate(String stepType) throws StepDefDBEException, NoSuchInstalledStepException, SystemException {
+		if (Validator.isNull(stepType)) {
+			throw new StepDefDBEException();
+		}
+		installedStepPersistence.findByStepType(stepType);
+	}
+	
+	public StepDBE addStepDBE(String stepType, LiferayFacesContext liferayFacesContext) throws SystemException, NoSuchUserException, NoSuchInstalledStepException, StepDBEException, StepDefDBEException {
+		User user = userPersistence.findByPrimaryKey(liferayFacesContext.getUserId());
+//		Date now = new Date();
+		long stepDBEId = counterLocalService.increment(StepDBE.class.getName());
+		
+		validate(stepType);
+		
+		StepDBE stepDBE = StepDBEUtil.create(stepDBEId);
+
+		stepDBE.setGroupId(liferayFacesContext.getScopeGroupId());
+		stepDBE.setCompanyId(liferayFacesContext.getCompanyId());
+		stepDBE.setUserId(liferayFacesContext.getUserId());
+		stepDBE.setUserName(user.getFullName());
+		stepDBE.setStepType(stepType);
+		
+//		stepDBEPersistence.update(stepDBE);
+		
+		return stepDBE;
+}
+
+//	@Override
+//	public StepDBE addStepDBE(StepDBE stepDBE) throws SystemException {
+//		long stepDBEId = counterLocalService.increment(StepDBE.class.getName());
+//		stepDBE.setStepDBEId(stepDBEId);
+//		
+//		return super.addStepDBE(stepDBE);
+//	}
 }
