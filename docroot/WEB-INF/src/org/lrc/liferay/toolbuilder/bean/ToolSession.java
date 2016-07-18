@@ -24,6 +24,14 @@ import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.SystemException;
 
+/**
+ * @author Fernando Suárez
+ * A session scoped bean to store the different configurations for a session
+ */
+/**
+ * @author Fernando Suárez
+ *
+ */
 @ManagedBean
 @SessionScoped
 public class ToolSession extends AbstractBaseBean implements Serializable{
@@ -41,6 +49,9 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 	private boolean configuringInstance;
 	private ToolDef toolDef;
 	
+	/**
+	 * Constructor which defines the tool Def as "Test Tool"
+	 */
 	public ToolSession() {
 		this.workingOnToolInstance = false;
 		this.configuringInstance = false;
@@ -55,10 +66,19 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 	public void postConstruct() throws Exception {
 	}
 
+	/**
+	 * Saves the selected tool instance
+	 * @throws SystemException
+	 */
 	public void saveExistingToolInstance() throws SystemException {
 		this.selectedToolInstance.save();
 	}
 
+	/**
+	 * Try to save a new Tool Instance. If there is a tool instance with the same name it shows an error
+	 * @return a string to the tool instance view
+	 * @throws SystemException
+	 */
 	public String saveNewToolInstance() throws SystemException {
 		if (!this.toolInstances.contains(this.selectedToolInstance)) {
 			this.selectedToolInstance.save();
@@ -71,6 +91,10 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 		return ToolSession.toolInstanceView;
 	}
 	
+	/**
+	 * Delete all not saved changes and deselects the tool instance
+	 * @return a string to the main view
+	 */
 	public String cancelToolInstance() {
 		this.selectedToolInstance = null;
 		this.workingOnToolInstance = false;
@@ -78,6 +102,10 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 		return ToolSession.mainView;
 	}
 	
+	/**
+	 * Delete the selected tool instance and all associated entries from the database
+	 * @return a string to the main view
+	 */
 	public String deleteToolInstance() {
 		try {
 			this.selectedToolInstance.delete();
@@ -92,6 +120,11 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 		return ToolSession.mainView;
 	}
 
+	/**
+	 * Selects a tool instance
+	 * @param toolInstance the ToolInstance object to be selected
+	 * @return a string to the tool instance view
+	 */
 	public String selectToolInstance(ToolInstance toolInstance) throws SystemException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException {
 		this.workingOnToolInstance = true;
 		this.selectedToolInstance = toolInstance;
@@ -99,14 +132,23 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 		return ToolSession.toolInstanceView;
 	}
 
+	/**
+	 * @return true if any tool instance is selected
+	 */
 	public boolean isWorkingOnToolInstance() {
 		return this.workingOnToolInstance;
 	}
 
+	/**
+	 * @return the selected tool instance object
+	 */
 	public ToolInstance getSelectedToolInstance() {
 		return this.selectedToolInstance;
 	}
 	
+	/**
+	 * @return a list with existing tool instances for the existing configuration (user group and selected tool definition)
+	 */
 	public List<ToolInstance> getToolInstances() {
 		// TODO: Mensajes entre SessionBeans cuando haya modificación del listado disponible para un usuario
 		// TODO: Criterios de búsqueda (nombre del RAM, permisos, etc)
@@ -129,18 +171,32 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 		return this.toolInstances;
 	}
 
+	/**
+	 * Sets if the selected tool instance is being configured or not
+	 */
 	public void setConfiguringInstance() {
 		this.configuringInstance = true;
 	}
 	
+	/**
+	 * @return true if the selected tool instance is being configured
+	 */
 	public boolean getConfiguringInstance() {
 		return this.configuringInstance;
 	}
 
+	/**
+	 * Setter
+	 * @param factoryBean the FactoryBean object
+	 */
 	public void setFactoryBean(FactoryBean factoryBean) {
 		this.factoryBean = factoryBean;
 	}
 
+	/**
+	 * Creates a new empty tool instance from the selected tool definition
+	 * @return  the tool instance object
+	 */
 	public ToolInstance createToolInstance() throws SystemException, NoSuchUserException, NoSuchInstalledStepException, StepDBEException, StepDefDBEException, CompositeStepDBEException, NoSuchToolDefDBEException {
 		return this.toolDef.buildInstance();
 	}
