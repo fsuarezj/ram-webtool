@@ -58,14 +58,16 @@ public class ToolInstance implements Serializable {
 		return this.compositeStep.stepForward();
 	}
 	
-	public void save() throws SystemException {
+	public void save() throws SystemException, PortalException {
 		this.compositeStep.save();
 		this.toolInstanceDBE.setCompositeStepDBEId(this.compositeStep.getStepDBEId());
 		
 		if (this.toolInstanceDBE.getToolInstanceDBEId() == 0) {
 			ToolInstanceDBELocalServiceUtil.addToolInstanceDBE(this.toolInstanceDBE);
 		} else {
+			System.out.println("Hace que updatea la instancia");
 			ToolInstanceDBELocalServiceUtil.updateToolInstanceDBE(this.toolInstanceDBE);
+//			ToolInstanceDBELocalServiceUtil.savePermissions(this.toolInstanceDBE);
 		}
 	}
 	
@@ -87,5 +89,9 @@ public class ToolInstance implements Serializable {
 
 	public void rebuildSteps() throws SystemException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, ClassNotFoundException, NoSuchMethodException, SecurityException {
 		this.compositeStep.rebuildSteps();
+	}
+	
+	public long getToolInstanceDBEId() {
+		return this.toolInstanceDBE.getToolInstanceDBEId();
 	}
 }

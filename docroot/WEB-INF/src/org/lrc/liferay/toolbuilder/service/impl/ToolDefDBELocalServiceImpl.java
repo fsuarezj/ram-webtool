@@ -16,14 +16,17 @@ package org.lrc.liferay.toolbuilder.service.impl;
 
 import org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException;
 import org.lrc.liferay.toolbuilder.ToolDefDBEException;
+import org.lrc.liferay.toolbuilder.bean.ToolSession;
 import org.lrc.liferay.toolbuilder.model.ToolDefDBE;
 import org.lrc.liferay.toolbuilder.service.base.ToolDefDBELocalServiceBaseImpl;
 import org.lrc.liferay.toolbuilder.service.persistence.ToolDefDBEUtil;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 
 /**
@@ -69,21 +72,35 @@ public class ToolDefDBELocalServiceImpl extends ToolDefDBELocalServiceBaseImpl {
 		ToolDefDBE toolDefDBE = ToolDefDBEUtil.create(toolDefDBEId);
 
 		toolDefDBE.setGroupId(liferayFacesContext.getScopeGroupId());
-		toolDefDBE.setCompanyId(liferayFacesContext.getCompanyId());
+		toolDefDBE.setCompanyId(user.getCompanyId());
 		toolDefDBE.setUserId(liferayFacesContext.getUserId());
 		toolDefDBE.setUserName(user.getFullName());
 		toolDefDBE.setToolName(toolName);
 		
 //		toolDefDBEPersistence.update(toolDefDBE);
 		
-		return toolDefDBE;
+		return this.addToolDefDBE(toolDefDBE);
 	}
 	
 	@Override
 	public ToolDefDBE addToolDefDBE(ToolDefDBE toolDefDBE) throws SystemException {
-		long toolDefDBEId = counterLocalService.increment(ToolDefDBE.class.getName());
-		toolDefDBE.setToolDefDBEId(toolDefDBEId);
+//		long toolDefDBEId = counterLocalService.increment(ToolDefDBE.class.getName());
+//		toolDefDBE.setToolDefDBEId(toolDefDBEId);
+//		try {
+//			resourceLocalService.addResources(toolDefDBE.getCompanyId(), toolDefDBE.getGroupId(), toolDefDBE.getUserId(),
+//				       ToolSession.MODEL, toolDefDBE.getToolDefDBEId(), false, true, true);
+//		} catch (PortalException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		return super.addToolDefDBE(toolDefDBE);
+	}
+	
+	@Override
+	public ToolDefDBE deleteToolDefDBE(ToolDefDBE toolDefDBE) throws PortalException, SystemException {
+		resourceLocalService.deleteResource(toolDefDBE.getCompanyId(), ToolSession.MODEL,
+				ResourceConstants.SCOPE_INDIVIDUAL, toolDefDBE.getPrimaryKey());
+		return super.deleteToolDefDBE(toolDefDBE);
 	}
 }

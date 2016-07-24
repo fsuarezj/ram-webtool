@@ -267,4 +267,9 @@ public interface ToolInstanceDBELocalService extends BaseLocalService,
 	public java.util.List<org.lrc.liferay.toolbuilder.model.ToolInstanceDBE> getToolInstanceDBEs(
 		long groupId, long toolDefDBEId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void savePermissions(
+		org.lrc.liferay.toolbuilder.model.ToolInstanceDBE toolInstanceDBE)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

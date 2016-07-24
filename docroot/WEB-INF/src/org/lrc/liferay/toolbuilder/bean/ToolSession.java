@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import org.lrc.liferay.toolbuilder.CompositeStepDBEException;
@@ -22,6 +21,7 @@ import org.lrc.liferay.toolbuilder.service.ToolInstanceDBELocalServiceUtil;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
@@ -36,8 +36,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 @SessionScoped
 public class ToolSession extends AbstractBaseBean implements Serializable{
 	
-	@ManagedProperty(name = "factoryBean", value = "#{factoryBean}")
-	private FactoryBean factoryBean;
+//	@ManagedProperty(name = "factoryBean", value = "#{factoryBean}")
+//	private FactoryBean factoryBean;
 
 	private static final long serialVersionUID = 8736093122352111506L;
 	private static final String mainView = "mainView.xhtml";
@@ -48,6 +48,9 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 	private boolean workingOnToolInstance;
 	private boolean configuringInstance;
 	private ToolDef toolDef;
+	
+	// Permissions
+	public static final String MODEL = "org.lrc.liferay.toolbuilder.model";
 	
 	/**
 	 * Constructor which defines the tool Def as "Test Tool"
@@ -69,8 +72,9 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 	/**
 	 * Saves the selected tool instance
 	 * @throws SystemException
+	 * @throws PortalException 
 	 */
-	public void saveExistingToolInstance() throws SystemException {
+	public void saveExistingToolInstance() throws SystemException, PortalException {
 		this.selectedToolInstance.save();
 	}
 
@@ -78,8 +82,9 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 	 * Try to save a new Tool Instance. If there is a tool instance with the same name it shows an error
 	 * @return a string to the tool instance view
 	 * @throws SystemException
+	 * @throws PortalException 
 	 */
-	public String saveNewToolInstance() throws SystemException {
+	public String saveNewToolInstance() throws SystemException, PortalException {
 		if (!this.toolInstances.contains(this.selectedToolInstance)) {
 			this.selectedToolInstance.save();
 			this.configuringInstance = false;
@@ -185,13 +190,13 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 		return this.configuringInstance;
 	}
 
-	/**
-	 * Setter
-	 * @param factoryBean the FactoryBean object
-	 */
-	public void setFactoryBean(FactoryBean factoryBean) {
-		this.factoryBean = factoryBean;
-	}
+//	/**
+//	 * Setter
+//	 * @param factoryBean the FactoryBean object
+//	 */
+//	public void setFactoryBean(FactoryBean factoryBean) {
+//		this.factoryBean = factoryBean;
+//	}
 
 	/**
 	 * Creates a new empty tool instance from the selected tool definition
@@ -200,4 +205,30 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 	public ToolInstance createToolInstance() throws SystemException, NoSuchUserException, NoSuchInstalledStepException, StepDBEException, StepDefDBEException, CompositeStepDBEException, NoSuchToolDefDBEException {
 		return this.toolDef.buildInstance();
 	}
+	
+//	public Boolean getHasAddDefPermission() {
+//		if (this.hasAddDefPermission == null) {
+//			LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+//			long scopeGroupId = liferayFacesContext.getScopeGroupId();
+//			this.hasAddDefPermission = liferayFacesContext.getThemeDisplay().getPermissionChecker()
+//					.hasPermission(scopeGroupId, MODEL, scopeGroupId, "ADD_TOOL_DEF");
+//		}
+//		return this.hasAddDefPermission;
+//	}
+//	
+//	public void setHasAddDefPermission(Boolean hasAddDefPermission) {
+//		this.hasAddDefPermission = hasAddDefPermission;
+//	}
+
+	public ToolDef getToolDef() {
+		return toolDef;
+	}
+	
+//	public boolean hasDeleteInstancePermission() {
+//		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+//		long scopeGroupId = liferayFacesContext.getScopeGroupId();
+//		return liferayFacesContext.getThemeDisplay().getPermissionChecker().hasPermission
+//				(scopeGroupId, ToolInstanceDBE.class.getName(), this.selectedToolInstance.getToolInstanceDBEId(), "DELETE");
+//	}
+//
 }

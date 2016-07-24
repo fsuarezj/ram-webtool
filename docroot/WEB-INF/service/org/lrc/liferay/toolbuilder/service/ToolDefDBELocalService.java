@@ -86,12 +86,14 @@ public interface ToolDefDBELocalService extends BaseLocalService,
 	*
 	* @param toolDefDBE the tool def d b e
 	* @return the tool def d b e that was removed
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public org.lrc.liferay.toolbuilder.model.ToolDefDBE deleteToolDefDBE(
 		org.lrc.liferay.toolbuilder.model.ToolDefDBE toolDefDBE)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 

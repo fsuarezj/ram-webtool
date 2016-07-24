@@ -294,6 +294,13 @@ public class ToolInstanceDBELocalServiceUtil {
 		return getService().getToolInstanceDBEs(groupId, toolDefDBEId);
 	}
 
+	public static void savePermissions(
+		org.lrc.liferay.toolbuilder.model.ToolInstanceDBE toolInstanceDBE)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().savePermissions(toolInstanceDBE);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

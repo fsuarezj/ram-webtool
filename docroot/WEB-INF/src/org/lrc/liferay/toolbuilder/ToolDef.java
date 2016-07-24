@@ -58,7 +58,8 @@ public class ToolDef implements Serializable {
 		
 		this.compositeStepDef.save();
 		this.toolDefDBE.setCompositeStepDefDBEId(this.compositeStepDef.getStepDefDBEId());
-		ToolDefDBELocalServiceUtil.addToolDefDBE(this.toolDefDBE);
+//		ToolDefDBELocalServiceUtil.addToolDefDBE(this.toolDefDBE);
+		ToolDefDBELocalServiceUtil.updateToolDefDBE(this.toolDefDBE);
 	}
 	
 	public long getToolDefDBEId() {

@@ -83,11 +83,13 @@ public class ToolDefDBELocalServiceUtil {
 	*
 	* @param toolDefDBE the tool def d b e
 	* @return the tool def d b e that was removed
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public static org.lrc.liferay.toolbuilder.model.ToolDefDBE deleteToolDefDBE(
 		org.lrc.liferay.toolbuilder.model.ToolDefDBE toolDefDBE)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().deleteToolDefDBE(toolDefDBE);
 	}
 

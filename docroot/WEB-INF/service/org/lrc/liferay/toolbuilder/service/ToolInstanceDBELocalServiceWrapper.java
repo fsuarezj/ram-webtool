@@ -310,6 +310,14 @@ public class ToolInstanceDBELocalServiceWrapper
 			toolDefDBEId);
 	}
 
+	@Override
+	public void savePermissions(
+		org.lrc.liferay.toolbuilder.model.ToolInstanceDBE toolInstanceDBE)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_toolInstanceDBELocalService.savePermissions(toolInstanceDBE);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

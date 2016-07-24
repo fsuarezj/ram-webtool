@@ -126,6 +126,12 @@ public class ToolInstanceDBELocalServiceClp
 		_methodName20 = "getToolInstanceDBEs";
 
 		_methodParameterTypes20 = new String[] { "long", "long" };
+
+		_methodName21 = "savePermissions";
+
+		_methodParameterTypes21 = new String[] {
+				"org.lrc.liferay.toolbuilder.model.ToolInstanceDBE"
+			};
 	}
 
 	@Override
@@ -760,6 +766,37 @@ public class ToolInstanceDBELocalServiceClp
 		return (java.util.List<org.lrc.liferay.toolbuilder.model.ToolInstanceDBE>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public void savePermissions(
+		org.lrc.liferay.toolbuilder.model.ToolInstanceDBE toolInstanceDBE)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName21,
+				_methodParameterTypes21,
+				new Object[] { ClpSerializer.translateInput(toolInstanceDBE) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -801,4 +838,6 @@ public class ToolInstanceDBELocalServiceClp
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

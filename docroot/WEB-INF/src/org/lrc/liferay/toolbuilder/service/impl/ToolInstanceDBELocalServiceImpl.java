@@ -18,12 +18,14 @@ import java.util.List;
 
 import org.lrc.liferay.toolbuilder.NoSuchToolDefDBEException;
 import org.lrc.liferay.toolbuilder.NoSuchToolInstanceDBEException;
+import org.lrc.liferay.toolbuilder.ToolInstance;
 import org.lrc.liferay.toolbuilder.model.ToolInstanceDBE;
 import org.lrc.liferay.toolbuilder.service.base.ToolInstanceDBELocalServiceBaseImpl;
 import org.lrc.liferay.toolbuilder.service.persistence.ToolInstanceDBEUtil;
 
 import com.liferay.faces.portal.context.LiferayFacesContext;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.User;
 
@@ -78,6 +80,12 @@ public class ToolInstanceDBELocalServiceImpl
 	
 	public List<ToolInstanceDBE> getToolInstanceDBEs(long groupId, long toolDefDBEId) throws SystemException {
 		return toolInstanceDBEPersistence.findByG_T(groupId, toolDefDBEId);
+	}
+	
+	public void savePermissions(ToolInstanceDBE toolInstanceDBE) throws PortalException, SystemException {
+		resourceLocalService.addResources(toolInstanceDBE.getCompanyId(), toolInstanceDBE.getGroupId(),
+				toolInstanceDBE.getUserId(),
+			    ToolInstance.class.getName(), toolInstanceDBE.getToolInstanceDBEId(), false, true, true);
 	}
 	
 	@Override

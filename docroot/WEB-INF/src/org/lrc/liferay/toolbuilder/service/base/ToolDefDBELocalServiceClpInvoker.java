@@ -134,6 +134,12 @@ public class ToolDefDBELocalServiceClpInvoker {
 		_methodParameterTypes80 = new String[] {
 				"org.lrc.liferay.toolbuilder.model.ToolDefDBE"
 			};
+
+		_methodName81 = "deleteToolDefDBE";
+
+		_methodParameterTypes81 = new String[] {
+				"org.lrc.liferay.toolbuilder.model.ToolDefDBE"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -258,6 +264,11 @@ public class ToolDefDBELocalServiceClpInvoker {
 			return ToolDefDBELocalServiceUtil.addToolDefDBE((org.lrc.liferay.toolbuilder.model.ToolDefDBE)arguments[0]);
 		}
 
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+			return ToolDefDBELocalServiceUtil.deleteToolDefDBE((org.lrc.liferay.toolbuilder.model.ToolDefDBE)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -305,4 +316,6 @@ public class ToolDefDBELocalServiceClpInvoker {
 	private String[] _methodParameterTypes79;
 	private String _methodName80;
 	private String[] _methodParameterTypes80;
+	private String _methodName81;
+	private String[] _methodParameterTypes81;
 }

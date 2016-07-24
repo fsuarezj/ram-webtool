@@ -115,12 +115,13 @@ public abstract class ToolDefDBELocalServiceBaseImpl
 	 *
 	 * @param toolDefDBE the tool def d b e
 	 * @return the tool def d b e that was removed
+	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public ToolDefDBE deleteToolDefDBE(ToolDefDBE toolDefDBE)
-		throws SystemException {
+		throws PortalException, SystemException {
 		return toolDefDBEPersistence.remove(toolDefDBE);
 	}
 
