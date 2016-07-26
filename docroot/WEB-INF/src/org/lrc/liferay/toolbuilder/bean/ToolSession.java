@@ -47,7 +47,7 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 	private List<ToolInstance> toolInstances;
 	private boolean workingOnToolInstance;
 	private boolean configuringInstance;
-	private ToolDef toolDef;
+	private ToolDef selectedToolDef;
 	
 	// Permissions
 	public static final String MODEL = "org.lrc.liferay.toolbuilder.model";
@@ -59,7 +59,8 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 		this.workingOnToolInstance = false;
 		this.configuringInstance = false;
 		try {
-			this.toolDef = FactoryBean.getToolDef("Test Tool");
+			this.selectedToolDef = FactoryBean.getToolDef("Test Tool 2");
+			this.selectedToolDef = FactoryBean.getToolDef("Test Tool");
 		} catch (Exception e) {
 			logger.error(e);
 		}
@@ -164,9 +165,9 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 			this.toolInstances = new ArrayList<ToolInstance>();
 			long groupId = LiferayFacesContext.getInstance().getScopeGroupId();
 			try {
-				List<ToolInstanceDBE> list = ToolInstanceDBELocalServiceUtil.getToolInstanceDBEs(groupId, this.toolDef.getToolDefDBEId());
+				List<ToolInstanceDBE> list = ToolInstanceDBELocalServiceUtil.getToolInstanceDBEs(groupId, this.selectedToolDef.getToolDefDBEId());
 				for (ToolInstanceDBE toolInstanceDBE : list) {
-					toolInstance = new ToolInstance(toolInstanceDBE, this.toolDef);
+					toolInstance = new ToolInstance(toolInstanceDBE, this.selectedToolDef);
 					this.toolInstances.add(toolInstance);
 				}
 			} catch (Exception e) {
@@ -203,7 +204,7 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 	 * @return  the tool instance object
 	 */
 	public ToolInstance createToolInstance() throws SystemException, NoSuchUserException, NoSuchInstalledStepException, StepDBEException, StepDefDBEException, CompositeStepDBEException, NoSuchToolDefDBEException {
-		return this.toolDef.buildInstance();
+		return this.selectedToolDef.buildInstance();
 	}
 	
 //	public Boolean getHasAddDefPermission() {
@@ -220,8 +221,29 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 //		this.hasAddDefPermission = hasAddDefPermission;
 //	}
 
-	public ToolDef getToolDef() {
-		return toolDef;
+	/**
+	 * Getter
+	 * @return the selectedToolDef
+	 */
+	public ToolDef getSelectedToolDef() {
+		return selectedToolDef;
+	}
+	
+	/**
+	 * Set the selectedToolDef
+	 * @param toolDefName the name of the selected tool definition
+	 * @throws SystemException
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 * @throws PortalException
+	 */
+	public void setSelectedToolDef(String toolDefName) throws SystemException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, PortalException {
+		this.selectedToolDef = FactoryBean.getToolDef(toolDefName);
 	}
 	
 //	public boolean hasDeleteInstancePermission() {

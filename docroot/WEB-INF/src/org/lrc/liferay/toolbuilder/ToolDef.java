@@ -26,7 +26,9 @@ public class ToolDef implements Serializable {
 	
 	public ToolDef(String toolName) throws NoSuchUserException, NoSuchInstalledStepException, ToolDefDBEException, InstalledStepException, StepDefDBEException, CompositeStepDefDBEException, SystemException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchToolDefDBEException {
 		if (toolName.equals("Test Tool")) {
-			this.createTestToolDef();
+			this.createTestToolDef(toolName, 5);
+		} else if (toolName.equals("Test Tool 2")) {
+			this.createTestToolDef(toolName, 3);
 		} else {
 			//TODO: Create new exception
 			throw new NoSuchToolDefDBEException();
@@ -39,22 +41,20 @@ public class ToolDef implements Serializable {
 		this.compositeStepDef = new CompositeStepDef(stepDefDBE);
 	}
 
-	private void createTestToolDef() throws SystemException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchUserException, ToolDefDBEException, InstalledStepException, NoSuchInstalledStepException, StepDefDBEException, CompositeStepDefDBEException {
+	private void createTestToolDef(String name, int stepsNumber) throws SystemException, ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchUserException, ToolDefDBEException, InstalledStepException, NoSuchInstalledStepException, StepDefDBEException, CompositeStepDefDBEException {
 		// TODO Auto-generated constructor stub
 		this.toolDefDBE = ToolDefDBEUtil.create(0L);
 		
 		System.out.println("Creando Test Tool Def");
 		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-		this.toolDefDBE = ToolDefDBELocalServiceUtil.addToolDefDBE("Test Tool", liferayFacesContext);
+		this.toolDefDBE = ToolDefDBELocalServiceUtil.addToolDefDBE(name, liferayFacesContext);
 
 //		this.compositeStepDef = new CompositeStepDef();
 		this.compositeStepDef = (CompositeStepDef) StepFactory.getStepDef("COMPOSITE");
 
-		this.compositeStepDef.addStepDef(StepFactory.getStepDef("MOCK"));
-		this.compositeStepDef.addStepDef(StepFactory.getStepDef("MOCK"));
-		this.compositeStepDef.addStepDef(StepFactory.getStepDef("MOCK"));
-		this.compositeStepDef.addStepDef(StepFactory.getStepDef("MOCK"));
-		this.compositeStepDef.addStepDef(StepFactory.getStepDef("MOCK"));
+		for (int i = 0; i < stepsNumber; i++) {
+			this.compositeStepDef.addStepDef(StepFactory.getStepDef("MOCK"));
+		}
 		
 		this.compositeStepDef.save();
 		this.toolDefDBE.setCompositeStepDefDBEId(this.compositeStepDef.getStepDefDBEId());

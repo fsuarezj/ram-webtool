@@ -2,6 +2,7 @@ package org.lrc.liferay.toolbuilder.bean;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,18 +23,6 @@ import com.liferay.portal.kernel.exception.SystemException;
  * @author Fernando Suárez
  * Application scoped bean to create the steps factory and to store tool definitions
  */
-/**
- * @author Fernando Suárez
- *
- */
-/**
- * @author Fernando Suárez
- *
- */
-/**
- * @author Fernando Suárez
- *
- */
 @ManagedBean(eager = true)
 //@ManagedBean(eager = true)
 @ApplicationScoped
@@ -43,7 +32,7 @@ public class FactoryBean extends AbstractBaseBean implements Serializable {
 	private static Map<String, ToolDef> toolDefs = new HashMap<String, ToolDef>();
 
 	/**
-	 * The constructor creates the stepFactory and get the installed ToolDefs.
+	 * The constructor creates the stepFactory and get the installed ToolDefs names.
 	 * @throws SystemException
 	 * @throws PortalException
 	 * @throws ClassNotFoundException
@@ -58,12 +47,14 @@ public class FactoryBean extends AbstractBaseBean implements Serializable {
 		new StepFactory();
 		List<ToolDefDBE> toolDefDBEs = ToolDefDBELocalServiceUtil.getToolDefDBEs(com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS, com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS);
 		for (ToolDefDBE toolDefDBE: toolDefDBEs) {
-			toolDefs.put(toolDefDBE.getToolName(), new ToolDef(toolDefDBE));
+			toolDefs.put(toolDefDBE.getToolName(), null);
 		}
 	}
 	
 	/**
-	 * Searches for a toolDef. If there is no toolDef and the given name is "Test Tool" it will create the test tool
+	 * Searches for a toolDef, if it has not yet been bring from the db it brings it.
+	 * If there is no toolDef and the given name is "Test Tool" it will create the test tool
+	 * 
 	 * @param toolName the name of the tool to search
 	 * @return the ToolDef object. null if there is no a Tool Definition with the given name.
 	 * @throws SystemException
@@ -80,26 +71,40 @@ public class FactoryBean extends AbstractBaseBean implements Serializable {
 		ToolDef result;
 		if (toolDefs.containsKey(toolName)) {
 			System.out.println("Looking for the existing tool " + toolName);
-			result = toolDefs.get(toolName);
+			if (toolDefs.get(toolName) == null) {
+				try {
+					System.out.println("Bringing " + toolName + " from the database");
+					ToolDefDBE toolDefDBE = ToolDefDBELocalServiceUtil.getToolDefDBE(toolName);
+					result = new ToolDef(toolDefDBE);
+					toolDefs.put(toolName, result);
+				} catch (NoSuchToolDefDBEException e) {
+					// TODO: Declare Specific Exception
+					// throw new Exception("None tool with given name");
+					System.out.println("No la encuentra");
+					result = null;
+				}
+			} else {
+				result = toolDefs.get(toolName);
+			}
 		} else if (toolName.equals("Test Tool")) {
 			result = new ToolDef("Test Tool");
 			System.out.println("Creando Test Tool = " + result);
 			toolDefs.put(toolName, result);
+		} else if (toolName.equals("Test Tool 2")) {
+			result = new ToolDef("Test Tool 2");
+			System.out.println("Creando Test Tool 2 = " + result);
+			toolDefs.put(toolName, result);
 		} else {
-			try {
-				System.out.println("Va a buscar la tool def con nombre " + toolName);
-				ToolDefDBE toolDefDBE = ToolDefDBELocalServiceUtil.getToolDefDBE(toolName);
-				System.out.println("Ha encontrado la tool def con nombre " + toolName);
-				result = new ToolDef(toolDefDBE);
-				toolDefs.put(toolName, result);
-			} catch (NoSuchToolDefDBEException e) {
-				// TODO: Declare Specific Exception
-				// throw new Exception("None tool with given name");
-				System.out.println("No la encuentra");
-				result = null;
-			}
+			// TODO: Declare Specific Exception
+			// throw new Exception("None tool with given name");
+			System.out.println("No la encuentra");
+			result = null;
 		}
 		return result;
+	}
+	
+	public static List<String> getToolDefNames() {
+		return new ArrayList<String>(FactoryBean.toolDefs.keySet());
 	}
 
 }

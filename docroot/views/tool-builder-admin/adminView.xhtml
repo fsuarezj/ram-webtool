@@ -11,5 +11,11 @@
 	<h:head />
 	<h:body>
 		<h:outputText value="#{i18n['tool-builder-admin-hello-world']}" /> in view mode.
+		<h:dataTable id="toolDefsListTable" styleClass="table table-bordered table-hover table-striped" rowClasses="table-cell" value="#{factoryBean.getToolDefNames()}" var="toolDefName">
+			<h:column>
+				<f:facet name="header"><h:outputText value="#{i18n['tool-def-name']}" /></f:facet>
+				<h:outputText id="toolDefName" value="#{toolDefName}" />
+			</h:column>
+		</h:dataTable>
 	</h:body>
 </f:view>
