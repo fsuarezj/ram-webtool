@@ -85,6 +85,14 @@ public class CompositeStepDef extends StepDef {
 		return this.stepDefs.get(index);
 	}
 	
+	public List<StepDef> getStepDefsList() {
+		List<StepDef> result = new ArrayList<StepDef>();
+		for (int i = 0; i < this.getStepsNumber(); i++) {
+			result.add(this.getStepDef(i));
+		}
+		return result;
+	}
+	
 	public void addStepDef(StepDef stepDef) throws SystemException {
 		try {
 			// Includes new StepDef in the tables

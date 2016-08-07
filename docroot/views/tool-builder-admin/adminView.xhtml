@@ -11,11 +11,22 @@
 	<h:head />
 	<h:body>
 		<h:outputText value="#{i18n['tool-builder-admin-hello-world']}" /> in view mode.
-		<h:dataTable id="toolDefsListTable" styleClass="table table-bordered table-hover table-striped" rowClasses="table-cell" value="#{factoryBean.getToolDefNames()}" var="toolDefName">
-			<h:column>
-				<f:facet name="header"><h:outputText value="#{i18n['tool-def-name']}" /></f:facet>
-				<h:outputText id="toolDefName" value="#{toolDefName}" />
-			</h:column>
-		</h:dataTable>
+		<h:form id="toolDefsList">
+			<h:dataTable id="toolDefsListTable" styleClass="table table-bordered table-hover table-striped" rowClasses="table-cell" value="#{factoryBean.getToolDefNames()}" var="toolDefName">
+				<h:column>
+					<f:facet name="header"><h:outputText value="#{i18n['tool-def-name']}" /></f:facet>
+					<h:outputText id="toolDefName" value="#{toolDefName}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:commandButton action="#{toolSession.setSelectedToolDef(toolDefName)}" value="#{i18n['select']}" disabled="#{toolSession.isSelectedToolDef(toolDefName)}">
+						<f:ajax render="@all" />
+					</h:commandButton>
+					<h:button outcome="toolDefConfig" value="#{i18n['configure']}">
+						<f:param name="toolDefName" value="#{toolDefName}" />
+					</h:button>
+				</h:column>
+			</h:dataTable>
+		</h:form>
 	</h:body>
 </f:view>

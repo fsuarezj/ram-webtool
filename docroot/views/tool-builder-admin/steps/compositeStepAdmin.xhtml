@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+    <ui:composition
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:alloy="http://liferay.com/faces/alloy"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:aui="http://liferay.com/faces/aui"
+	    xmlns:h="http://java.sun.com/jsf/html" 
+    >
+	    <alloy:tabview>
+	    	<alloy:tab>
+	    		<f:facet name="header"><alloy:outputText value="Hola" /></f:facet>
+	    	</alloy:tab>
+	    	<alloy:tab>
+	    		<f:facet name="header"><alloy:outputText value="Adios" /></f:facet>
+	    	</alloy:tab>
+	    </alloy:tabview>
+	    <alloy:jurjur />
+	<aui:fieldset id="compositeDefFieldSet">
+	    <ui:repeat value="#{toolDefBacking.getStepDef().getStepDefsList()}" var="stepDef">
+	    	<h:outputText value="#{stepDef.stepType}" />
+	    </ui:repeat>
+    </aui:fieldset>
+    </ui:composition>

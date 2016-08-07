@@ -246,6 +246,10 @@ public class ToolSession extends AbstractBaseBean implements Serializable{
 		this.selectedToolDef = FactoryBean.getToolDef(toolDefName);
 	}
 	
+	public boolean isSelectedToolDef(String toolDefName) {
+		return (toolDefName.equals(this.selectedToolDef.getToolDefName()));
+	}
+	
 //	public boolean hasDeleteInstancePermission() {
 //		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 //		long scopeGroupId = liferayFacesContext.getScopeGroupId();

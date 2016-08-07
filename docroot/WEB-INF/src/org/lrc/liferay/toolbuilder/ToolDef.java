@@ -8,6 +8,7 @@ import org.lrc.liferay.toolbuilder.model.ToolDefDBE;
 import org.lrc.liferay.toolbuilder.service.StepDefDBELocalServiceUtil;
 import org.lrc.liferay.toolbuilder.service.ToolDefDBELocalServiceUtil;
 import org.lrc.liferay.toolbuilder.service.persistence.ToolDefDBEUtil;
+import org.lrc.liferay.toolbuilder.steps.StepDef;
 import org.lrc.liferay.toolbuilder.steps.composite.CompositeStep;
 import org.lrc.liferay.toolbuilder.steps.composite.CompositeStepDef;
 
@@ -72,5 +73,23 @@ public class ToolDef implements Serializable {
 
 	public void rebuildSteps() throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, SystemException {
 		this.compositeStepDef.buildStepDefs();
+	}
+
+	public String getToolDefName() {
+		// TODO Auto-generated method stub
+		return this.toolDefDBE.getToolName();
+	}
+	
+	public void save() throws SystemException {
+		ToolDefDBELocalServiceUtil.updateToolDefDBE(this.toolDefDBE);
+		this.compositeStepDef.save();
+	}
+
+	public void setToolDefName(String toolDefName) {
+		this.toolDefDBE.setToolName(toolDefName);
+	}
+	
+	public StepDef getCompositeStepDef() {
+		return this.compositeStepDef;
 	}
 }

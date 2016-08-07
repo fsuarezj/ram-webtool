@@ -97,10 +97,19 @@ public class FactoryBean extends AbstractBaseBean implements Serializable {
 		} else {
 			// TODO: Declare Specific Exception
 			// throw new Exception("None tool with given name");
-			System.out.println("No la encuentra");
+			System.out.println("No encuentra " + toolName);
 			result = null;
 		}
 		return result;
+	}
+	
+	public static void removeToolDef(String toolDefName) {
+		System.out.println("Removing from FactoryBean map toolDef " + toolDefName);
+		FactoryBean.toolDefs.remove(toolDefName);
+	}
+	
+	public static void putToolDef(String toolDefName) {
+		FactoryBean.toolDefs.put(toolDefName, null);
 	}
 	
 	public static List<String> getToolDefNames() {
